@@ -16,5 +16,14 @@ namespace tartempion
         {
             InitializeComponent();
         }
+        public static void ThreadProc()
+        {
+            Application.Run(new FMenu());
+        }
+
+        private void FConnexion_Load(object sender, EventArgs e)
+        {
+            pbConnexion.Image = Image.FromFile(@"U:\Romeuf\AP3 GSB 2025\Logo GSB\logo.png");
+        }
     }
 }
