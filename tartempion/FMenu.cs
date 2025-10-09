@@ -16,5 +16,10 @@ namespace tartempion
         {
             InitializeComponent();
         }
+
+        private void FMenu_Load(object sender, EventArgs e)
+        {
+            pbMenu.Image = Image.FromFile(@"U:\Romeuf\AP3 GSB 2025\Logo GSB\logo.png");
+        }
     }
 }

@@ -28,12 +28,86 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FMenu";
+            menuStrip1 = new MenuStrip();
+            rAPPORTSToolStripMenuItem = new ToolStripMenuItem();
+            mÉDICAMENTSToolStripMenuItem = new ToolStripMenuItem();
+            mÉDECINSToolStripMenuItem = new ToolStripMenuItem();
+            pbMenu = new PictureBox();
+            label1 = new Label();
+            menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
+            SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { rAPPORTSToolStripMenuItem, mÉDICAMENTSToolStripMenuItem, mÉDECINSToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // rAPPORTSToolStripMenuItem
+            // 
+            rAPPORTSToolStripMenuItem.Name = "rAPPORTSToolStripMenuItem";
+            rAPPORTSToolStripMenuItem.Size = new Size(76, 20);
+            rAPPORTSToolStripMenuItem.Text = "RAPPORTS";
+            // 
+            // mÉDICAMENTSToolStripMenuItem
+            // 
+            mÉDICAMENTSToolStripMenuItem.Name = "mÉDICAMENTSToolStripMenuItem";
+            mÉDICAMENTSToolStripMenuItem.Size = new Size(102, 20);
+            mÉDICAMENTSToolStripMenuItem.Text = "MÉDICAMENTS";
+            // 
+            // mÉDECINSToolStripMenuItem
+            // 
+            mÉDECINSToolStripMenuItem.Name = "mÉDECINSToolStripMenuItem";
+            mÉDECINSToolStripMenuItem.Size = new Size(76, 20);
+            mÉDECINSToolStripMenuItem.Text = "MÉDECINS";
+            // 
+            // pbMenu
+            // 
+            pbMenu.Location = new Point(474, 0);
+            pbMenu.Name = "pbMenu";
+            pbMenu.Size = new Size(326, 244);
+            pbMenu.TabIndex = 1;
+            pbMenu.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 42);
+            label1.Name = "label1";
+            label1.Size = new Size(66, 15);
+            label1.TabIndex = 2;
+            label1.Text = "BONJOUR !";
+            // 
+            // FMenu
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(pbMenu);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
+            Name = "FMenu";
+            Text = "FMenu";
+            Load += FMenu_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbMenu).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem rAPPORTSToolStripMenuItem;
+        private ToolStripMenuItem mÉDICAMENTSToolStripMenuItem;
+        private ToolStripMenuItem mÉDECINSToolStripMenuItem;
+        private PictureBox pbMenu;
+        private Label label1;
     }
 }
