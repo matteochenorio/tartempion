@@ -58,5 +58,10 @@ namespace tartempion
             }
             return message;
         }
+
+        public static List<Specialite> ListeSpecialite()
+        {
+            return MonModel.Specialites.ToList();
+        }
     }
 }

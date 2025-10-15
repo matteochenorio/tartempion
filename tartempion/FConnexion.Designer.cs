@@ -48,6 +48,7 @@
             // 
             tbMdp.Location = new Point(109, 50);
             tbMdp.Name = "tbMdp";
+            tbMdp.PasswordChar = '*';
             tbMdp.Size = new Size(154, 23);
             tbMdp.TabIndex = 1;
             // 

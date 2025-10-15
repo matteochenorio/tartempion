@@ -28,14 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             rAPPORTSToolStripMenuItem = new ToolStripMenuItem();
             mÉDICAMENTSToolStripMenuItem = new ToolStripMenuItem();
             mÉDECINSToolStripMenuItem = new ToolStripMenuItem();
             pbMenu = new PictureBox();
             label1 = new Label();
+            btnDeconnexion = new Button();
+            tbRole = new TextBox();
+            bsRole = new BindingSource(components);
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsRole).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -67,7 +72,7 @@
             // 
             // pbMenu
             // 
-            pbMenu.Location = new Point(474, 0);
+            pbMenu.Location = new Point(474, 64);
             pbMenu.Name = "pbMenu";
             pbMenu.Size = new Size(326, 244);
             pbMenu.TabIndex = 1;
@@ -82,11 +87,34 @@
             label1.TabIndex = 2;
             label1.Text = "BONJOUR !";
             // 
+            // btnDeconnexion
+            // 
+            btnDeconnexion.Location = new Point(703, 27);
+            btnDeconnexion.Name = "btnDeconnexion";
+            btnDeconnexion.Size = new Size(85, 23);
+            btnDeconnexion.TabIndex = 3;
+            btnDeconnexion.Text = "Déconnexion";
+            btnDeconnexion.UseVisualStyleBackColor = true;
+            btnDeconnexion.Click += btnDeconnexion_Click;
+            // 
+            // tbRole
+            // 
+            tbRole.Location = new Point(474, 27);
+            tbRole.Name = "tbRole";
+            tbRole.Size = new Size(223, 23);
+            tbRole.TabIndex = 4;
+            // 
+            // bsRole
+            // 
+            bsRole.CurrentChanged += bsRole_CurrentChanged;
+            // 
             // FMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(tbRole);
+            Controls.Add(btnDeconnexion);
             Controls.Add(label1);
             Controls.Add(pbMenu);
             Controls.Add(menuStrip1);
@@ -97,6 +125,7 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsRole).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -109,5 +138,8 @@
         private ToolStripMenuItem mÉDECINSToolStripMenuItem;
         private PictureBox pbMenu;
         private Label label1;
+        private Button btnDeconnexion;
+        private TextBox tbRole;
+        private BindingSource bsRole;
     }
 }
