@@ -38,6 +38,7 @@
             label1 = new Label();
             btnDeconnexion = new Button();
             bsRole = new BindingSource(components);
+            lISTEDESMÉDECINSToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsRole).BeginInit();
@@ -74,6 +75,7 @@
             // 
             // mÉDECINSToolStripMenuItem
             // 
+            mÉDECINSToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lISTEDESMÉDECINSToolStripMenuItem });
             mÉDECINSToolStripMenuItem.Name = "mÉDECINSToolStripMenuItem";
             mÉDECINSToolStripMenuItem.Size = new Size(76, 20);
             mÉDECINSToolStripMenuItem.Text = "MÉDECINS";
@@ -109,6 +111,13 @@
             // 
             bsRole.CurrentChanged += bsRole_CurrentChanged;
             // 
+            // lISTEDESMÉDECINSToolStripMenuItem
+            // 
+            lISTEDESMÉDECINSToolStripMenuItem.Name = "lISTEDESMÉDECINSToolStripMenuItem";
+            lISTEDESMÉDECINSToolStripMenuItem.Size = new Size(185, 22);
+            lISTEDESMÉDECINSToolStripMenuItem.Text = "LISTE DES MÉDECINS";
+            lISTEDESMÉDECINSToolStripMenuItem.Click += lISTEDESMÉDECINSToolStripMenuItem_Click;
+            // 
             // FMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -141,5 +150,6 @@
         private Button btnDeconnexion;
         private BindingSource bsRole;
         private ToolStripMenuItem lISTEDESMÉDICAMENTSToolStripMenuItem;
+        private ToolStripMenuItem lISTEDESMÉDECINSToolStripMenuItem;
     }
 }

@@ -55,5 +55,11 @@ namespace tartempion
             FMedicaments newFMedicaments = new FMedicaments();
             newFMedicaments.ShowDialog();
         }
+
+        private void lISTEDESMÉDECINSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FMedecins newFMedecins = new FMedecins();
+            newFMedecins.ShowDialog();
+        }
     }
 }

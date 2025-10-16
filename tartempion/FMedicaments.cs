@@ -53,7 +53,7 @@ namespace tartempion
                 bsMedicament.DataSource = MonModelMission2.ListeMedicament()
                 .Select(x => new { x.IdMedicament, x.NomCommercial, x.IdFamille, x.Composition, x.Effets, x.ContreIndications }).OrderBy(x => x.NomCommercial).ToList();
                 cboFamille.Enabled = false;
-                btnFamilleMedica.Text = "Filtrer sur 1 nationalité";
+                btnFamilleMedica.Text = "Filtrer sur 1 Famille";
                 btnFamilleMedica.BackColor = Color.LightGreen;
             }
             else
