@@ -32,11 +32,11 @@
             menuStrip1 = new MenuStrip();
             rAPPORTSToolStripMenuItem = new ToolStripMenuItem();
             mÉDICAMENTSToolStripMenuItem = new ToolStripMenuItem();
+            lISTEDESMÉDICAMENTSToolStripMenuItem = new ToolStripMenuItem();
             mÉDECINSToolStripMenuItem = new ToolStripMenuItem();
             pbMenu = new PictureBox();
             label1 = new Label();
             btnDeconnexion = new Button();
-            tbRole = new TextBox();
             bsRole = new BindingSource(components);
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
@@ -60,9 +60,17 @@
             // 
             // mÉDICAMENTSToolStripMenuItem
             // 
+            mÉDICAMENTSToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lISTEDESMÉDICAMENTSToolStripMenuItem });
             mÉDICAMENTSToolStripMenuItem.Name = "mÉDICAMENTSToolStripMenuItem";
             mÉDICAMENTSToolStripMenuItem.Size = new Size(102, 20);
             mÉDICAMENTSToolStripMenuItem.Text = "MÉDICAMENTS";
+            // 
+            // lISTEDESMÉDICAMENTSToolStripMenuItem
+            // 
+            lISTEDESMÉDICAMENTSToolStripMenuItem.Name = "lISTEDESMÉDICAMENTSToolStripMenuItem";
+            lISTEDESMÉDICAMENTSToolStripMenuItem.Size = new Size(211, 22);
+            lISTEDESMÉDICAMENTSToolStripMenuItem.Text = "LISTE DES MÉDICAMENTS";
+            lISTEDESMÉDICAMENTSToolStripMenuItem.Click += lISTEDESMÉDICAMENTSToolStripMenuItem_Click;
             // 
             // mÉDECINSToolStripMenuItem
             // 
@@ -81,11 +89,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 42);
+            label1.Location = new Point(93, 174);
             label1.Name = "label1";
-            label1.Size = new Size(66, 15);
+            label1.Size = new Size(235, 15);
             label1.TabIndex = 2;
-            label1.Text = "BONJOUR !";
+            label1.Text = "BIENVENUR SUR LE TABLEAU DE BORD GSB";
             // 
             // btnDeconnexion
             // 
@@ -97,13 +105,6 @@
             btnDeconnexion.UseVisualStyleBackColor = true;
             btnDeconnexion.Click += btnDeconnexion_Click;
             // 
-            // tbRole
-            // 
-            tbRole.Location = new Point(474, 27);
-            tbRole.Name = "tbRole";
-            tbRole.Size = new Size(223, 23);
-            tbRole.TabIndex = 4;
-            // 
             // bsRole
             // 
             bsRole.CurrentChanged += bsRole_CurrentChanged;
@@ -113,7 +114,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(tbRole);
             Controls.Add(btnDeconnexion);
             Controls.Add(label1);
             Controls.Add(pbMenu);
@@ -139,7 +139,7 @@
         private PictureBox pbMenu;
         private Label label1;
         private Button btnDeconnexion;
-        private TextBox tbRole;
         private BindingSource bsRole;
+        private ToolStripMenuItem lISTEDESMÉDICAMENTSToolStripMenuItem;
     }
 }

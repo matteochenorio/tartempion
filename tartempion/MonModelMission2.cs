@@ -59,9 +59,19 @@ namespace tartempion
             return message;
         }
 
-        public static List<Specialite> ListeSpecialite()
+        public static List<Visiteur> ListeVisiteur()
         {
-            return MonModel.Specialites.ToList();
+            return MonModel.Visiteurs.ToList();
+        }
+
+        public static List<Medicament> ListeMedicament()
+        {
+            return MonModel.Medicaments.ToList();
+        }
+
+        public static List<Famille> ListeFamille()
+        {
+            return MonModel.Familles.ToList();
         }
     }
 }
