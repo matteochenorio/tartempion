@@ -82,5 +82,10 @@ namespace tartempion
         {
             return MonModel.Specialites.ToList();
         }
+
+        public static List<Rapport> ListeRapport()
+        {
+            return MonModel.Rapports.ToList();
+        }
     }
 }
