@@ -49,17 +49,5 @@ namespace tartempion
             //tbNom.Text = MonModelMission2.VisiteurConnecte.Nom.ToString();
             //tbPrenom.Text = MonModelMission2.VisiteurConnecte.Prenom.ToString();
         }
-
-        private void lISTEDESMÉDICAMENTSToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FMedicaments newFMedicaments = new FMedicaments();
-            newFMedicaments.ShowDialog();
-        }
-
-        private void lISTEDESMÉDECINSToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FMedecins newFMedecins = new FMedecins();
-            newFMedecins.ShowDialog();
-        }
     }
 }
