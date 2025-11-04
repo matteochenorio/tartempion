@@ -67,7 +67,7 @@
             // 
             // pbMenu
             // 
-            pbMenu.Location = new Point(474, 64);
+            pbMenu.Location = new Point(423, 89);
             pbMenu.Name = "pbMenu";
             pbMenu.Size = new Size(326, 244);
             pbMenu.TabIndex = 1;
