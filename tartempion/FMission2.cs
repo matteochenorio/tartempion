@@ -16,5 +16,10 @@ namespace tartempion
         {
             InitializeComponent();
         }
+
+        private void FMission2_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
