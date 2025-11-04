@@ -30,13 +30,19 @@
         {
             components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
+            mISSION1ToolStripMenuItem = new ToolStripMenuItem();
+            mISSION2ToolStripMenuItem = new ToolStripMenuItem();
+            rAPPORTSToolStripMenuItem = new ToolStripMenuItem();
+            vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem = new ToolStripMenuItem();
+            mÉDICAMENTSToolStripMenuItem = new ToolStripMenuItem();
+            lISTEDESMÉDICAMENTSToolStripMenuItem = new ToolStripMenuItem();
+            mÉDECINSToolStripMenuItem = new ToolStripMenuItem();
+            lISTEDESMÉDECINSToolStripMenuItem = new ToolStripMenuItem();
+            mISSION3ToolStripMenuItem = new ToolStripMenuItem();
             pbMenu = new PictureBox();
             label1 = new Label();
             btnDeconnexion = new Button();
             bsRole = new BindingSource(components);
-            mISSION1ToolStripMenuItem = new ToolStripMenuItem();
-            mISSION2ToolStripMenuItem = new ToolStripMenuItem();
-            mISSION3ToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsRole).BeginInit();
@@ -50,6 +56,67 @@
             menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
+            // 
+            // mISSION1ToolStripMenuItem
+            // 
+            mISSION1ToolStripMenuItem.Name = "mISSION1ToolStripMenuItem";
+            mISSION1ToolStripMenuItem.Size = new Size(75, 20);
+            mISSION1ToolStripMenuItem.Text = "MISSION 1";
+            // 
+            // mISSION2ToolStripMenuItem
+            // 
+            mISSION2ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { rAPPORTSToolStripMenuItem, mÉDICAMENTSToolStripMenuItem, mÉDECINSToolStripMenuItem });
+            mISSION2ToolStripMenuItem.Name = "mISSION2ToolStripMenuItem";
+            mISSION2ToolStripMenuItem.Size = new Size(75, 20);
+            mISSION2ToolStripMenuItem.Text = "MISSION 2";
+            // 
+            // rAPPORTSToolStripMenuItem
+            // 
+            rAPPORTSToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem });
+            rAPPORTSToolStripMenuItem.Name = "rAPPORTSToolStripMenuItem";
+            rAPPORTSToolStripMenuItem.Size = new Size(180, 22);
+            rAPPORTSToolStripMenuItem.Text = "RAPPORTS";
+            // 
+            // vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem
+            // 
+            vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem.Name = "vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem";
+            vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem.Size = new Size(227, 22);
+            vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem.Text = "VOIR PRÉCÉDENTS RAPPORT";
+            vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem.Click += vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem_Click;
+            // 
+            // mÉDICAMENTSToolStripMenuItem
+            // 
+            mÉDICAMENTSToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lISTEDESMÉDICAMENTSToolStripMenuItem });
+            mÉDICAMENTSToolStripMenuItem.Name = "mÉDICAMENTSToolStripMenuItem";
+            mÉDICAMENTSToolStripMenuItem.Size = new Size(180, 22);
+            mÉDICAMENTSToolStripMenuItem.Text = "MÉDICAMENTS";
+            // 
+            // lISTEDESMÉDICAMENTSToolStripMenuItem
+            // 
+            lISTEDESMÉDICAMENTSToolStripMenuItem.Name = "lISTEDESMÉDICAMENTSToolStripMenuItem";
+            lISTEDESMÉDICAMENTSToolStripMenuItem.Size = new Size(211, 22);
+            lISTEDESMÉDICAMENTSToolStripMenuItem.Text = "LISTE DES MÉDICAMENTS";
+            lISTEDESMÉDICAMENTSToolStripMenuItem.Click += lISTEDESMÉDICAMENTSToolStripMenuItem_Click;
+            // 
+            // mÉDECINSToolStripMenuItem
+            // 
+            mÉDECINSToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lISTEDESMÉDECINSToolStripMenuItem });
+            mÉDECINSToolStripMenuItem.Name = "mÉDECINSToolStripMenuItem";
+            mÉDECINSToolStripMenuItem.Size = new Size(180, 22);
+            mÉDECINSToolStripMenuItem.Text = "MÉDECINS";
+            // 
+            // lISTEDESMÉDECINSToolStripMenuItem
+            // 
+            lISTEDESMÉDECINSToolStripMenuItem.Name = "lISTEDESMÉDECINSToolStripMenuItem";
+            lISTEDESMÉDECINSToolStripMenuItem.Size = new Size(185, 22);
+            lISTEDESMÉDECINSToolStripMenuItem.Text = "LISTE DES MÉDECINS";
+            lISTEDESMÉDECINSToolStripMenuItem.Click += lISTEDESMÉDECINSToolStripMenuItem_Click;
+            // 
+            // mISSION3ToolStripMenuItem
+            // 
+            mISSION3ToolStripMenuItem.Name = "mISSION3ToolStripMenuItem";
+            mISSION3ToolStripMenuItem.Size = new Size(75, 20);
+            mISSION3ToolStripMenuItem.Text = "MISSION 3";
             // 
             // pbMenu
             // 
@@ -82,24 +149,6 @@
             // 
             bsRole.CurrentChanged += bsRole_CurrentChanged;
             // 
-            // mISSION1ToolStripMenuItem
-            // 
-            mISSION1ToolStripMenuItem.Name = "mISSION1ToolStripMenuItem";
-            mISSION1ToolStripMenuItem.Size = new Size(75, 20);
-            mISSION1ToolStripMenuItem.Text = "MISSION 1";
-            // 
-            // mISSION2ToolStripMenuItem
-            // 
-            mISSION2ToolStripMenuItem.Name = "mISSION2ToolStripMenuItem";
-            mISSION2ToolStripMenuItem.Size = new Size(75, 20);
-            mISSION2ToolStripMenuItem.Text = "MISSION 2";
-            // 
-            // mISSION3ToolStripMenuItem
-            // 
-            mISSION3ToolStripMenuItem.Name = "mISSION3ToolStripMenuItem";
-            mISSION3ToolStripMenuItem.Size = new Size(75, 20);
-            mISSION3ToolStripMenuItem.Text = "MISSION 3";
-            // 
             // FMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -131,5 +180,11 @@
         private ToolStripMenuItem mISSION1ToolStripMenuItem;
         private ToolStripMenuItem mISSION2ToolStripMenuItem;
         private ToolStripMenuItem mISSION3ToolStripMenuItem;
+        private ToolStripMenuItem rAPPORTSToolStripMenuItem;
+        private ToolStripMenuItem vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem;
+        private ToolStripMenuItem mÉDICAMENTSToolStripMenuItem;
+        private ToolStripMenuItem lISTEDESMÉDICAMENTSToolStripMenuItem;
+        private ToolStripMenuItem mÉDECINSToolStripMenuItem;
+        private ToolStripMenuItem lISTEDESMÉDECINSToolStripMenuItem;
     }
 }
