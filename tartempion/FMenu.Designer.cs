@@ -34,11 +34,12 @@
             mÉDICAMENTSToolStripMenuItem = new ToolStripMenuItem();
             lISTEDESMÉDICAMENTSToolStripMenuItem = new ToolStripMenuItem();
             mÉDECINSToolStripMenuItem = new ToolStripMenuItem();
+            lISTEDESMÉDECINSToolStripMenuItem = new ToolStripMenuItem();
             pbMenu = new PictureBox();
             label1 = new Label();
             btnDeconnexion = new Button();
             bsRole = new BindingSource(components);
-            lISTEDESMÉDECINSToolStripMenuItem = new ToolStripMenuItem();
+            vOIRLESRAPPORTSToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsRole).BeginInit();
@@ -55,6 +56,7 @@
             // 
             // rAPPORTSToolStripMenuItem
             // 
+            rAPPORTSToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vOIRLESRAPPORTSToolStripMenuItem });
             rAPPORTSToolStripMenuItem.Name = "rAPPORTSToolStripMenuItem";
             rAPPORTSToolStripMenuItem.Size = new Size(76, 20);
             rAPPORTSToolStripMenuItem.Text = "RAPPORTS";
@@ -79,6 +81,13 @@
             mÉDECINSToolStripMenuItem.Name = "mÉDECINSToolStripMenuItem";
             mÉDECINSToolStripMenuItem.Size = new Size(76, 20);
             mÉDECINSToolStripMenuItem.Text = "MÉDECINS";
+            // 
+            // lISTEDESMÉDECINSToolStripMenuItem
+            // 
+            lISTEDESMÉDECINSToolStripMenuItem.Name = "lISTEDESMÉDECINSToolStripMenuItem";
+            lISTEDESMÉDECINSToolStripMenuItem.Size = new Size(185, 22);
+            lISTEDESMÉDECINSToolStripMenuItem.Text = "LISTE DES MÉDECINS";
+            lISTEDESMÉDECINSToolStripMenuItem.Click += lISTEDESMÉDECINSToolStripMenuItem_Click;
             // 
             // pbMenu
             // 
@@ -111,12 +120,11 @@
             // 
             bsRole.CurrentChanged += bsRole_CurrentChanged;
             // 
-            // lISTEDESMÉDECINSToolStripMenuItem
+            // vOIRLESRAPPORTSToolStripMenuItem
             // 
-            lISTEDESMÉDECINSToolStripMenuItem.Name = "lISTEDESMÉDECINSToolStripMenuItem";
-            lISTEDESMÉDECINSToolStripMenuItem.Size = new Size(185, 22);
-            lISTEDESMÉDECINSToolStripMenuItem.Text = "LISTE DES MÉDECINS";
-            lISTEDESMÉDECINSToolStripMenuItem.Click += lISTEDESMÉDECINSToolStripMenuItem_Click;
+            vOIRLESRAPPORTSToolStripMenuItem.Name = "vOIRLESRAPPORTSToolStripMenuItem";
+            vOIRLESRAPPORTSToolStripMenuItem.Size = new Size(181, 22);
+            vOIRLESRAPPORTSToolStripMenuItem.Text = "VOIR LES RAPPORTS";
             // 
             // FMenu
             // 
@@ -151,5 +159,6 @@
         private BindingSource bsRole;
         private ToolStripMenuItem lISTEDESMÉDICAMENTSToolStripMenuItem;
         private ToolStripMenuItem lISTEDESMÉDECINSToolStripMenuItem;
+        private ToolStripMenuItem vOIRLESRAPPORTSToolStripMenuItem;
     }
 }
