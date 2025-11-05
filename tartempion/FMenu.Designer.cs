@@ -43,6 +43,7 @@
             label1 = new Label();
             btnDeconnexion = new Button();
             bsRole = new BindingSource(components);
+            nOUVEAURAPPORTToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsRole).BeginInit();
@@ -72,7 +73,7 @@
             // 
             // rAPPORTSToolStripMenuItem
             // 
-            rAPPORTSToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem });
+            rAPPORTSToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vOIRPRÉCÉDENTSRAPPORTToolStripMenuItem, nOUVEAURAPPORTToolStripMenuItem });
             rAPPORTSToolStripMenuItem.Name = "rAPPORTSToolStripMenuItem";
             rAPPORTSToolStripMenuItem.Size = new Size(180, 22);
             rAPPORTSToolStripMenuItem.Text = "RAPPORTS";
@@ -149,6 +150,12 @@
             // 
             bsRole.CurrentChanged += bsRole_CurrentChanged;
             // 
+            // nOUVEAURAPPORTToolStripMenuItem
+            // 
+            nOUVEAURAPPORTToolStripMenuItem.Name = "nOUVEAURAPPORTToolStripMenuItem";
+            nOUVEAURAPPORTToolStripMenuItem.Size = new Size(227, 22);
+            nOUVEAURAPPORTToolStripMenuItem.Text = "NOUVEAU RAPPORT";
+            // 
             // FMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -186,5 +193,6 @@
         private ToolStripMenuItem lISTEDESMÉDICAMENTSToolStripMenuItem;
         private ToolStripMenuItem mÉDECINSToolStripMenuItem;
         private ToolStripMenuItem lISTEDESMÉDECINSToolStripMenuItem;
+        private ToolStripMenuItem nOUVEAURAPPORTToolStripMenuItem;
     }
 }

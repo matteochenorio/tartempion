@@ -39,6 +39,8 @@
             bsMedecin = new BindingSource(components);
             bsRapport = new BindingSource(components);
             bsFiltreRapport = new BindingSource(components);
+            btnSpecialiteMedecin = new Button();
+            btnFiltreRapport = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvMedecin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvRapport).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsSpecialite).BeginInit();
@@ -109,11 +111,33 @@
             // 
             bsRapport.CurrentChanged += bsRapport_CurrentChanged;
             // 
+            // btnSpecialiteMedecin
+            // 
+            btnSpecialiteMedecin.Location = new Point(181, 5);
+            btnSpecialiteMedecin.Name = "btnSpecialiteMedecin";
+            btnSpecialiteMedecin.Size = new Size(200, 23);
+            btnSpecialiteMedecin.TabIndex = 6;
+            btnSpecialiteMedecin.Text = "Filtrer";
+            btnSpecialiteMedecin.UseVisualStyleBackColor = true;
+            btnSpecialiteMedecin.Click += btnSpecialiteMedecin_Click;
+            // 
+            // btnFiltreRapport
+            // 
+            btnFiltreRapport.Location = new Point(617, 5);
+            btnFiltreRapport.Name = "btnFiltreRapport";
+            btnFiltreRapport.Size = new Size(171, 23);
+            btnFiltreRapport.TabIndex = 7;
+            btnFiltreRapport.Text = "Filtrer";
+            btnFiltreRapport.UseVisualStyleBackColor = true;
+            btnFiltreRapport.Click += btnFiltreRapport_Click;
+            // 
             // FVoirRapports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnFiltreRapport);
+            Controls.Add(btnSpecialiteMedecin);
             Controls.Add(cboFiltreRapport);
             Controls.Add(label2);
             Controls.Add(dgvRapport);
@@ -145,5 +169,7 @@
         private BindingSource bsMedecin;
         private BindingSource bsRapport;
         private BindingSource bsFiltreRapport;
+        private Button btnSpecialiteMedecin;
+        private Button btnFiltreRapport;
     }
 }

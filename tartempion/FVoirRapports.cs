@@ -13,6 +13,8 @@ namespace tartempion
 {
     public partial class FVoirRapports : Form
     {
+        private bool afficherTousLesMedecins = false;
+        private bool afficherTousLesRapports = false;
         public FVoirRapports()
         {
             InitializeComponent();
@@ -24,6 +26,12 @@ namespace tartempion
             cboSpecialite.DisplayMember = "LibSpecialite";//pareil pour le lib
             bsSpecialite.DataSource = MonModelMission2.ListeSpecialite();
             cboSpecialite.DataSource = bsSpecialite;
+
+
+            cboFiltreRapport.ValueMember = "IdRapport";
+            cboFiltreRapport.DisplayMember = "bilan";
+            cboFiltreRapport.DataSource = MonModelMission2.ListeRapport();
+            cboFiltreRapport.DataSource = bsFiltreRapport;
         }
 
         private void bsSpecialite_CurrentChanged(object sender, EventArgs e)
@@ -68,10 +76,65 @@ namespace tartempion
 
         private void bsRapport_CurrentChanged(object sender, EventArgs e)
         {
-            cboFiltreRapport.ValueMember = "IdRapport";
-            cboFiltreRapport.DisplayMember = "bilan";
-            cboFiltreRapport.DataSource = MonModelMission2.ListeRapport();
-            cboFiltreRapport.DataSource = bsFiltreRapport;
+            //cboFiltreRapport.ValueMember = "IdRapport";
+            //cboFiltreRapport.DisplayMember = "bilan";
+            //cboFiltreRapport.DataSource = MonModelMission2.ListeRapport();
+            //cboFiltreRapport.DataSource = bsFiltreRapport;
+        }
+
+        private void btnSpecialiteMedecin_Click(object sender, EventArgs e)
+        {
+            afficherTousLesMedecins = !afficherTousLesMedecins;
+
+            if (afficherTousLesMedecins)
+            {
+                bsMedecin.DataSource = MonModelMission2.ListeMedecin()
+                .OrderBy(x => x.Nom)
+                .ToList();
+                //bsMedecin.DataSource = MonModelMission2.ListeMedecin()
+                //.Select(x => new { x.IdMedecin, x.Nom, x.Prenom, x.Adresse, x.Tel, x.IdSpecialite, x.Departement }).OrderBy(x => x.Nom).ToList();
+                cboSpecialite.Enabled = false;
+                btnSpecialiteMedecin.Text = "Filtrer sur 1 spécialité";
+                btnSpecialiteMedecin.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                Specialite laSpecialiteChoisie = (Specialite)bsSpecialite.Current;
+                bsMedecin.DataSource = laSpecialiteChoisie.Medecins
+                .OrderBy(x => x.Nom)
+                .ToList();
+                cboSpecialite.Enabled = true;
+                btnSpecialiteMedecin.Text = "Filtrer sur toutes les spécialités";
+                btnSpecialiteMedecin.BackColor = Color.Red;
+            }
+        }
+
+        private void btnFiltreRapport_Click(object sender, EventArgs e)
+        {
+            afficherTousLesRapports = !afficherTousLesRapports;
+
+            if (afficherTousLesRapports)
+            {
+                bsRapport.DataSource = MonModelMission2.ListeRapport();
+                dgvRapport.DataSource = bsRapport;
+                cboSpecialite.Enabled = false;
+                dgvMedecin.Enabled = false;
+                btnFiltreRapport.BackColor = Color.LightGreen;
+                btnFiltreRapport.Text = "Tous les rapports";
+            }
+            else
+            {
+                if (bsMedecin.Current != null)
+                {
+                    Medecin leMedecinChoisi = (Medecin)bsMedecin.Current;
+                    bsRapport.DataSource = leMedecinChoisi.Rapports.ToList();
+                    dgvRapport.DataSource = bsRapport;
+                }
+                cboSpecialite.Enabled = true;
+                dgvMedecin.Enabled = true;
+                btnFiltreRapport.BackColor = Color.Red;
+                btnFiltreRapport.Text = "Filtrer par médecin";
+            }
         }
     }
 }
