@@ -11,6 +11,8 @@ namespace tartempion
     internal class MonModelMission2
     {
         private static TartempionContext monModel;
+        private static int actionRapport;
+        private static Rapport leRapportChoisi;
         private static Visiteur visiteurConnecte;
         private static bool connexionValide;
         private static Visiteur utilisateurConnecte;
@@ -19,7 +21,13 @@ namespace tartempion
         public static Visiteur VisiteurConnecte { get => visiteurConnecte; set => visiteurConnecte = value; }
         public static bool ConnexionValide { get => connexionValide; set => connexionValide = value; }
         public static Visiteur UtilisateurConnecte { get => utilisateurConnecte; set => utilisateurConnecte = value; }
+        public static int ActionRapport { get => actionRapport; set => actionRapport = value; }
+        public static Rapport LeRapportChoisi { get => leRapportChoisi; set => leRapportChoisi = value; }
 
+        public static void setLeRapportChoisi(int id)
+        {
+            LeRapportChoisi = MonModel.Rapports.Where(x => x.IdRapport == id).ToList()[0];
+        }
         public static void init()
         {
             MonModel = new TartempionContext();

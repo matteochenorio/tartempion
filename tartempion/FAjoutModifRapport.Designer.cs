@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             cboMedecin = new ComboBox();
             cboMedicament = new ComboBox();
             checkBoxRemplacant = new CheckBox();
@@ -56,9 +57,13 @@
             dateReelle = new DateTimePicker();
             dateDuree = new DateTimePicker();
             tbBilan = new TextBox();
+            bsMedecin = new BindingSource(components);
+            bsMedicament = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)qteMedicament).BeginInit();
             ((System.ComponentModel.ISupportInitialize)qteAvis).BeginInit();
             ((System.ComponentModel.ISupportInitialize)qteEchantillon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsMedecin).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsMedicament).BeginInit();
             SuspendLayout();
             // 
             // cboMedecin
@@ -189,7 +194,7 @@
             // 
             // qteEchantillon
             // 
-            qteEchantillon.Location = new Point(703, 51);
+            qteEchantillon.Location = new Point(703, 50);
             qteEchantillon.Name = "qteEchantillon";
             qteEchantillon.Size = new Size(54, 23);
             qteEchantillon.TabIndex = 15;
@@ -332,6 +337,8 @@
             ((System.ComponentModel.ISupportInitialize)qteMedicament).EndInit();
             ((System.ComponentModel.ISupportInitialize)qteAvis).EndInit();
             ((System.ComponentModel.ISupportInitialize)qteEchantillon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsMedecin).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsMedicament).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -366,5 +373,7 @@
         private DateTimePicker dateReelle;
         private DateTimePicker dateDuree;
         private TextBox tbBilan;
+        private BindingSource bsMedecin;
+        private BindingSource bsMedicament;
     }
 }

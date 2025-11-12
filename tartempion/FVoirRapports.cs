@@ -136,5 +136,25 @@ namespace tartempion
                 btnFiltreRapport.Text = "Filtrer par médecin";
             }
         }
+
+        private void btnAjout_Click(object sender, EventArgs e)
+        {
+            MonModelMission2.ActionRapport = 1;
+            FAjoutModifRapport newFAjoutModifCompositeur = new FAjoutModifRapport();
+            newFAjoutModifCompositeur.ShowDialog();
+            bsRapport_CurrentChanged(this, null);
+        }
+
+        private void btnModif_Click(object sender, EventArgs e)
+        {
+            MonModelMission2.ActionRapport = 2;
+            System.Type type = bsRapport.Current.GetType();
+            int id = (int)type.GetProperty("IdRapport").GetValue(bsRapport.Current, null);
+
+            MonModelMission2.setLeRapportChoisi(id);
+            FAjoutModifRapport newFAjoutModifRapport = new FAjoutModifRapport();
+            newFAjoutModifRapport.ShowDialog();
+            bsRapport_CurrentChanged(this, null);
+        }
     }
 }

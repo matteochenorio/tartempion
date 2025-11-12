@@ -141,6 +141,7 @@
             btnAjout.TabIndex = 8;
             btnAjout.Text = "NOUVEAU";
             btnAjout.UseVisualStyleBackColor = true;
+            btnAjout.Click += btnAjout_Click;
             // 
             // btnModif
             // 
@@ -150,6 +151,7 @@
             btnModif.TabIndex = 9;
             btnModif.Text = "MODIFIER";
             btnModif.UseVisualStyleBackColor = true;
+            btnModif.Click += btnModif_Click;
             // 
             // FVoirRapports
             // 
