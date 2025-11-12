@@ -23,6 +23,8 @@ public partial class TartempionContext : DbContext
 
     public virtual DbSet<FraisForfait> FraisForfaits { get; set; }
 
+    public virtual DbSet<HistoriqueFrai> HistoriqueFrais { get; set; }
+
     public virtual DbSet<Laboratoire> Laboratoires { get; set; }
 
     public virtual DbSet<LigneFraisForfait> LigneFraisForfaits { get; set; }
@@ -41,9 +43,13 @@ public partial class TartempionContext : DbContext
 
     public virtual DbSet<Region> Regions { get; set; }
 
+    public virtual DbSet<Remplacant> Remplacants { get; set; }
+
     public virtual DbSet<Secteur> Secteurs { get; set; }
 
     public virtual DbSet<Specialite> Specialites { get; set; }
+
+    public virtual DbSet<TypeFraisForfait> TypeFraisForfaits { get; set; }
 
     public virtual DbSet<Visiteur> Visiteurs { get; set; }
 
@@ -142,16 +148,37 @@ public partial class TartempionContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("id");
+            entity.Property(e => e.IdHistoriqueFrais).HasColumnName("idHistoriqueFrais");
+            entity.Property(e => e.IdTypeFraisForfait).HasColumnName("idTypeFraisForfait");
             entity.Property(e => e.Libelle)
                 .HasMaxLength(20)
                 .IsUnicode(false)
                 .HasDefaultValueSql("(NULL)")
                 .IsFixedLength()
                 .HasColumnName("libelle");
-            entity.Property(e => e.Montant)
-                .HasDefaultValueSql("(NULL)")
-                .HasColumnType("decimal(5, 2)")
-                .HasColumnName("montant");
+            entity.Property(e => e.Mensuel).HasColumnName("mensuel");
+
+            entity.HasOne(d => d.IdHistoriqueFraisNavigation).WithMany(p => p.FraisForfaits)
+                .HasForeignKey(d => d.IdHistoriqueFrais)
+                .HasConstraintName("fk_FraisForfait_historiqueFrais");
+
+            entity.HasOne(d => d.IdTypeFraisForfaitNavigation).WithMany(p => p.FraisForfaits)
+                .HasForeignKey(d => d.IdTypeFraisForfait)
+                .HasConstraintName("fk_FraisForfait_typeFraisForfait");
+        });
+
+        modelBuilder.Entity<HistoriqueFrai>(entity =>
+        {
+            entity.HasKey(e => e.IdHistoriqueFrais).HasName("PK__historiq__CAFDD9E11C86CF3F");
+
+            entity.ToTable("historiqueFrais");
+
+            entity.Property(e => e.IdHistoriqueFrais)
+                .ValueGeneratedNever()
+                .HasColumnName("idHistoriqueFrais");
+            entity.Property(e => e.DateDebut).HasColumnName("dateDebut");
+            entity.Property(e => e.DateFin).HasColumnName("dateFin");
+            entity.Property(e => e.Montant).HasColumnName("montant");
         });
 
         modelBuilder.Entity<Laboratoire>(entity =>
@@ -418,6 +445,24 @@ public partial class TartempionContext : DbContext
                 .HasConstraintName("FK_VISITEUR");
         });
 
+        modelBuilder.Entity<Remplacant>(entity =>
+        {
+            entity.HasKey(e => e.IdRemplacant).HasName("PK_REMPLACANT");
+
+            entity.ToTable("Remplacant");
+
+            entity.Property(e => e.IdRemplacant).HasColumnName("idRemplacant");
+            entity.Property(e => e.DateDebut).HasColumnName("dateDebut");
+            entity.Property(e => e.DateFin).HasColumnName("dateFin");
+            entity.Property(e => e.EstRemplacant).HasColumnName("estRemplacant");
+            entity.Property(e => e.IdMedecin).HasColumnName("idMedecin");
+
+            entity.HasOne(d => d.IdMedecinNavigation).WithMany(p => p.Remplacants)
+                .HasForeignKey(d => d.IdMedecin)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_REMPLACANT_MEDECIN");
+        });
+
         modelBuilder.Entity<Secteur>(entity =>
         {
             entity.HasKey(e => e.IdSecteur).HasName("PK_SECTEUR");
@@ -458,6 +503,22 @@ public partial class TartempionContext : DbContext
                 .HasMaxLength(64)
                 .IsUnicode(false)
                 .HasColumnName("libSpecialite");
+        });
+
+        modelBuilder.Entity<TypeFraisForfait>(entity =>
+        {
+            entity.HasKey(e => e.IdTypeFraisForfait).HasName("PK__typeFrai__948837038D3D467D");
+
+            entity.ToTable("typeFraisForfait");
+
+            entity.Property(e => e.IdTypeFraisForfait)
+                .ValueGeneratedNever()
+                .HasColumnName("idTypeFraisForfait");
+            entity.Property(e => e.Libelle)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("libelle");
         });
 
         modelBuilder.Entity<Visiteur>(entity =>

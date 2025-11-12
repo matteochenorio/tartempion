@@ -16,5 +16,10 @@ namespace tartempion
         {
             InitializeComponent();
         }
+
+        private void FAjoutModifRapport_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

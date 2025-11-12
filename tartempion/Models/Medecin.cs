@@ -22,4 +22,6 @@ public partial class Medecin
     public virtual Specialite? IdSpecialiteNavigation { get; set; }
 
     public virtual ICollection<Rapport> Rapports { get; set; } = new List<Rapport>();
+
+    public virtual ICollection<Remplacant> Remplacants { get; set; } = new List<Remplacant>();
 }
