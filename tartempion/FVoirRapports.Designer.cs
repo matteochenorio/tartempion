@@ -41,6 +41,8 @@
             bsFiltreRapport = new BindingSource(components);
             btnSpecialiteMedecin = new Button();
             btnFiltreRapport = new Button();
+            btnAjout = new Button();
+            btnModif = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvMedecin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvRapport).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsSpecialite).BeginInit();
@@ -71,7 +73,7 @@
             dgvMedecin.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMedecin.Location = new Point(12, 66);
             dgvMedecin.Name = "dgvMedecin";
-            dgvMedecin.Size = new Size(369, 372);
+            dgvMedecin.Size = new Size(369, 343);
             dgvMedecin.TabIndex = 2;
             // 
             // dgvRapport
@@ -79,7 +81,7 @@
             dgvRapport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRapport.Location = new Point(406, 66);
             dgvRapport.Name = "dgvRapport";
-            dgvRapport.Size = new Size(382, 372);
+            dgvRapport.Size = new Size(382, 343);
             dgvRapport.TabIndex = 3;
             // 
             // label2
@@ -131,11 +133,31 @@
             btnFiltreRapport.UseVisualStyleBackColor = true;
             btnFiltreRapport.Click += btnFiltreRapport_Click;
             // 
+            // btnAjout
+            // 
+            btnAjout.Location = new Point(12, 415);
+            btnAjout.Name = "btnAjout";
+            btnAjout.Size = new Size(369, 23);
+            btnAjout.TabIndex = 8;
+            btnAjout.Text = "NOUVEAU";
+            btnAjout.UseVisualStyleBackColor = true;
+            // 
+            // btnModif
+            // 
+            btnModif.Location = new Point(406, 415);
+            btnModif.Name = "btnModif";
+            btnModif.Size = new Size(382, 23);
+            btnModif.TabIndex = 9;
+            btnModif.Text = "MODIFIER";
+            btnModif.UseVisualStyleBackColor = true;
+            // 
             // FVoirRapports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnModif);
+            Controls.Add(btnAjout);
             Controls.Add(btnFiltreRapport);
             Controls.Add(btnSpecialiteMedecin);
             Controls.Add(cboFiltreRapport);
@@ -171,5 +193,7 @@
         private BindingSource bsFiltreRapport;
         private Button btnSpecialiteMedecin;
         private Button btnFiltreRapport;
+        private Button btnAjout;
+        private Button btnModif;
     }
 }
