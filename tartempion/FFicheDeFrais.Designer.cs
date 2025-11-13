@@ -33,12 +33,26 @@
             btnAjouter = new Button();
             btnModifier = new Button();
             btnSupprimer = new Button();
-            labelVisiteur = new Label();
-            label1 = new Label();
+            lblVisiteur = new Label();
+            lblMoisActuelle = new Label();
             txtVisiteurConnecte = new TextBox();
             txtMoisActuelle = new TextBox();
             dgvFicheDeFrais = new DataGridView();
             bsFicheDeFrais = new BindingSource(components);
+            lblMoisFiche = new Label();
+            lblNbJustificatifFiche = new Label();
+            lblFiche = new Label();
+            lblAnnée = new Label();
+            txtIdFiche = new TextBox();
+            txtEtat = new TextBox();
+            txtDateDeDernierModifFiche = new TextBox();
+            txtMontantValideFiche = new TextBox();
+            txtNbJustificatifFiche = new TextBox();
+            txtAnnéeFiche = new TextBox();
+            txtMoisFiche = new TextBox();
+            lblEtat = new Label();
+            lblDateDeDernierModifFiche = new Label();
+            lblMontantValide = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvFicheDeFrais).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsFicheDeFrais).BeginInit();
             SuspendLayout();
@@ -79,28 +93,29 @@
             btnSupprimer.Text = "Supprimer";
             btnSupprimer.UseVisualStyleBackColor = true;
             // 
-            // labelVisiteur
+            // lblVisiteur
             // 
-            labelVisiteur.AutoSize = true;
-            labelVisiteur.Location = new Point(61, 27);
-            labelVisiteur.Name = "labelVisiteur";
-            labelVisiteur.Size = new Size(52, 15);
-            labelVisiteur.TabIndex = 4;
-            labelVisiteur.Text = "Visiteur :";
+            lblVisiteur.AutoSize = true;
+            lblVisiteur.Location = new Point(61, 27);
+            lblVisiteur.Name = "lblVisiteur";
+            lblVisiteur.Size = new Size(52, 15);
+            lblVisiteur.TabIndex = 4;
+            lblVisiteur.Text = "Visiteur :";
             // 
-            // label1
+            // lblMoisActuelle
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(61, 68);
-            label1.Name = "label1";
-            label1.Size = new Size(39, 15);
-            label1.TabIndex = 5;
-            label1.Text = "Mois :";
+            lblMoisActuelle.AutoSize = true;
+            lblMoisActuelle.Location = new Point(61, 68);
+            lblMoisActuelle.Name = "lblMoisActuelle";
+            lblMoisActuelle.Size = new Size(39, 15);
+            lblMoisActuelle.TabIndex = 5;
+            lblMoisActuelle.Text = "Mois :";
             // 
             // txtVisiteurConnecte
             // 
             txtVisiteurConnecte.Location = new Point(142, 24);
             txtVisiteurConnecte.Name = "txtVisiteurConnecte";
+            txtVisiteurConnecte.ReadOnly = true;
             txtVisiteurConnecte.Size = new Size(100, 23);
             txtVisiteurConnecte.TabIndex = 6;
             // 
@@ -108,27 +123,160 @@
             // 
             txtMoisActuelle.Location = new Point(142, 68);
             txtMoisActuelle.Name = "txtMoisActuelle";
+            txtMoisActuelle.ReadOnly = true;
             txtMoisActuelle.Size = new Size(100, 23);
             txtMoisActuelle.TabIndex = 7;
             // 
             // dgvFicheDeFrais
             // 
+            dgvFicheDeFrais.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvFicheDeFrais.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvFicheDeFrais.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvFicheDeFrais.Location = new Point(25, 145);
             dgvFicheDeFrais.Name = "dgvFicheDeFrais";
             dgvFicheDeFrais.Size = new Size(370, 264);
             dgvFicheDeFrais.TabIndex = 8;
             // 
+            // bsFicheDeFrais
+            // 
+            bsFicheDeFrais.CurrentChanged += bsFicheDeFrais_CurrentChanged;
+            // 
+            // lblMoisFiche
+            // 
+            lblMoisFiche.AutoSize = true;
+            lblMoisFiche.Location = new Point(617, 56);
+            lblMoisFiche.Name = "lblMoisFiche";
+            lblMoisFiche.Size = new Size(39, 15);
+            lblMoisFiche.TabIndex = 9;
+            lblMoisFiche.Text = "Mois :";
+            // 
+            // lblNbJustificatifFiche
+            // 
+            lblNbJustificatifFiche.AutoSize = true;
+            lblNbJustificatifFiche.Location = new Point(478, 84);
+            lblNbJustificatifFiche.Name = "lblNbJustificatifFiche";
+            lblNbJustificatifFiche.Size = new Size(128, 15);
+            lblNbJustificatifFiche.TabIndex = 10;
+            lblNbJustificatifFiche.Text = "Nombre de justificatif :";
+            // 
+            // lblFiche
+            // 
+            lblFiche.AutoSize = true;
+            lblFiche.Location = new Point(478, 32);
+            lblFiche.Name = "lblFiche";
+            lblFiche.Size = new Size(84, 15);
+            lblFiche.TabIndex = 11;
+            lblFiche.Text = "Fiche de Frais :";
+            // 
+            // lblAnnée
+            // 
+            lblAnnée.AutoSize = true;
+            lblAnnée.Location = new Point(479, 56);
+            lblAnnée.Name = "lblAnnée";
+            lblAnnée.Size = new Size(47, 15);
+            lblAnnée.TabIndex = 12;
+            lblAnnée.Text = "Année :";
+            // 
+            // txtIdFiche
+            // 
+            txtIdFiche.Location = new Point(568, 27);
+            txtIdFiche.Name = "txtIdFiche";
+            txtIdFiche.Size = new Size(100, 23);
+            txtIdFiche.TabIndex = 13;
+            // 
+            // txtEtat
+            // 
+            txtEtat.Location = new Point(518, 158);
+            txtEtat.Name = "txtEtat";
+            txtEtat.Size = new Size(100, 23);
+            txtEtat.TabIndex = 14;
+            // 
+            // txtDateDeDernierModifFiche
+            // 
+            txtDateDeDernierModifFiche.Location = new Point(655, 134);
+            txtDateDeDernierModifFiche.Name = "txtDateDeDernierModifFiche";
+            txtDateDeDernierModifFiche.Size = new Size(100, 23);
+            txtDateDeDernierModifFiche.TabIndex = 15;
+            // 
+            // txtMontantValideFiche
+            // 
+            txtMontantValideFiche.Location = new Point(577, 105);
+            txtMontantValideFiche.Name = "txtMontantValideFiche";
+            txtMontantValideFiche.Size = new Size(100, 23);
+            txtMontantValideFiche.TabIndex = 16;
+            // 
+            // txtNbJustificatifFiche
+            // 
+            txtNbJustificatifFiche.Location = new Point(612, 81);
+            txtNbJustificatifFiche.Name = "txtNbJustificatifFiche";
+            txtNbJustificatifFiche.Size = new Size(100, 23);
+            txtNbJustificatifFiche.TabIndex = 17;
+            // 
+            // txtAnnéeFiche
+            // 
+            txtAnnéeFiche.Location = new Point(532, 53);
+            txtAnnéeFiche.Name = "txtAnnéeFiche";
+            txtAnnéeFiche.Size = new Size(79, 23);
+            txtAnnéeFiche.TabIndex = 18;
+            // 
+            // txtMoisFiche
+            // 
+            txtMoisFiche.Location = new Point(662, 53);
+            txtMoisFiche.Name = "txtMoisFiche";
+            txtMoisFiche.Size = new Size(100, 23);
+            txtMoisFiche.TabIndex = 19;
+            // 
+            // lblEtat
+            // 
+            lblEtat.AutoSize = true;
+            lblEtat.Location = new Point(479, 161);
+            lblEtat.Name = "lblEtat";
+            lblEtat.Size = new Size(33, 15);
+            lblEtat.TabIndex = 21;
+            lblEtat.Text = "Etat :";
+            // 
+            // lblDateDeDernierModifFiche
+            // 
+            lblDateDeDernierModifFiche.AutoSize = true;
+            lblDateDeDernierModifFiche.Location = new Point(478, 137);
+            lblDateDeDernierModifFiche.Name = "lblDateDeDernierModifFiche";
+            lblDateDeDernierModifFiche.Size = new Size(171, 15);
+            lblDateDeDernierModifFiche.TabIndex = 22;
+            lblDateDeDernierModifFiche.Text = "Date de Dernière Modification :";
+            // 
+            // lblMontantValide
+            // 
+            lblMontantValide.AutoSize = true;
+            lblMontantValide.Location = new Point(478, 113);
+            lblMontantValide.Name = "lblMontantValide";
+            lblMontantValide.Size = new Size(93, 15);
+            lblMontantValide.TabIndex = 23;
+            lblMontantValide.Text = "Montant Valide :";
+            // 
             // FFicheDeFrais
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblMontantValide);
+            Controls.Add(lblDateDeDernierModifFiche);
+            Controls.Add(lblEtat);
+            Controls.Add(txtMoisFiche);
+            Controls.Add(txtAnnéeFiche);
+            Controls.Add(txtNbJustificatifFiche);
+            Controls.Add(txtMontantValideFiche);
+            Controls.Add(txtDateDeDernierModifFiche);
+            Controls.Add(txtEtat);
+            Controls.Add(txtIdFiche);
+            Controls.Add(lblAnnée);
+            Controls.Add(lblFiche);
+            Controls.Add(lblNbJustificatifFiche);
+            Controls.Add(lblMoisFiche);
             Controls.Add(dgvFicheDeFrais);
             Controls.Add(txtMoisActuelle);
             Controls.Add(txtVisiteurConnecte);
-            Controls.Add(label1);
-            Controls.Add(labelVisiteur);
+            Controls.Add(lblMoisActuelle);
+            Controls.Add(lblVisiteur);
             Controls.Add(btnSupprimer);
             Controls.Add(btnModifier);
             Controls.Add(btnAjouter);
@@ -148,11 +296,25 @@
         private Button btnAjouter;
         private Button btnModifier;
         private Button btnSupprimer;
-        private Label labelVisiteur;
-        private Label label1;
+        private Label lblVisiteur;
+        private Label lblMoisActuelle;
         private TextBox txtVisiteurConnecte;
         private TextBox txtMoisActuelle;
         private DataGridView dgvFicheDeFrais;
         private BindingSource bsFicheDeFrais;
+        private Label lblMoisFiche;
+        private Label lblNbJustificatifFiche;
+        private Label lblFiche;
+        private Label lblAnnée;
+        private TextBox txtIdFiche;
+        private TextBox txtEtat;
+        private TextBox txtDateDeDernierModifFiche;
+        private TextBox txtMontantValideFiche;
+        private TextBox txtNbJustificatifFiche;
+        private TextBox txtAnnéeFiche;
+        private TextBox txtMoisFiche;
+        private Label lblEtat;
+        private Label lblDateDeDernierModifFiche;
+        private Label lblMontantValide;
     }
 }
