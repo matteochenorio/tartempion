@@ -34,6 +34,7 @@
             mISSION3ToolStripMenuItem = new ToolStripMenuItem();
             pbMenu = new PictureBox();
             label1 = new Label();
+            ficheDeFraisToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
             SuspendLayout();
@@ -61,6 +62,7 @@
             // 
             // mISSION3ToolStripMenuItem
             // 
+            mISSION3ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ficheDeFraisToolStripMenuItem });
             mISSION3ToolStripMenuItem.Name = "mISSION3ToolStripMenuItem";
             mISSION3ToolStripMenuItem.Size = new Size(75, 20);
             mISSION3ToolStripMenuItem.Text = "MISSION 3";
@@ -81,6 +83,13 @@
             label1.Size = new Size(235, 15);
             label1.TabIndex = 2;
             label1.Text = "BIENVENUR SUR LE TABLEAU DE BORD GSB";
+            // 
+            // ficheDeFraisToolStripMenuItem
+            // 
+            ficheDeFraisToolStripMenuItem.Name = "ficheDeFraisToolStripMenuItem";
+            ficheDeFraisToolStripMenuItem.Size = new Size(180, 22);
+            ficheDeFraisToolStripMenuItem.Text = "Fiche de Frais";
+            ficheDeFraisToolStripMenuItem.Click += ficheDeFraisToolStripMenuItem_Click;
             // 
             // FMenu
             // 
@@ -109,5 +118,6 @@
         private ToolStripMenuItem mISSION1ToolStripMenuItem;
         private ToolStripMenuItem mISSION2ToolStripMenuItem;
         private ToolStripMenuItem mISSION3ToolStripMenuItem;
+        private ToolStripMenuItem ficheDeFraisToolStripMenuItem;
     }
 }

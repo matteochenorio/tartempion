@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tartempion.Models;
 
@@ -24,7 +23,6 @@ public partial class Visiteur
 
     public string Identifiant { get; set; } = null!;
 
-    [Column("mdp")]
     public string Password { get; set; } = null!;
 
     public virtual ICollection<Fichefrai> Fichefrais { get; set; } = new List<Fichefrai>();

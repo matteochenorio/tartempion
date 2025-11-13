@@ -9,7 +9,15 @@ public partial class FraisForfait
 
     public string? Libelle { get; set; }
 
-    public decimal? Montant { get; set; }
+    public bool? Mensuel { get; set; }
+
+    public int? IdHistoriqueFrais { get; set; }
+
+    public int? IdTypeFraisForfait { get; set; }
+
+    public virtual HistoriqueFrai? IdHistoriqueFraisNavigation { get; set; }
+
+    public virtual TypeFraisForfait? IdTypeFraisForfaitNavigation { get; set; }
 
     public virtual ICollection<LigneFraisForfait> LigneFraisForfaits { get; set; } = new List<LigneFraisForfait>();
 }

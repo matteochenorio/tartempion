@@ -21,7 +21,13 @@ namespace tartempion
 
         private void FMenu_Load(object sender, EventArgs e)
         {
-            pbMenu.Image = Image.FromFile(@"U:\Romeuf\AP3 GSB 2025\Logo GSB\logo.png");
+           
+        }
+
+        private void ficheDeFraisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FFicheDeFrais newFFicheDeFrais = new FFicheDeFrais();
+            newFFicheDeFrais.Show();
         }
     }
 }
