@@ -33,28 +33,29 @@ namespace tartempion
 
             cboMedicament1.ValueMember = "idMedicament";
             cboMedicament1.DisplayMember = "nomCommercial";
-            bsMedicament.DataSource = MonModelMission2.ListeMedicament();
-            cboMedicament1.DataSource = bsMedicament;
+            bsMedicament1.DataSource = MonModelMission2.ListeMedicament();
+            cboMedicament1.DataSource = bsMedicament1;
 
             cboEchantillon.ValueMember = "idMedicament";
             cboEchantillon.DisplayMember = "nomCommercial";
-            bsMedicament.DataSource = MonModelMission2.ListeMedicament();
-            cboEchantillon.DataSource = bsMedicament;
+            bsEchantillon.DataSource = MonModelMission2.ListeMedicament();
+            cboEchantillon.DataSource = bsEchantillon;
 
             cboEchantillon1.ValueMember = "idMedicament";
             cboEchantillon1.DisplayMember = "nomCommercial";
-            bsMedicament.DataSource = MonModelMission2.ListeMedicament();
-            cboEchantillon1.DataSource = bsMedicament;
+            bsEchantillon1.DataSource = MonModelMission2.ListeMedicament();
+            cboEchantillon1.DataSource = bsEchantillon1;
 
             cboEchantillon2.ValueMember = "idMedicament";
             cboEchantillon2.DisplayMember = "nomCommercial";
-            bsMedicament.DataSource = MonModelMission2.ListeMedicament();
-            cboEchantillon2.DataSource = bsMedicament;
+            bsEchantillon2.DataSource = MonModelMission2.ListeMedicament();
+            cboEchantillon2.DataSource = bsEchantillon2;
 
             if (MonModelMission2.ActionRapport == 2)
             {
                 tbMotif.Text = MonModelMission2.LeRapportChoisi.IdMotif.ToString();
                 tbBilan.Text = MonModelMission2.LeRapportChoisi.Bilan.ToString();
+                
             }
 
         }

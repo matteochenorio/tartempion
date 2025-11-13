@@ -35,8 +35,6 @@
             label1 = new Label();
             label2 = new Label();
             cboMedicament1 = new ComboBox();
-            label3 = new Label();
-            qteMedicament = new NumericUpDown();
             tbMotif = new TextBox();
             label4 = new Label();
             label5 = new Label();
@@ -59,11 +57,22 @@
             tbBilan = new TextBox();
             bsMedecin = new BindingSource(components);
             bsMedicament = new BindingSource(components);
-            ((System.ComponentModel.ISupportInitialize)qteMedicament).BeginInit();
+            btnOKAjoutModif = new Button();
+            btnCancelAjoutModif = new Button();
+            errorProvider = new ErrorProvider(components);
+            bsMedicament1 = new BindingSource(components);
+            bsEchantillon = new BindingSource(components);
+            bsEchantillon1 = new BindingSource(components);
+            bsEchantillon2 = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)qteAvis).BeginInit();
             ((System.ComponentModel.ISupportInitialize)qteEchantillon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsMedecin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsMedicament).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsMedicament1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsEchantillon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsEchantillon1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsEchantillon2).BeginInit();
             SuspendLayout();
             // 
             // cboMedecin
@@ -117,22 +126,6 @@
             cboMedicament1.Name = "cboMedicament1";
             cboMedicament1.Size = new Size(121, 23);
             cboMedicament1.TabIndex = 5;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 93);
-            label3.Name = "label3";
-            label3.Size = new Size(68, 15);
-            label3.TabIndex = 6;
-            label3.Text = "QTE Médoc";
-            // 
-            // qteMedicament
-            // 
-            qteMedicament.Location = new Point(105, 91);
-            qteMedicament.Name = "qteMedicament";
-            qteMedicament.Size = new Size(120, 23);
-            qteMedicament.TabIndex = 7;
             // 
             // tbMotif
             // 
@@ -298,11 +291,35 @@
             tbBilan.Size = new Size(248, 23);
             tbBilan.TabIndex = 29;
             // 
+            // btnOKAjoutModif
+            // 
+            btnOKAjoutModif.Location = new Point(12, 415);
+            btnOKAjoutModif.Name = "btnOKAjoutModif";
+            btnOKAjoutModif.Size = new Size(75, 23);
+            btnOKAjoutModif.TabIndex = 30;
+            btnOKAjoutModif.Text = "OK";
+            btnOKAjoutModif.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelAjoutModif
+            // 
+            btnCancelAjoutModif.Location = new Point(105, 415);
+            btnCancelAjoutModif.Name = "btnCancelAjoutModif";
+            btnCancelAjoutModif.Size = new Size(75, 23);
+            btnCancelAjoutModif.TabIndex = 31;
+            btnCancelAjoutModif.Text = "ANNULER";
+            btnCancelAjoutModif.UseVisualStyleBackColor = true;
+            // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
+            // 
             // FAjoutModifRapport
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnCancelAjoutModif);
+            Controls.Add(btnOKAjoutModif);
             Controls.Add(tbBilan);
             Controls.Add(dateDuree);
             Controls.Add(dateReelle);
@@ -323,8 +340,6 @@
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(tbMotif);
-            Controls.Add(qteMedicament);
-            Controls.Add(label3);
             Controls.Add(cboMedicament1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -334,11 +349,15 @@
             Name = "FAjoutModifRapport";
             Text = "FAjoutModifRapport";
             Load += FAjoutModifRapport_Load;
-            ((System.ComponentModel.ISupportInitialize)qteMedicament).EndInit();
             ((System.ComponentModel.ISupportInitialize)qteAvis).EndInit();
             ((System.ComponentModel.ISupportInitialize)qteEchantillon).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsMedecin).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsMedicament).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsMedicament1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsEchantillon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsEchantillon1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsEchantillon2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -351,8 +370,6 @@
         private Label label1;
         private Label label2;
         private ComboBox cboMedicament1;
-        private Label label3;
-        private NumericUpDown qteMedicament;
         private TextBox tbMotif;
         private Label label4;
         private Label label5;
@@ -375,5 +392,12 @@
         private TextBox tbBilan;
         private BindingSource bsMedecin;
         private BindingSource bsMedicament;
+        private Button btnOKAjoutModif;
+        private Button btnCancelAjoutModif;
+        private ErrorProvider errorProvider;
+        private BindingSource bsMedicament1;
+        private BindingSource bsEchantillon;
+        private BindingSource bsEchantillon1;
+        private BindingSource bsEchantillon2;
     }
 }
