@@ -386,12 +386,24 @@ public partial class TartempionContext : DbContext
             entity.ToTable("RAPPORT");
 
             entity.Property(e => e.IdRapport).HasColumnName("idRapport");
+            entity.Property(e => e.AvisMedecin)
+                .HasDefaultValue(1)
+                .HasColumnName("avisMedecin");
             entity.Property(e => e.Bilan)
                 .HasMaxLength(64)
                 .IsUnicode(false)
                 .HasColumnName("bilan");
             entity.Property(e => e.DateRapport).HasColumnName("dateRapport");
+            entity.Property(e => e.DureeVisite).HasColumnName("dureeVisite");
+            entity.Property(e => e.EstRemplacant).HasColumnName("estRemplacant");
+            entity.Property(e => e.HeurePrevue).HasColumnName("heurePrevue");
+            entity.Property(e => e.HeureReelle).HasColumnName("heureReelle");
             entity.Property(e => e.IdMedecin).HasColumnName("idMedecin");
+            entity.Property(e => e.IdMedicament)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("3MYC7")
+                .HasColumnName("idMedicament");
             entity.Property(e => e.IdMotif).HasColumnName("idMotif");
             entity.Property(e => e.IdVisiteur)
                 .HasMaxLength(3)
@@ -452,10 +464,11 @@ public partial class TartempionContext : DbContext
             entity.ToTable("Remplacant");
 
             entity.Property(e => e.IdRemplacant).HasColumnName("idRemplacant");
-            entity.Property(e => e.DateDebut).HasColumnName("dateDebut");
-            entity.Property(e => e.DateFin).HasColumnName("dateFin");
             entity.Property(e => e.EstRemplacant).HasColumnName("estRemplacant");
             entity.Property(e => e.IdMedecin).HasColumnName("idMedecin");
+            entity.Property(e => e.IdRapport)
+                .HasDefaultValue(1)
+                .HasColumnName("idRapport");
 
             entity.HasOne(d => d.IdMedecinNavigation).WithMany(p => p.Remplacants)
                 .HasForeignKey(d => d.IdMedecin)

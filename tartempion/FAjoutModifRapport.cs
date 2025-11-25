@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace tartempion
 {
@@ -16,6 +18,8 @@ namespace tartempion
         {
             InitializeComponent();
         }
+
+        private bool vretour = false;
 
         private void FAjoutModifRapport_Load(object sender, EventArgs e)
         {
@@ -53,11 +57,44 @@ namespace tartempion
 
             if (MonModelMission2.ActionRapport == 2)
             {
-                tbMotif.Text = MonModelMission2.LeRapportChoisi.IdMotif.ToString();
+                cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
+
+                //if (MonModelMission2.LeRapportChoisi.EstRemplacant = true)
+                //{
+                //    checkBoxRemplacant.Checked == true;
+                //}
+                //else
+                //{
+                //    checkBoxRemplacant.Checked == false;
+
+                cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedicament;
+                tbMotif.Text = MonModelMission2.LeRapportChoisi.IdMotifNavigation?.LibMotif?.ToString();
+                qteAvis.Value = (MonModelMission2.LeRapportChoisi.AvisMedecin == 1) ? 1 : 5;
+                tbDateRapport.Text = MonModelMission2.LeRapportChoisi.DateRapport?.ToString("dd/MM/yyyy");
+                tbHeurePrevue.Text = MonModelMission2.LeRapportChoisi.HeurePrevue.ToString("HH:mm:ss");
+                tbHeureReelle.Text = MonModelMission2.LeRapportChoisi.HeureReelle.ToString("HH:mm:ss");
+                tbDureeVisite.Text = MonModelMission2.LeRapportChoisi.DureeVisite.ToString();
+
                 tbBilan.Text = MonModelMission2.LeRapportChoisi.Bilan.ToString();
-                
+
+
             }
 
+        }
+
+        private bool tests()
+        {
+            if (System.String.IsNullOrEmpty(tbMotif.Text))
+            {
+                errorProvider.SetError(tbMotif, "Le motif du rapport doit être renseigné.");
+                vretour = false;
+            }
+            return vretour;
+        }
+
+        private void btnCancelAjoutModif_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

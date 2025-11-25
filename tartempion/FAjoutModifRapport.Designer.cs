@@ -46,14 +46,10 @@
             cboEchantillon1 = new ComboBox();
             cboEchantillon2 = new ComboBox();
             label8 = new Label();
-            dateRapport = new DateTimePicker();
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
             label12 = new Label();
-            datePrevue = new DateTimePicker();
-            dateReelle = new DateTimePicker();
-            dateDuree = new DateTimePicker();
             tbBilan = new TextBox();
             bsMedecin = new BindingSource(components);
             bsMedicament = new BindingSource(components);
@@ -64,6 +60,10 @@
             bsEchantillon = new BindingSource(components);
             bsEchantillon1 = new BindingSource(components);
             bsEchantillon2 = new BindingSource(components);
+            tbDateRapport = new TextBox();
+            tbHeurePrevue = new TextBox();
+            tbHeureReelle = new TextBox();
+            tbDureeVisite = new TextBox();
             ((System.ComponentModel.ISupportInitialize)qteAvis).BeginInit();
             ((System.ComponentModel.ISupportInitialize)qteEchantillon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsMedecin).BeginInit();
@@ -217,13 +217,6 @@
             label8.TabIndex = 18;
             label8.Text = "Date Rapport";
             // 
-            // dateRapport
-            // 
-            dateRapport.Location = new Point(105, 201);
-            dateRapport.Name = "dateRapport";
-            dateRapport.Size = new Size(200, 23);
-            dateRapport.TabIndex = 19;
-            // 
             // label9
             // 
             label9.AutoSize = true;
@@ -260,30 +253,6 @@
             label12.TabIndex = 23;
             label12.Text = "Bilan";
             // 
-            // datePrevue
-            // 
-            datePrevue.Format = DateTimePickerFormat.Time;
-            datePrevue.Location = new Point(105, 236);
-            datePrevue.Name = "datePrevue";
-            datePrevue.Size = new Size(200, 23);
-            datePrevue.TabIndex = 26;
-            // 
-            // dateReelle
-            // 
-            dateReelle.Format = DateTimePickerFormat.Time;
-            dateReelle.Location = new Point(105, 271);
-            dateReelle.Name = "dateReelle";
-            dateReelle.Size = new Size(200, 23);
-            dateReelle.TabIndex = 27;
-            // 
-            // dateDuree
-            // 
-            dateDuree.Format = DateTimePickerFormat.Time;
-            dateDuree.Location = new Point(105, 307);
-            dateDuree.Name = "dateDuree";
-            dateDuree.Size = new Size(200, 23);
-            dateDuree.TabIndex = 28;
-            // 
             // tbBilan
             // 
             tbBilan.Location = new Point(105, 346);
@@ -308,27 +277,56 @@
             btnCancelAjoutModif.TabIndex = 31;
             btnCancelAjoutModif.Text = "ANNULER";
             btnCancelAjoutModif.UseVisualStyleBackColor = true;
+            btnCancelAjoutModif.Click += btnCancelAjoutModif_Click;
             // 
             // errorProvider
             // 
             errorProvider.ContainerControl = this;
+            // 
+            // tbDateRapport
+            // 
+            tbDateRapport.Location = new Point(105, 204);
+            tbDateRapport.Name = "tbDateRapport";
+            tbDateRapport.Size = new Size(248, 23);
+            tbDateRapport.TabIndex = 32;
+            // 
+            // tbHeurePrevue
+            // 
+            tbHeurePrevue.Location = new Point(105, 239);
+            tbHeurePrevue.Name = "tbHeurePrevue";
+            tbHeurePrevue.Size = new Size(248, 23);
+            tbHeurePrevue.TabIndex = 33;
+            // 
+            // tbHeureReelle
+            // 
+            tbHeureReelle.Location = new Point(105, 274);
+            tbHeureReelle.Name = "tbHeureReelle";
+            tbHeureReelle.Size = new Size(248, 23);
+            tbHeureReelle.TabIndex = 34;
+            // 
+            // tbDureeVisite
+            // 
+            tbDureeVisite.Location = new Point(105, 310);
+            tbDureeVisite.Name = "tbDureeVisite";
+            tbDureeVisite.Size = new Size(248, 23);
+            tbDureeVisite.TabIndex = 35;
             // 
             // FAjoutModifRapport
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(tbDureeVisite);
+            Controls.Add(tbHeureReelle);
+            Controls.Add(tbHeurePrevue);
+            Controls.Add(tbDateRapport);
             Controls.Add(btnCancelAjoutModif);
             Controls.Add(btnOKAjoutModif);
             Controls.Add(tbBilan);
-            Controls.Add(dateDuree);
-            Controls.Add(dateReelle);
-            Controls.Add(datePrevue);
             Controls.Add(label12);
             Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(label9);
-            Controls.Add(dateRapport);
             Controls.Add(label8);
             Controls.Add(cboEchantillon2);
             Controls.Add(cboEchantillon1);
@@ -381,14 +379,10 @@
         private ComboBox cboEchantillon1;
         private ComboBox cboEchantillon2;
         private Label label8;
-        private DateTimePicker dateRapport;
         private Label label9;
         private Label label10;
         private Label label11;
         private Label label12;
-        private DateTimePicker datePrevue;
-        private DateTimePicker dateReelle;
-        private DateTimePicker dateDuree;
         private TextBox tbBilan;
         private BindingSource bsMedecin;
         private BindingSource bsMedicament;
@@ -399,5 +393,9 @@
         private BindingSource bsEchantillon;
         private BindingSource bsEchantillon1;
         private BindingSource bsEchantillon2;
+        private TextBox tbDureeVisite;
+        private TextBox tbHeureReelle;
+        private TextBox tbHeurePrevue;
+        private TextBox tbDateRapport;
     }
 }
