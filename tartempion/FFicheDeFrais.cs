@@ -59,6 +59,21 @@ namespace tartempion
             txtMoisFiche.Text = laFicheDeFraisChoisie.Mois.Substring(4, 2);
             txtMontantValideFiche.Text = laFicheDeFraisChoisie.MontantValide.ToString();
             txtEtat.Text = laFicheDeFraisChoisie.IdEtatNavigation.Libelle;
+            MonModelMission3.FicheFraisChoisi = laFicheDeFraisChoisie;
+            
+        }
+
+        private void btnForfait_Click(object sender, EventArgs e)
+        {
+            if (dgvFicheDeFrais.CurrentRow == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une fiche de frais.");
+                return;
+            }
+
+            FFicheForfaitHorsForfait newFFicheForfaitHorsForfait = new FFicheForfaitHorsForfait();
+            newFFicheForfaitHorsForfait.Show();
+        
         }
     }
 }

@@ -53,6 +53,7 @@
             lblEtat = new Label();
             lblDateDeDernierModifFiche = new Label();
             lblMontantValide = new Label();
+            btnForfait = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvFicheDeFrais).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsFicheDeFrais).BeginInit();
             SuspendLayout();
@@ -253,11 +254,22 @@
             lblMontantValide.TabIndex = 23;
             lblMontantValide.Text = "Montant Valide :";
             // 
+            // btnForfait
+            // 
+            btnForfait.Location = new Point(518, 365);
+            btnForfait.Name = "btnForfait";
+            btnForfait.Size = new Size(207, 23);
+            btnForfait.TabIndex = 24;
+            btnForfait.Text = "afficher frais forfait et hors forfait";
+            btnForfait.UseVisualStyleBackColor = true;
+            btnForfait.Click += btnForfait_Click;
+            // 
             // FFicheDeFrais
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnForfait);
             Controls.Add(lblMontantValide);
             Controls.Add(lblDateDeDernierModifFiche);
             Controls.Add(lblEtat);
@@ -316,5 +328,6 @@
         private Label lblEtat;
         private Label lblDateDeDernierModifFiche;
         private Label lblMontantValide;
+        private Button btnForfait;
     }
 }

@@ -13,10 +13,12 @@ namespace tartempion
         private static TartempionContext monModel;
         private static Visiteur visiteurConnecte;
         private static bool connexionValide;
+        private static Fichefrai ficheFraisChoisi;
 
         public static TartempionContext MonModel { get => monModel; set => monModel = value; }
         public static Visiteur VisiteurConnecte { get => visiteurConnecte; set => visiteurConnecte = value; }
         public static bool ConnexionValide { get => connexionValide; set => connexionValide = value; }
+        public static Fichefrai FicheFraisChoisi { get => ficheFraisChoisi; set => ficheFraisChoisi = value; }
 
         public static void init()
         {
@@ -26,6 +28,16 @@ namespace tartempion
         public static List<Fichefrai> listeFicheFrais()
         {
             return monModel.Fichefrais.ToList();
+        }
+
+        public static List<FraisForfait> listeFraisForfait()
+        {
+            return monModel.FraisForfaits.ToList();
+        }
+
+        public static List<LigneFraisHorsForfait> listeFraisHorsForfait()
+        {
+            return monModel.LigneFraisHorsForfaits.ToList();
         }
 
         private static string GetMd5Hash(string PasswdSaisi)
