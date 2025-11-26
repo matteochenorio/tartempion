@@ -57,6 +57,17 @@ namespace tartempion
 
             if (MonModelMission2.ActionRapport == 2)
             {
+
+                //    var medicamentsPresentes = MonModelMission2.ListeMedicamentPresenteParRapport(MonModelMission2.LeRapportChoisi.IdRapport);
+                //    if (medicamentsPresentes.Count > 0)
+                //    {
+                //        cboMedicament.SelectedValue = medicamentsPresentes[0].IdMedicament;
+                //        if (medicamentsPresentes.Count > 1)
+                //        {
+                //            cboMedicament1.SelectedValue = medicamentsPresentes[1].IdMedicament;
+                //        }
+                //    }
+
                 cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
 
                 //if (MonModelMission2.LeRapportChoisi.EstRemplacant = true)
@@ -68,6 +79,8 @@ namespace tartempion
                 //    checkBoxRemplacant.Checked == false;
 
                 cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedicament;
+                //cboMedicament.SelectedValue = MonModelMission2
+
                 tbMotif.Text = MonModelMission2.LeRapportChoisi.IdMotifNavigation?.LibMotif?.ToString();
                 qteAvis.Value = (MonModelMission2.LeRapportChoisi.AvisMedecin == 1) ? 1 : 5;
                 tbDateRapport.Text = MonModelMission2.LeRapportChoisi.DateRapport?.ToString("dd/MM/yyyy");
@@ -76,6 +89,8 @@ namespace tartempion
                 tbDureeVisite.Text = MonModelMission2.LeRapportChoisi.DureeVisite.ToString();
 
                 tbBilan.Text = MonModelMission2.LeRapportChoisi.Bilan.ToString();
+
+                cboEchantillon.SelectedValue = MonModelMission2.LeRapportChoisi.IdVisiteurNavigation ?.Nom.ToString();
 
 
             }

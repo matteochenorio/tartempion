@@ -424,6 +424,29 @@ public partial class TartempionContext : DbContext
                 .HasForeignKey(d => d.IdVisiteur)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("rapport_fk1");
+
+            entity.HasMany(d => d.IdMedicaments).WithMany(p => p.IdRapports)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Presentation",
+                    r => r.HasOne<Medicament>().WithMany()
+                        .HasForeignKey("IdMedicament")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__PRESENTAT__idMed__0F624AF8"),
+                    l => l.HasOne<Rapport>().WithMany()
+                        .HasForeignKey("IdRapport")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__PRESENTAT__idRap__0E6E26BF"),
+                    j =>
+                    {
+                        j.HasKey("IdRapport", "IdMedicament").HasName("PK__PRESENTA__8E6CD178FA2E6021");
+                        j.ToTable("PRESENTATION");
+                        j.IndexerProperty<int>("IdRapport").HasColumnName("idRapport");
+                        j.IndexerProperty<string>("IdMedicament")
+                            .HasMaxLength(12)
+                            .IsUnicode(false)
+                            .IsFixedLength()
+                            .HasColumnName("idMedicament");
+                    });
         });
 
         modelBuilder.Entity<Region>(entity =>
