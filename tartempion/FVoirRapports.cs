@@ -39,7 +39,8 @@ namespace tartempion
             Specialite laSpecialiteChoisie = (Specialite)bsSpecialite.Current;
             bsMedecin.DataSource = MonModelMission2.ListeMedecin().Where(x => x.IdSpecialite == laSpecialiteChoisie.IdSpecialite).ToList();
             dgvMedecin.DataSource = bsMedecin;
-            dgvMedecin.Columns[0].Visible = false;
+            //dgvMedecin.Columns[0].Visible = false;
+            dgvMedecin.Columns[0].Visible = true;
             dgvMedecin.Columns[1].HeaderText = "NOM";
             dgvMedecin.Columns[2].HeaderText = "PRENOM";
             dgvMedecin.Columns[3].HeaderText = "ADRESSE";

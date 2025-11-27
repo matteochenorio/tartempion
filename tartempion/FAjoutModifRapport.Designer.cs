@@ -57,8 +57,11 @@
             tbDureeVisite = new TextBox();
             dgvPresentes = new DataGridView();
             dgvEchantillon = new DataGridView();
-            btnModifPresentes = new Button();
-            btnModifEchantillon = new Button();
+            btnAjoutPresentes = new Button();
+            btnDeletePresentes = new Button();
+            btnAjoutEchantillon = new Button();
+            btnDeleteEchantillon = new Button();
+            btnModifQuantite = new Button();
             ((System.ComponentModel.ISupportInitialize)qteAvis).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsMedecin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsMedicamentPresentes).BeginInit();
@@ -214,6 +217,7 @@
             btnOKAjoutModif.TabIndex = 30;
             btnOKAjoutModif.Text = "OK";
             btnOKAjoutModif.UseVisualStyleBackColor = true;
+            btnOKAjoutModif.Click += btnOKAjoutModif_Click;
             // 
             // btnCancelAjoutModif
             // 
@@ -279,31 +283,66 @@
             dgvEchantillon.Size = new Size(248, 109);
             dgvEchantillon.TabIndex = 37;
             // 
-            // btnModifPresentes
+            // btnAjoutPresentes
             // 
-            btnModifPresentes.Location = new Point(105, 156);
-            btnModifPresentes.Name = "btnModifPresentes";
-            btnModifPresentes.Size = new Size(75, 23);
-            btnModifPresentes.TabIndex = 38;
-            btnModifPresentes.Text = "Modifier";
-            btnModifPresentes.UseVisualStyleBackColor = true;
+            btnAjoutPresentes.Location = new Point(105, 156);
+            btnAjoutPresentes.Name = "btnAjoutPresentes";
+            btnAjoutPresentes.Size = new Size(75, 23);
+            btnAjoutPresentes.TabIndex = 38;
+            btnAjoutPresentes.Text = "Ajouter";
+            btnAjoutPresentes.UseVisualStyleBackColor = true;
+            btnAjoutPresentes.Click += btnAjoutPresentes_Click;
             // 
-            // btnModifEchantillon
+            // btnDeletePresentes
             // 
-            btnModifEchantillon.Location = new Point(544, 156);
-            btnModifEchantillon.Name = "btnModifEchantillon";
-            btnModifEchantillon.Size = new Size(75, 23);
-            btnModifEchantillon.TabIndex = 39;
-            btnModifEchantillon.Text = "Modifier";
-            btnModifEchantillon.UseVisualStyleBackColor = true;
+            btnDeletePresentes.Location = new Point(186, 156);
+            btnDeletePresentes.Name = "btnDeletePresentes";
+            btnDeletePresentes.Size = new Size(75, 23);
+            btnDeletePresentes.TabIndex = 40;
+            btnDeletePresentes.Text = "Supprimer";
+            btnDeletePresentes.UseVisualStyleBackColor = true;
+            btnDeletePresentes.Click += btnDeletePresentes_Click;
+            // 
+            // btnAjoutEchantillon
+            // 
+            btnAjoutEchantillon.Location = new Point(544, 156);
+            btnAjoutEchantillon.Name = "btnAjoutEchantillon";
+            btnAjoutEchantillon.Size = new Size(75, 23);
+            btnAjoutEchantillon.TabIndex = 39;
+            btnAjoutEchantillon.Text = "Ajouter";
+            btnAjoutEchantillon.UseVisualStyleBackColor = true;
+            btnAjoutEchantillon.Click += btnAjoutEchantillon_Click;
+            // 
+            // btnDeleteEchantillon
+            // 
+            btnDeleteEchantillon.Location = new Point(625, 156);
+            btnDeleteEchantillon.Name = "btnDeleteEchantillon";
+            btnDeleteEchantillon.Size = new Size(75, 23);
+            btnDeleteEchantillon.TabIndex = 41;
+            btnDeleteEchantillon.Text = "Supprimer";
+            btnDeleteEchantillon.UseVisualStyleBackColor = true;
+            btnDeleteEchantillon.Click += btnDeleteEchantillon_Click;
+            // 
+            // btnModifQuantite
+            // 
+            btnModifQuantite.Location = new Point(706, 156);
+            btnModifQuantite.Name = "btnModifQuantite";
+            btnModifQuantite.Size = new Size(86, 23);
+            btnModifQuantite.TabIndex = 42;
+            btnModifQuantite.Text = "Modifier QTE";
+            btnModifQuantite.UseVisualStyleBackColor = true;
+            btnModifQuantite.Click += btnModifQuantite_Click;
             // 
             // FAjoutModifRapport
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnModifEchantillon);
-            Controls.Add(btnModifPresentes);
+            Controls.Add(btnModifQuantite);
+            Controls.Add(btnDeleteEchantillon);
+            Controls.Add(btnDeletePresentes);
+            Controls.Add(btnAjoutEchantillon);
+            Controls.Add(btnAjoutPresentes);
             Controls.Add(dgvEchantillon);
             Controls.Add(dgvPresentes);
             Controls.Add(tbDureeVisite);
@@ -372,7 +411,10 @@
         private TextBox tbDateRapport;
         private DataGridView dgvPresentes;
         private DataGridView dgvEchantillon;
-        private Button btnModifEchantillon;
-        private Button btnModifPresentes;
+        private Button btnAjoutPresentes;
+        private Button btnDeleteEchantillon;
+        private Button btnDeletePresentes;
+        private Button btnAjoutEchantillon;
+        private Button btnModifQuantite;
     }
 }

@@ -87,6 +87,7 @@ namespace tartempion
         {
             return MonModel.Medecins.ToList();
         }
+
         public static List<Specialite> ListeSpecialite()
         {
             return MonModel.Specialites.ToList();
@@ -96,5 +97,16 @@ namespace tartempion
         {
             return MonModel.Rapports.ToList();
         }
+
+        public static List<Offrir> ListeEchantillon()
+        {
+            return MonModel.Offrirs.ToList();
+        }
+
+        //public static bool AjoutRapport(string nom)
+        //{
+        //    bool vretour = true;
+
+        //}
     }
 }
