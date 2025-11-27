@@ -30,21 +30,15 @@
         {
             components = new System.ComponentModel.Container();
             cboMedecin = new ComboBox();
-            cboMedicament = new ComboBox();
             checkBoxRemplacant = new CheckBox();
             label1 = new Label();
             label2 = new Label();
-            cboMedicament1 = new ComboBox();
             tbMotif = new TextBox();
             label4 = new Label();
             label5 = new Label();
             qteAvis = new NumericUpDown();
             label6 = new Label();
             label7 = new Label();
-            cboEchantillon = new ComboBox();
-            qteEchantillon = new NumericUpDown();
-            cboEchantillon1 = new ComboBox();
-            cboEchantillon2 = new ComboBox();
             label8 = new Label();
             label9 = new Label();
             label10 = new Label();
@@ -52,27 +46,26 @@
             label12 = new Label();
             tbBilan = new TextBox();
             bsMedecin = new BindingSource(components);
-            bsMedicament = new BindingSource(components);
+            bsMedicamentPresentes = new BindingSource(components);
             btnOKAjoutModif = new Button();
             btnCancelAjoutModif = new Button();
             errorProvider = new ErrorProvider(components);
-            bsMedicament1 = new BindingSource(components);
             bsEchantillon = new BindingSource(components);
-            bsEchantillon1 = new BindingSource(components);
-            bsEchantillon2 = new BindingSource(components);
             tbDateRapport = new TextBox();
             tbHeurePrevue = new TextBox();
             tbHeureReelle = new TextBox();
             tbDureeVisite = new TextBox();
+            dgvPresentes = new DataGridView();
+            dgvEchantillon = new DataGridView();
+            btnModifPresentes = new Button();
+            btnModifEchantillon = new Button();
             ((System.ComponentModel.ISupportInitialize)qteAvis).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)qteEchantillon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsMedecin).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsMedicament).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsMedicamentPresentes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsMedicament1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsEchantillon).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsEchantillon1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsEchantillon2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPresentes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEchantillon).BeginInit();
             SuspendLayout();
             // 
             // cboMedecin
@@ -82,14 +75,6 @@
             cboMedecin.Name = "cboMedecin";
             cboMedecin.Size = new Size(121, 23);
             cboMedecin.TabIndex = 0;
-            // 
-            // cboMedicament
-            // 
-            cboMedicament.FormattingEnabled = true;
-            cboMedicament.Location = new Point(105, 50);
-            cboMedicament.Name = "cboMedicament";
-            cboMedicament.Size = new Size(121, 23);
-            cboMedicament.TabIndex = 1;
             // 
             // checkBoxRemplacant
             // 
@@ -119,17 +104,9 @@
             label2.TabIndex = 4;
             label2.Text = "Médicament(s)";
             // 
-            // cboMedicament1
-            // 
-            cboMedicament1.FormattingEnabled = true;
-            cboMedicament1.Location = new Point(232, 50);
-            cboMedicament1.Name = "cboMedicament1";
-            cboMedicament1.Size = new Size(121, 23);
-            cboMedicament1.TabIndex = 5;
-            // 
             // tbMotif
             // 
-            tbMotif.Location = new Point(105, 127);
+            tbMotif.Location = new Point(105, 185);
             tbMotif.Name = "tbMotif";
             tbMotif.Size = new Size(248, 23);
             tbMotif.TabIndex = 8;
@@ -137,7 +114,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 130);
+            label4.Location = new Point(12, 185);
             label4.Name = "label4";
             label4.Size = new Size(67, 15);
             label4.TabIndex = 9;
@@ -146,7 +123,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 169);
+            label5.Location = new Point(12, 218);
             label5.Name = "label5";
             label5.Size = new Size(78, 15);
             label5.TabIndex = 10;
@@ -154,7 +131,7 @@
             // 
             // qteAvis
             // 
-            qteAvis.Location = new Point(105, 167);
+            qteAvis.Location = new Point(106, 218);
             qteAvis.Name = "qteAvis";
             qteAvis.Size = new Size(120, 23);
             qteAvis.TabIndex = 11;
@@ -162,7 +139,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(232, 169);
+            label6.Location = new Point(228, 226);
             label6.Name = "label6";
             label6.Size = new Size(125, 15);
             label6.TabIndex = 12;
@@ -171,47 +148,16 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(446, 53);
+            label7.Location = new Point(414, 53);
             label7.Name = "label7";
             label7.Size = new Size(124, 15);
             label7.TabIndex = 13;
             label7.Text = "Échantillon(s) offert(s)";
             // 
-            // cboEchantillon
-            // 
-            cboEchantillon.FormattingEnabled = true;
-            cboEchantillon.Location = new Point(576, 50);
-            cboEchantillon.Name = "cboEchantillon";
-            cboEchantillon.Size = new Size(121, 23);
-            cboEchantillon.TabIndex = 14;
-            // 
-            // qteEchantillon
-            // 
-            qteEchantillon.Location = new Point(703, 50);
-            qteEchantillon.Name = "qteEchantillon";
-            qteEchantillon.Size = new Size(54, 23);
-            qteEchantillon.TabIndex = 15;
-            // 
-            // cboEchantillon1
-            // 
-            cboEchantillon1.FormattingEnabled = true;
-            cboEchantillon1.Location = new Point(576, 85);
-            cboEchantillon1.Name = "cboEchantillon1";
-            cboEchantillon1.Size = new Size(121, 23);
-            cboEchantillon1.TabIndex = 16;
-            // 
-            // cboEchantillon2
-            // 
-            cboEchantillon2.FormattingEnabled = true;
-            cboEchantillon2.Location = new Point(576, 122);
-            cboEchantillon2.Name = "cboEchantillon2";
-            cboEchantillon2.Size = new Size(121, 23);
-            cboEchantillon2.TabIndex = 17;
-            // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(12, 207);
+            label8.Location = new Point(12, 250);
             label8.Name = "label8";
             label8.Size = new Size(76, 15);
             label8.TabIndex = 18;
@@ -220,7 +166,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(11, 242);
+            label9.Location = new Point(12, 279);
             label9.Name = "label9";
             label9.Size = new Size(78, 15);
             label9.TabIndex = 20;
@@ -229,7 +175,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(11, 277);
+            label10.Location = new Point(12, 312);
             label10.Name = "label10";
             label10.Size = new Size(70, 15);
             label10.TabIndex = 21;
@@ -238,7 +184,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(12, 313);
+            label11.Location = new Point(11, 342);
             label11.Name = "label11";
             label11.Size = new Size(68, 15);
             label11.TabIndex = 22;
@@ -247,7 +193,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(12, 349);
+            label12.Location = new Point(12, 373);
             label12.Name = "label12";
             label12.Size = new Size(33, 15);
             label12.TabIndex = 23;
@@ -255,7 +201,7 @@
             // 
             // tbBilan
             // 
-            tbBilan.Location = new Point(105, 346);
+            tbBilan.Location = new Point(105, 370);
             tbBilan.Name = "tbBilan";
             tbBilan.Size = new Size(248, 23);
             tbBilan.TabIndex = 29;
@@ -285,37 +231,81 @@
             // 
             // tbDateRapport
             // 
-            tbDateRapport.Location = new Point(105, 204);
+            tbDateRapport.Location = new Point(105, 247);
             tbDateRapport.Name = "tbDateRapport";
             tbDateRapport.Size = new Size(248, 23);
             tbDateRapport.TabIndex = 32;
             // 
             // tbHeurePrevue
             // 
-            tbHeurePrevue.Location = new Point(105, 239);
+            tbHeurePrevue.Location = new Point(105, 276);
             tbHeurePrevue.Name = "tbHeurePrevue";
             tbHeurePrevue.Size = new Size(248, 23);
             tbHeurePrevue.TabIndex = 33;
             // 
             // tbHeureReelle
             // 
-            tbHeureReelle.Location = new Point(105, 274);
+            tbHeureReelle.Location = new Point(105, 309);
             tbHeureReelle.Name = "tbHeureReelle";
             tbHeureReelle.Size = new Size(248, 23);
             tbHeureReelle.TabIndex = 34;
             // 
             // tbDureeVisite
             // 
-            tbDureeVisite.Location = new Point(105, 310);
+            tbDureeVisite.Location = new Point(105, 339);
             tbDureeVisite.Name = "tbDureeVisite";
             tbDureeVisite.Size = new Size(248, 23);
             tbDureeVisite.TabIndex = 35;
+            // 
+            // dgvPresentes
+            // 
+            dgvPresentes.AllowUserToAddRows = false;
+            dgvPresentes.AllowUserToDeleteRows = false;
+            dgvPresentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPresentes.Location = new Point(105, 41);
+            dgvPresentes.Name = "dgvPresentes";
+            dgvPresentes.ReadOnly = true;
+            dgvPresentes.Size = new Size(248, 109);
+            dgvPresentes.TabIndex = 36;
+            // 
+            // dgvEchantillon
+            // 
+            dgvEchantillon.AllowUserToAddRows = false;
+            dgvEchantillon.AllowUserToDeleteRows = false;
+            dgvEchantillon.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEchantillon.Location = new Point(544, 41);
+            dgvEchantillon.Name = "dgvEchantillon";
+            dgvEchantillon.ReadOnly = true;
+            dgvEchantillon.Size = new Size(248, 109);
+            dgvEchantillon.TabIndex = 37;
+            // 
+            // btnModifPresentes
+            // 
+            btnModifPresentes.Location = new Point(105, 156);
+            btnModifPresentes.Name = "btnModifPresentes";
+            btnModifPresentes.Size = new Size(75, 23);
+            btnModifPresentes.TabIndex = 38;
+            btnModifPresentes.Text = "Modifier";
+            btnModifPresentes.UseVisualStyleBackColor = true;
+            // 
+            // btnModifEchantillon
+            // 
+            btnModifEchantillon.Location = new Point(544, 156);
+            btnModifEchantillon.Name = "btnModifEchantillon";
+            btnModifEchantillon.Size = new Size(75, 23);
+            btnModifEchantillon.TabIndex = 39;
+            btnModifEchantillon.Text = "Modifier";
+            btnModifEchantillon.UseVisualStyleBackColor = true;
             // 
             // FAjoutModifRapport
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnModifEchantillon);
+            Controls.Add(btnModifPresentes);
+            Controls.Add(dgvEchantillon);
+            Controls.Add(dgvPresentes);
             Controls.Add(tbDureeVisite);
             Controls.Add(tbHeureReelle);
             Controls.Add(tbHeurePrevue);
@@ -328,34 +318,26 @@
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(label8);
-            Controls.Add(cboEchantillon2);
-            Controls.Add(cboEchantillon1);
-            Controls.Add(qteEchantillon);
-            Controls.Add(cboEchantillon);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(qteAvis);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(tbMotif);
-            Controls.Add(cboMedicament1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(checkBoxRemplacant);
-            Controls.Add(cboMedicament);
             Controls.Add(cboMedecin);
             Name = "FAjoutModifRapport";
             Text = "FAjoutModifRapport";
             Load += FAjoutModifRapport_Load;
             ((System.ComponentModel.ISupportInitialize)qteAvis).EndInit();
-            ((System.ComponentModel.ISupportInitialize)qteEchantillon).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsMedecin).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsMedicament).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsMedicamentPresentes).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsMedicament1).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsEchantillon).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsEchantillon1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsEchantillon2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPresentes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEchantillon).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -363,21 +345,15 @@
         #endregion
 
         private ComboBox cboMedecin;
-        private ComboBox cboMedicament;
         private CheckBox checkBoxRemplacant;
         private Label label1;
         private Label label2;
-        private ComboBox cboMedicament1;
         private TextBox tbMotif;
         private Label label4;
         private Label label5;
         private NumericUpDown qteAvis;
         private Label label6;
         private Label label7;
-        private ComboBox cboEchantillon;
-        private NumericUpDown qteEchantillon;
-        private ComboBox cboEchantillon1;
-        private ComboBox cboEchantillon2;
         private Label label8;
         private Label label9;
         private Label label10;
@@ -385,17 +361,18 @@
         private Label label12;
         private TextBox tbBilan;
         private BindingSource bsMedecin;
-        private BindingSource bsMedicament;
+        private BindingSource bsMedicamentPresentes;
         private Button btnOKAjoutModif;
         private Button btnCancelAjoutModif;
         private ErrorProvider errorProvider;
-        private BindingSource bsMedicament1;
         private BindingSource bsEchantillon;
-        private BindingSource bsEchantillon1;
-        private BindingSource bsEchantillon2;
         private TextBox tbDureeVisite;
         private TextBox tbHeureReelle;
         private TextBox tbHeurePrevue;
         private TextBox tbDateRapport;
+        private DataGridView dgvPresentes;
+        private DataGridView dgvEchantillon;
+        private Button btnModifEchantillon;
+        private Button btnModifPresentes;
     }
 }

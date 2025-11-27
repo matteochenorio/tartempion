@@ -29,72 +29,55 @@ namespace tartempion
             bsMedecin.DataSource = MonModelMission2.ListeMedecin();
             cboMedecin.DataSource = bsMedecin;
 
-            //cboMedicament et echantillon
-            cboMedicament.ValueMember = "idMedicament";
-            cboMedicament.DisplayMember = "nomCommercial";
-            bsMedicament.DataSource = MonModelMission2.ListeMedicament();
-            cboMedicament.DataSource = bsMedicament;
-
-            cboMedicament1.ValueMember = "idMedicament";
-            cboMedicament1.DisplayMember = "nomCommercial";
-            bsMedicament1.DataSource = MonModelMission2.ListeMedicament();
-            cboMedicament1.DataSource = bsMedicament1;
-
-            cboEchantillon.ValueMember = "idMedicament";
-            cboEchantillon.DisplayMember = "nomCommercial";
-            bsEchantillon.DataSource = MonModelMission2.ListeMedicament();
-            cboEchantillon.DataSource = bsEchantillon;
-
-            cboEchantillon1.ValueMember = "idMedicament";
-            cboEchantillon1.DisplayMember = "nomCommercial";
-            bsEchantillon1.DataSource = MonModelMission2.ListeMedicament();
-            cboEchantillon1.DataSource = bsEchantillon1;
-
-            cboEchantillon2.ValueMember = "idMedicament";
-            cboEchantillon2.DisplayMember = "nomCommercial";
-            bsEchantillon2.DataSource = MonModelMission2.ListeMedicament();
-            cboEchantillon2.DataSource = bsEchantillon2;
+            cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
 
             if (MonModelMission2.ActionRapport == 2)
             {
 
-                //    var medicamentsPresentes = MonModelMission2.ListeMedicamentPresenteParRapport(MonModelMission2.LeRapportChoisi.IdRapport);
-                //    if (medicamentsPresentes.Count > 0)
-                //    {
-                //        cboMedicament.SelectedValue = medicamentsPresentes[0].IdMedicament;
-                //        if (medicamentsPresentes.Count > 1)
-                //        {
-                //            cboMedicament1.SelectedValue = medicamentsPresentes[1].IdMedicament;
-                //        }
-                //    }
+                if (MonModelMission2.LeRapportChoisi.EstRemplacant == true)
+                {
+                    checkBoxRemplacant.Checked = true;
+                }
+                else
+                {
+                    checkBoxRemplacant.Checked = false;
+                    tbMotif.Text = MonModelMission2.LeRapportChoisi.IdMotifNavigation?.LibMotif?.ToString();
+                    qteAvis.Value = (MonModelMission2.LeRapportChoisi.AvisMedecin == 1) ? 1 : 5;
+                    tbDateRapport.Text = MonModelMission2.LeRapportChoisi.DateRapport?.ToString("dd/MM/yyyy");
+                    tbHeurePrevue.Text = MonModelMission2.LeRapportChoisi.HeurePrevue.ToString("HH:mm:ss");
+                    tbHeureReelle.Text = MonModelMission2.LeRapportChoisi.HeureReelle.ToString("HH:mm:ss");
+                    tbDureeVisite.Text = MonModelMission2.LeRapportChoisi.DureeVisite.ToString();
 
-                cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
+                    tbBilan.Text = MonModelMission2.LeRapportChoisi.Bilan.ToString();
 
-                //if (MonModelMission2.LeRapportChoisi.EstRemplacant = true)
-                //{
-                //    checkBoxRemplacant.Checked == true;
-                //}
-                //else
-                //{
-                //    checkBoxRemplacant.Checked == false;
+                    //cboEchantillon.SelectedValue = MonModelMission2.LeRapportChoisi.IdVisiteurNavigation?.Nom.ToString();
 
-                cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedicament;
-                //cboMedicament.SelectedValue = MonModelMission2
+                    //médicaments présentés
+                    bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.IdMedicaments.ToList();
+                    dgvPresentes.DataSource = bsMedicamentPresentes;
 
-                tbMotif.Text = MonModelMission2.LeRapportChoisi.IdMotifNavigation?.LibMotif?.ToString();
-                qteAvis.Value = (MonModelMission2.LeRapportChoisi.AvisMedecin == 1) ? 1 : 5;
-                tbDateRapport.Text = MonModelMission2.LeRapportChoisi.DateRapport?.ToString("dd/MM/yyyy");
-                tbHeurePrevue.Text = MonModelMission2.LeRapportChoisi.HeurePrevue.ToString("HH:mm:ss");
-                tbHeureReelle.Text = MonModelMission2.LeRapportChoisi.HeureReelle.ToString("HH:mm:ss");
-                tbDureeVisite.Text = MonModelMission2.LeRapportChoisi.DureeVisite.ToString();
+                    for (int i = 0; i < dgvPresentes.Columns.Count; i++)
+                    {
+                        dgvPresentes.Columns[i].Visible = false;
 
-                tbBilan.Text = MonModelMission2.LeRapportChoisi.Bilan.ToString();
+                    }
+                    dgvPresentes.Columns[1].Visible = true;
+                    dgvPresentes.Columns[1].HeaderCell.Value = "Nom Commercial";
 
-                cboEchantillon.SelectedValue = MonModelMission2.LeRapportChoisi.IdVisiteurNavigation ?.Nom.ToString();
+                    //echantillons
+                    bsEchantillon.DataSource = MonModelMission2.LeRapportChoisi.IdMedicament.ToList();
+                    dgvEchantillon.DataSource = bsEchantillon;
 
-
+                    //for (int i = 0; i < dgvEchantillon.Columns.Count; i++)
+                    //{
+                    //    dgvEchantillon.Columns[i].Visible = false;
+                    //}
+                    //dgvEchantillon.Columns[1].Visible = true;
+                    //dgvEchantillon.Columns[1].HeaderCell.Value = "Id Medicament";
+                    //dgvEchantillon.Columns[2].Visible = true;
+                    //dgvEchantillon.Columns[2].HeaderCell.Value = "Quantité Offerte";
+                }
             }
-
         }
 
         private bool tests()

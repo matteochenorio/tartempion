@@ -31,6 +31,7 @@ namespace tartempion
         public static void init()
         {
             MonModel = new TartempionContext();
+           // Rapport x=MonModel.Rapports.Where(r => r.IdRapport == 1).FirstOrDefault();
         }
 
         public static void ThreadProc()
