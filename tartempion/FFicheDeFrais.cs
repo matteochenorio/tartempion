@@ -60,6 +60,7 @@ namespace tartempion
             txtMontantValideFiche.Text = laFicheDeFraisChoisie.MontantValide.ToString();
             txtEtat.Text = laFicheDeFraisChoisie.IdEtatNavigation.Libelle;
             MonModelMission3.FicheFraisChoisi = laFicheDeFraisChoisie;
+
             
         }
 

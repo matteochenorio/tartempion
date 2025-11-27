@@ -35,6 +35,7 @@
             dgvFraisHorsForfait = new DataGridView();
             bsFraisForfait = new BindingSource(components);
             bsFraisHorsForfait = new BindingSource(components);
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvFraisForfait).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvFraisHorsForfait).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsFraisForfait).BeginInit();
@@ -75,11 +76,22 @@
             dgvFraisHorsForfait.Size = new Size(308, 256);
             dgvFraisHorsForfait.TabIndex = 3;
             // 
+            // button1
+            // 
+            button1.Location = new Point(48, 382);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 4;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // FFicheForfaitHorsForfait
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(dgvFraisHorsForfait);
             Controls.Add(lblFraisHorsForfait);
             Controls.Add(lblForfait);
@@ -103,5 +115,6 @@
         private DataGridView dgvFraisHorsForfait;
         private BindingSource bsFraisForfait;
         private BindingSource bsFraisHorsForfait;
+        private Button button1;
     }
 }

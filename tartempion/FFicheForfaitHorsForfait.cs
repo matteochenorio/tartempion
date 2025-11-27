@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using tartempion.Models;
 
 namespace tartempion
 {
@@ -31,7 +32,22 @@ namespace tartempion
             bsFraisHorsForfait.DataSource = ligneHorsForfaitFiltre;
             dgvFraisHorsForfait.DataSource = bsFraisHorsForfait;
 
-            bsFraisForfait.DataSource = MonModelMission3.FicheFraisChoisi.LigneFraisForfaits.Select(x => new { }).OrderBy(x => x.NomCompositeur).ToList();
+            dgvFraisHorsForfait.Columns[0].Visible = false;
+            dgvFraisHorsForfait.Columns[1].Visible = false;
+            dgvFraisHorsForfait.Columns[2].HeaderText = "Date";
+            dgvFraisHorsForfait.Columns[3].HeaderText = "Libellé";
+            dgvFraisHorsForfait.Columns[5].HeaderText = "Montant";
+            dgvFraisHorsForfait.Columns[4].Visible = false;
+            dgvFraisHorsForfait.Columns[6].Visible = false;
+            List<LigneFraisForfait> ls = MonModelMission3.FicheFraisChoisi.LigneFraisForfaits.ToList();
+            bsFraisForfait.DataSource = MonModelMission3.FicheFraisChoisi.LigneFraisForfaits.Select(x => new { x.IdFraisForfaitNavigation.Libelle, x.Quantite, x.IdFraisForfaitNavigation.IdHistoriqueFraisNavigation.Montant }).ToList();
+            dgvFraisForfait.DataSource = bsFraisForfait;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FFicheDeFrais newFFicheDeFrais = new FFicheDeFrais();
+            newFFicheDeFrais.Show();
         }
     }
 }

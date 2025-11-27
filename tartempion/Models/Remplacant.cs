@@ -11,9 +11,7 @@ public partial class Remplacant
 
     public bool EstRemplacant { get; set; }
 
-    public DateOnly? DateDebut { get; set; }
-
-    public DateOnly? DateFin { get; set; }
+    public int IdRapport { get; set; }
 
     public virtual Medecin IdMedecinNavigation { get; set; } = null!;
 }

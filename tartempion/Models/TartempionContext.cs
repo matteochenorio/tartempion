@@ -129,6 +129,7 @@ public partial class TartempionContext : DbContext
 
             entity.HasOne(d => d.IdEtatNavigation).WithMany(p => p.Fichefrais)
                 .HasForeignKey(d => d.IdEtat)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__fichefrai__idEta__534D60F1");
 
             entity.HasOne(d => d.IdVisiteurNavigation).WithMany(p => p.Fichefrais)
@@ -151,7 +152,7 @@ public partial class TartempionContext : DbContext
             entity.Property(e => e.IdHistoriqueFrais).HasColumnName("idHistoriqueFrais");
             entity.Property(e => e.IdTypeFraisForfait).HasColumnName("idTypeFraisForfait");
             entity.Property(e => e.Libelle)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasDefaultValueSql("(NULL)")
                 .IsFixedLength()
@@ -160,10 +161,12 @@ public partial class TartempionContext : DbContext
 
             entity.HasOne(d => d.IdHistoriqueFraisNavigation).WithMany(p => p.FraisForfaits)
                 .HasForeignKey(d => d.IdHistoriqueFrais)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_FraisForfait_historiqueFrais");
 
             entity.HasOne(d => d.IdTypeFraisForfaitNavigation).WithMany(p => p.FraisForfaits)
                 .HasForeignKey(d => d.IdTypeFraisForfait)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_FraisForfait_typeFraisForfait");
         });
 
@@ -386,12 +389,24 @@ public partial class TartempionContext : DbContext
             entity.ToTable("RAPPORT");
 
             entity.Property(e => e.IdRapport).HasColumnName("idRapport");
+            entity.Property(e => e.AvisMedecin)
+                .HasDefaultValue(1)
+                .HasColumnName("avisMedecin");
             entity.Property(e => e.Bilan)
                 .HasMaxLength(64)
                 .IsUnicode(false)
                 .HasColumnName("bilan");
             entity.Property(e => e.DateRapport).HasColumnName("dateRapport");
+            entity.Property(e => e.DureeVisite).HasColumnName("dureeVisite");
+            entity.Property(e => e.EstRemplacant).HasColumnName("estRemplacant");
+            entity.Property(e => e.HeurePrevue).HasColumnName("heurePrevue");
+            entity.Property(e => e.HeureReelle).HasColumnName("heureReelle");
             entity.Property(e => e.IdMedecin).HasColumnName("idMedecin");
+            entity.Property(e => e.IdMedicament)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("3MYC7")
+                .HasColumnName("idMedicament");
             entity.Property(e => e.IdMotif).HasColumnName("idMotif");
             entity.Property(e => e.IdVisiteur)
                 .HasMaxLength(3)
@@ -412,6 +427,29 @@ public partial class TartempionContext : DbContext
                 .HasForeignKey(d => d.IdVisiteur)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("rapport_fk1");
+
+            entity.HasMany(d => d.IdMedicaments).WithMany(p => p.IdRapports)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Presentation",
+                    r => r.HasOne<Medicament>().WithMany()
+                        .HasForeignKey("IdMedicament")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__PRESENTAT__idMed__0F624AF8"),
+                    l => l.HasOne<Rapport>().WithMany()
+                        .HasForeignKey("IdRapport")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__PRESENTAT__idRap__0E6E26BF"),
+                    j =>
+                    {
+                        j.HasKey("IdRapport", "IdMedicament").HasName("PK__PRESENTA__8E6CD178FA2E6021");
+                        j.ToTable("PRESENTATION");
+                        j.IndexerProperty<int>("IdRapport").HasColumnName("idRapport");
+                        j.IndexerProperty<string>("IdMedicament")
+                            .HasMaxLength(12)
+                            .IsUnicode(false)
+                            .IsFixedLength()
+                            .HasColumnName("idMedicament");
+                    });
         });
 
         modelBuilder.Entity<Region>(entity =>
@@ -452,10 +490,11 @@ public partial class TartempionContext : DbContext
             entity.ToTable("Remplacant");
 
             entity.Property(e => e.IdRemplacant).HasColumnName("idRemplacant");
-            entity.Property(e => e.DateDebut).HasColumnName("dateDebut");
-            entity.Property(e => e.DateFin).HasColumnName("dateFin");
             entity.Property(e => e.EstRemplacant).HasColumnName("estRemplacant");
             entity.Property(e => e.IdMedecin).HasColumnName("idMedecin");
+            entity.Property(e => e.IdRapport)
+                .HasDefaultValue(1)
+                .HasColumnName("idRapport");
 
             entity.HasOne(d => d.IdMedecinNavigation).WithMany(p => p.Remplacants)
                 .HasForeignKey(d => d.IdMedecin)

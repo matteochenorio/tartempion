@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -23,6 +24,8 @@ namespace tartempion
         public static void init()
         {
             MonModel = new TartempionContext();
+            visiteurConnecte = monModel.Visiteurs.Where(v => v.IdVisiteur == "a17").FirstOrDefault();
+            connexionValide = true;
         }
 
         public static List<Fichefrai> listeFicheFrais()
