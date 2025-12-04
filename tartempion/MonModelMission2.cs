@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -103,10 +104,134 @@ namespace tartempion
             return MonModel.Offrirs.ToList();
         }
 
-        //public static bool AjoutRapport(string nom)
-        //{
-        //    bool vretour = true;
+        public static bool AjoutRapport(string ?motif, string bilan, string dateRapport, string heurePrevue, 
+            string heureReelle, int dureeVisite, int idMedecin, List<Medicament> medsPresentes, List<Offrir> echantillons)
+        {
+            bool vretour = true;
+            try
+            {
+                if (UtilisateurConnecte == null)
+                    throw new Exception("Aucun utilisateur connecté");
 
-        //}
+                leRapportChoisi = new Rapport();
+                //leRapportChoisi.IdMotifNavigation.LibMotif = motif;
+
+                // Gestion du motif
+                var motifObj = monModel.Motifs.FirstOrDefault(m => m.LibMotif == motif);
+                if (motifObj == null)
+                {
+                    motifObj = new Motif { LibMotif = motif };
+                    monModel.Motifs.Add(motifObj);
+                    monModel.SaveChanges();
+                }
+                leRapportChoisi.IdMotif = motifObj.IdMotif; // Assigner l'ID
+
+                leRapportChoisi.Bilan = bilan;
+                
+                if (DateOnly.TryParse(dateRapport, out var d))
+                    leRapportChoisi.DateRapport = d;
+                else
+                    throw new Exception("Date invalide");
+
+                leRapportChoisi.HeurePrevue = TimeOnly.Parse(heurePrevue); ;
+                leRapportChoisi.HeureReelle = TimeOnly.Parse(heureReelle); ;
+                leRapportChoisi.DureeVisite = dureeVisite;
+                leRapportChoisi.IdMedecin = idMedecin;
+                leRapportChoisi.IdVisiteur = UtilisateurConnecte.IdVisiteur;
+
+                leRapportChoisi.IdMedicaments = new List<Medicament>();
+                foreach (var m in medsPresentes)
+                {
+                    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
+                    leRapportChoisi.IdMedicaments.Add(medTracked);
+                }
+
+                leRapportChoisi.Offrirs = new List<Offrir>();
+                foreach (var o in echantillons)
+                {
+                    leRapportChoisi.Offrirs.Add(new Offrir
+                    {
+                        IdMedicament = o.IdMedicament,
+                        Quantite = o.Quantite
+                    });
+                }
+
+                monModel.Rapports.Add(leRapportChoisi); 
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                Debug.WriteLine(ex.ToString()); // plus complet
+                MessageBox.Show(ex.InnerException?.Message ?? ex.Message);
+            }
+            return vretour;
+        }
+
+        public static bool ModifRapport(string? motif, string bilan, string dateRapport, string heurePrevue, 
+            string heureReelle, int dureeVisite, int idMedecin, List<Medicament> medsPresentes, List<Offrir> echantillons)
+        {
+            try
+            {
+                //motif
+                var motifObj = monModel.Motifs.FirstOrDefault(m => m.LibMotif == motif);
+                if (motifObj == null)
+                {
+                    motifObj = new Motif { LibMotif = motif };
+                    monModel.Motifs.Add(motifObj);
+                    monModel.SaveChanges();
+                }
+                leRapportChoisi.IdMotif = motifObj.IdMotif;
+
+                //formats
+                if (!DateOnly.TryParse(dateRapport, out var d))
+                    throw new Exception("Date invalide");
+
+                if (!TimeOnly.TryParse(heurePrevue, out var hp))
+                    throw new Exception("Heure prévue invalide");
+
+                if (!TimeOnly.TryParse(heureReelle, out var hr))
+                    throw new Exception("Heure réelle invalide");
+
+                //champs
+                leRapportChoisi.Bilan = bilan;
+                leRapportChoisi.DateRapport = d;
+                leRapportChoisi.HeurePrevue = hp;
+                leRapportChoisi.HeureReelle = hr;
+                leRapportChoisi.DureeVisite = dureeVisite;
+                leRapportChoisi.IdMedecin = idMedecin;
+
+               leRapportChoisi.IdMedicaments.Clear();
+                foreach (var m in medsPresentes)
+                {
+                    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
+                    leRapportChoisi.IdMedicaments.Add(medTracked);
+                }
+
+                //supprimer ancien échantillon, ajouter nouveau
+                var anciensEch = leRapportChoisi.Offrirs.ToList();
+                foreach (var o in anciensEch)
+                    monModel.Offrirs.Remove(o);
+
+                foreach (var o in echantillons)
+                {
+                    monModel.Offrirs.Add(new Offrir
+                    {
+                        IdRapport = leRapportChoisi.IdRapport,
+                        IdMedicament = o.IdMedicament,
+                        Quantite = o.Quantite
+                    });
+                }
+                //entité est déjà trackée
+                monModel.SaveChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException?.Message ?? ex.Message);
+                return false;
+            }
+        }
     }
 }

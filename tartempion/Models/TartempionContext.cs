@@ -55,7 +55,7 @@ public partial class TartempionContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Data Source=SRV-SGBD\\SQLSERVERGLOBAL;Initial Catalog=tartempion;User ID=tartempion;Password=usersio;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False;");
+        => optionsBuilder.UseSqlServer("Data Source=SRV-SGBD\\SQLSERVERGLOBAL;Initial Catalog=tartempion;User ID=tartempion;Password=usersio;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -129,6 +129,7 @@ public partial class TartempionContext : DbContext
 
             entity.HasOne(d => d.IdEtatNavigation).WithMany(p => p.Fichefrais)
                 .HasForeignKey(d => d.IdEtat)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__fichefrai__idEta__534D60F1");
 
             entity.HasOne(d => d.IdVisiteurNavigation).WithMany(p => p.Fichefrais)
@@ -160,10 +161,12 @@ public partial class TartempionContext : DbContext
 
             entity.HasOne(d => d.IdHistoriqueFraisNavigation).WithMany(p => p.FraisForfaits)
                 .HasForeignKey(d => d.IdHistoriqueFrais)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_FraisForfait_historiqueFrais");
 
             entity.HasOne(d => d.IdTypeFraisForfaitNavigation).WithMany(p => p.FraisForfaits)
                 .HasForeignKey(d => d.IdTypeFraisForfait)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_FraisForfait_typeFraisForfait");
         });
 
@@ -418,6 +421,7 @@ public partial class TartempionContext : DbContext
 
             entity.HasOne(d => d.IdMotifNavigation).WithMany(p => p.Rapports)
                 .HasForeignKey(d => d.IdMotif)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("rapport_fk3");
 
             entity.HasOne(d => d.IdVisiteurNavigation).WithMany(p => p.Rapports)

@@ -9,7 +9,7 @@ public partial class Rapport
 
     public DateOnly? DateRapport { get; set; }
 
-    public int? IdMotif { get; set; }
+    public int IdMotif { get; set; }
 
     public string? Bilan { get; set; }
 
@@ -31,7 +31,7 @@ public partial class Rapport
 
     public virtual Medecin IdMedecinNavigation { get; set; } = null!;
 
-    public virtual Motif? IdMotifNavigation { get; set; }
+    public virtual Motif IdMotifNavigation { get; set; } = null!;
 
     public virtual Visiteur IdVisiteurNavigation { get; set; } = null!;
 

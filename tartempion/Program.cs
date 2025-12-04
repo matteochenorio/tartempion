@@ -14,7 +14,7 @@ namespace tartempion
             MonModelMission1.init();
             MonModelMission2.init();
             MonModelMission3.init();
-            Application.Run(new FMenu());
+            Application.Run(new FConnexion());
         }
     }
 }

@@ -15,9 +15,9 @@ public partial class Fichefrai
 
     public DateOnly? DateModif { get; set; }
 
-    public string? IdEtat { get; set; }
+    public string IdEtat { get; set; } = null!;
 
-    public virtual Etat? IdEtatNavigation { get; set; }
+    public virtual Etat IdEtatNavigation { get; set; } = null!;
 
     public virtual Visiteur IdVisiteurNavigation { get; set; } = null!;
 

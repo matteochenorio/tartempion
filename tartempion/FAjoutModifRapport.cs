@@ -30,7 +30,7 @@ namespace tartempion
             bsMedecin.DataSource = MonModelMission2.ListeMedecin();
             cboMedecin.DataSource = bsMedecin;
 
-            cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
+            //cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
 
             if (MonModelMission2.ActionRapport == 2)
             {
@@ -235,66 +235,152 @@ namespace tartempion
 
         private bool tests()
         {
-            if (System.String.IsNullOrEmpty(tbMotif.Text))
+            vretour = true;
+            errorProvider.Clear();
+
+            //if (System.String.IsNullOrEmpty(tbMotif.Text))
+            //{
+            //    errorProvider.SetError(tbMotif, "Le motif du rapport doit être renseigné.");
+            //    vretour = false;
+
+            //}
+
+            if (System.String.IsNullOrEmpty(tbBilan.Text))
             {
-                errorProvider.SetError(tbMotif, "Le motif du rapport doit être renseigné.");
+                errorProvider.SetError(tbBilan, "Le bilan du rapport doit être renseigné.");
                 vretour = false;
+
+            }
+
+            //if (checkBoxRemplacant.Checked == false && System.String.IsNullOrEmpty(tbMotif.Text))
+            //{
+            //    errorProvider.SetError(tbMotif, "Le motif du rapport doit être renseigné si le médecin n'est pas un remplaçant.");
+            //    vretour = false;
+            //}
+
+            int avisMedecin = (int)qteAvis.Value;
+            if (avisMedecin < 1 || avisMedecin > 5)
+            {
+                errorProvider.SetError(qteAvis, "L'avis du médecin doit être un entier entre 1 et 5.");
+                vretour = false;
+            }
+
+            if (!System.String.IsNullOrEmpty(tbDateRapport.Text))
+            {
+                DateTime dateRapport;
+                bool isDateValid = DateTime.TryParse(tbDateRapport.Text, out dateRapport);
+                if (!isDateValid)
+                {
+                    errorProvider.SetError(tbDateRapport, "La date du rapport n'est pas valide.");
+                    vretour = false;
+                }
+            }
+
+            if (!System.String.IsNullOrEmpty(tbHeurePrevue.Text))
+            {
+                TimeSpan heurePrevue;
+                bool isHeureValid = TimeSpan.TryParse(tbHeurePrevue.Text, out heurePrevue);
+                if (!isHeureValid)
+                {
+                    errorProvider.SetError(tbHeurePrevue, "L'heure prévue n'est pas valide.");
+                    vretour = false;
+                }
+            }
+
+            if (!System.String.IsNullOrEmpty(tbHeureReelle.Text))
+            {
+                TimeSpan heureReelle;
+                bool isHeureValid = TimeSpan.TryParse(tbHeureReelle.Text, out heureReelle);
+                if (!isHeureValid)
+                {
+                    errorProvider.SetError(tbHeureReelle, "L'heure réelle n'est pas valide.");
+                    vretour = false;
+                }
+            }
+
+            if (!System.String.IsNullOrEmpty(tbDureeVisite.Text))
+            {
+                int dureeVisite;
+                bool isDureeValid = int.TryParse(tbDureeVisite.Text, out dureeVisite);
+                if (!isDureeValid)
+                {
+                    errorProvider.SetError(tbDureeVisite, "La durée de la visite n'est pas valide.");
+                    vretour = false;
+                }
             }
             return vretour;
         }
 
         private void btnOKAjoutModif_Click(object sender, EventArgs e)
         {
-            //    if (tests() && ModelProjet.ActionCompositeur == 1)
-            //    {
-            //        string nom = tbNom.Text;
-            //        string prenom = tbPrenom.Text;
-            //        string remarque = tbCommentaire.Text;
-            //        int anNais = int.Parse(tbDateDebut.Text);
-            //        int anMort = int.Parse(tbDateFin.Text);
-            //        int idNation = (int)cboNation.SelectedValue;
-            //        int idStyle = (int)cboStyle.SelectedValue;
+            if (tests() && MonModelMission2.ActionRapport == 1)
+            {
+                string motif = tbMotif.Text;
+                string bilan = tbBilan.Text;
+                string dateRapport = tbDateRapport.Text;
+                string heurePrevue = tbHeurePrevue.Text;
+                string heureReelle = tbHeureReelle.Text;
+                int dureeVisite;
+                if (!int.TryParse(tbDureeVisite.Text, out dureeVisite))
+                {
+                    MessageBox.Show("La durée de visite est invalide.");
+                    return;
+                }
 
-            //        vretour = ModelProjet.AjoutCompositeur(nom, prenom, remarque, anNais, anMort, idNation, idStyle);
+                int idMedecin = (int)cboMedecin.SelectedValue;
 
-            //        if (vretour)
-            //        {
-            //            MessageBox.Show("Compositeur ajouté !", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            this.Close();
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Erreur", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
+                var medsPresentes = bsMedicamentPresentes.DataSource as List<Medicament> ?? new List<Medicament>();
+                var echantillons = bsEchantillon.DataSource as List<Offrir> ?? new List<Offrir>();
 
-            //    else if (tests() && ModelProjet.ActionCompositeur == 2)
-            //    {
-            //        string nom = tbNom.Text;
-            //        string prenom = tbPrenom.Text;
-            //        string remarque = tbCommentaire.Text;
-            //        int anNais = int.Parse(tbDateDebut.Text);
-            //        int anMort = int.Parse(tbDateFin.Text);
-            //        int idNation = (int)cboNation.SelectedValue;
-            //        int idStyle = (int)cboStyle.SelectedValue;
+                vretour = MonModelMission2.AjoutRapport(motif, bilan, dateRapport, heurePrevue, heureReelle, dureeVisite, idMedecin, medsPresentes, echantillons);
 
-            //        vretour = ModelProjet.ModifCompositeur(nom, prenom, remarque, anNais, anMort, idNation, idStyle);
+                if (vretour)
+                {
+                    MessageBox.Show("Rapport ajouté !", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Erreur", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
 
-            //        if (vretour)
-            //        {
-            //            MessageBox.Show("Compositeur modifié !", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //            this.Close();
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Erreur", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Erreur(s) dans le formulaire", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    }
-            //}
+            else if (tests() && MonModelMission2.ActionRapport == 2)
+            {
+                string motif = tbMotif.Text;
+                string bilan = tbBilan.Text;
+                string dateRapport = tbDateRapport.Text;
+                string heurePrevue = tbHeurePrevue.Text;
+                string heureReelle = tbHeureReelle.Text;
+                int dureeVisite;
+                if (!int.TryParse(tbDureeVisite.Text, out dureeVisite))
+                {
+                    MessageBox.Show("La durée de visite est invalide.");
+                    return;
+                }
+
+                int idMedecin = (int)cboMedecin.SelectedValue;
+
+                var medsPresentes = bsMedicamentPresentes.DataSource as List<Medicament> ?? new List<Medicament>();
+                var echantillons = bsEchantillon.DataSource as List<Offrir> ?? new List<Offrir>();
+
+
+                vretour = MonModelMission2.ModifRapport(motif, bilan, dateRapport, heurePrevue, heureReelle, dureeVisite, idMedecin, medsPresentes, echantillons);
+
+                if (vretour)
+                {
+                    MessageBox.Show("Rapport modifié !", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Erreur(s)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Erreur(s)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
