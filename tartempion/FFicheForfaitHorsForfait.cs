@@ -39,15 +39,44 @@ namespace tartempion
             dgvFraisHorsForfait.Columns[5].HeaderText = "Montant";
             dgvFraisHorsForfait.Columns[4].Visible = false;
             dgvFraisHorsForfait.Columns[6].Visible = false;
-            List<LigneFraisForfait> ls = MonModelMission3.FicheFraisChoisi.LigneFraisForfaits.ToList();
-            bsFraisForfait.DataSource = MonModelMission3.FicheFraisChoisi.LigneFraisForfaits.Select(x => new { x.IdFraisForfaitNavigation.Libelle, x.Quantite, x.IdFraisForfaitNavigation.IdHistoriqueFraisNavigation.Montant }).ToList();
+
+            List<LigneFraisForfait> lignesForfait = MonModelMission3.FicheFraisChoisi.LigneFraisForfaits.ToList();
+
+            var listeAffichage = lignesForfait.Select(x => // c'est select en sql
+            {
+                bool modeMensuel = x.IdFraisForfaitNavigation.Mensuel ?? false;
+                decimal montant = (decimal)x.IdFraisForfaitNavigation.IdHistoriqueFraisNavigation.Montant;
+                int quantite = x.Quantite ?? 0;
+
+                decimal total = modeMensuel         // le ? remplace le if else dans ce cas la si modeMensuel a true alors total = montant sinon total = quantite x montant
+                                ? montant          // Mensuel : montant unique
+                                : quantite * montant;    // Sinon : quantité x montant
+
+                return new
+                {
+                    Libelle = x.IdFraisForfaitNavigation.Libelle, //s'occupe de l'affichage
+                    Quantite = quantite,
+                    Montant = montant,
+                    Total = total
+                };
+            })
+            .ToList();
+            
+            bsFraisForfait.DataSource = listeAffichage;
             dgvFraisForfait.DataSource = bsFraisForfait;
+
+            decimal totalFraisForfait = listeAffichage.Sum(l => l.Total);
+            decimal totalFraisHorsForfait = ligneHorsForfaitFiltre.Sum(l => l.Montant ?? 0);
+            decimal totalGeneral = totalFraisForfait + totalFraisHorsForfait;
+
+            tbTotal.Text = totalGeneral.ToString("0.00") + " €";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             FFicheDeFrais newFFicheDeFrais = new FFicheDeFrais();
             newFFicheDeFrais.Show();
+            this.Close();
         }
     }
 }

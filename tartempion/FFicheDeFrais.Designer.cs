@@ -75,6 +75,7 @@
             btnAjouter.TabIndex = 1;
             btnAjouter.Text = "Ajouter";
             btnAjouter.UseVisualStyleBackColor = true;
+            btnAjouter.Click += btnAjouter_Click;
             // 
             // btnModifier
             // 
@@ -182,6 +183,7 @@
             // 
             txtIdFiche.Location = new Point(568, 27);
             txtIdFiche.Name = "txtIdFiche";
+            txtIdFiche.ReadOnly = true;
             txtIdFiche.Size = new Size(100, 23);
             txtIdFiche.TabIndex = 13;
             // 
@@ -189,6 +191,7 @@
             // 
             txtEtat.Location = new Point(518, 158);
             txtEtat.Name = "txtEtat";
+            txtEtat.ReadOnly = true;
             txtEtat.Size = new Size(100, 23);
             txtEtat.TabIndex = 14;
             // 
@@ -196,6 +199,7 @@
             // 
             txtDateDeDernierModifFiche.Location = new Point(655, 134);
             txtDateDeDernierModifFiche.Name = "txtDateDeDernierModifFiche";
+            txtDateDeDernierModifFiche.ReadOnly = true;
             txtDateDeDernierModifFiche.Size = new Size(100, 23);
             txtDateDeDernierModifFiche.TabIndex = 15;
             // 
@@ -203,6 +207,7 @@
             // 
             txtMontantValideFiche.Location = new Point(577, 105);
             txtMontantValideFiche.Name = "txtMontantValideFiche";
+            txtMontantValideFiche.ReadOnly = true;
             txtMontantValideFiche.Size = new Size(100, 23);
             txtMontantValideFiche.TabIndex = 16;
             // 
@@ -210,6 +215,7 @@
             // 
             txtNbJustificatifFiche.Location = new Point(612, 81);
             txtNbJustificatifFiche.Name = "txtNbJustificatifFiche";
+            txtNbJustificatifFiche.ReadOnly = true;
             txtNbJustificatifFiche.Size = new Size(100, 23);
             txtNbJustificatifFiche.TabIndex = 17;
             // 
@@ -217,6 +223,7 @@
             // 
             txtAnnéeFiche.Location = new Point(532, 53);
             txtAnnéeFiche.Name = "txtAnnéeFiche";
+            txtAnnéeFiche.ReadOnly = true;
             txtAnnéeFiche.Size = new Size(79, 23);
             txtAnnéeFiche.TabIndex = 18;
             // 
@@ -224,6 +231,7 @@
             // 
             txtMoisFiche.Location = new Point(662, 53);
             txtMoisFiche.Name = "txtMoisFiche";
+            txtMoisFiche.ReadOnly = true;
             txtMoisFiche.Size = new Size(100, 23);
             txtMoisFiche.TabIndex = 19;
             // 

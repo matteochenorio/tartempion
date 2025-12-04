@@ -28,6 +28,7 @@ namespace tartempion
         {
             FFicheDeFrais newFFicheDeFrais = new FFicheDeFrais();
             newFFicheDeFrais.Show();
+            this.Close();
         }
     }
 }

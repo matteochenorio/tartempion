@@ -61,7 +61,7 @@ namespace tartempion
             txtEtat.Text = laFicheDeFraisChoisie.IdEtatNavigation.Libelle;
             MonModelMission3.FicheFraisChoisi = laFicheDeFraisChoisie;
 
-            
+
         }
 
         private void btnForfait_Click(object sender, EventArgs e)
@@ -74,7 +74,15 @@ namespace tartempion
 
             FFicheForfaitHorsForfait newFFicheForfaitHorsForfait = new FFicheForfaitHorsForfait();
             newFFicheForfaitHorsForfait.Show();
-        
+            this.Close();
+
+        }
+
+        private void btnAjouter_Click(object sender, EventArgs e)
+        {
+            FAjoutModifFicheDeFrais newFAjoutModifFicheDeFrais = new FAjoutModifFicheDeFrais();
+            newFAjoutModifFicheDeFrais.Show();
+            this.Close();
         }
     }
 }

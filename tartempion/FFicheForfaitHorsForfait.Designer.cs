@@ -35,7 +35,9 @@
             dgvFraisHorsForfait = new DataGridView();
             bsFraisForfait = new BindingSource(components);
             bsFraisHorsForfait = new BindingSource(components);
-            button1 = new Button();
+            btnRetour = new Button();
+            lblTotal = new Label();
+            tbTotal = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvFraisForfait).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvFraisHorsForfait).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsFraisForfait).BeginInit();
@@ -76,22 +78,41 @@
             dgvFraisHorsForfait.Size = new Size(308, 256);
             dgvFraisHorsForfait.TabIndex = 3;
             // 
-            // button1
+            // btnRetour
             // 
-            button1.Location = new Point(48, 382);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 4;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnRetour.Location = new Point(48, 382);
+            btnRetour.Name = "btnRetour";
+            btnRetour.Size = new Size(75, 23);
+            btnRetour.TabIndex = 4;
+            btnRetour.Text = "Retour";
+            btnRetour.UseVisualStyleBackColor = true;
+            btnRetour.Click += button1_Click;
+            // 
+            // lblTotal
+            // 
+            lblTotal.AutoSize = true;
+            lblTotal.Location = new Point(614, 380);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(42, 15);
+            lblTotal.TabIndex = 5;
+            lblTotal.Text = "Total : ";
+            // 
+            // tbTotal
+            // 
+            tbTotal.Location = new Point(662, 377);
+            tbTotal.Name = "tbTotal";
+            tbTotal.ReadOnly = true;
+            tbTotal.Size = new Size(100, 23);
+            tbTotal.TabIndex = 6;
             // 
             // FFicheForfaitHorsForfait
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            Controls.Add(tbTotal);
+            Controls.Add(lblTotal);
+            Controls.Add(btnRetour);
             Controls.Add(dgvFraisHorsForfait);
             Controls.Add(lblFraisHorsForfait);
             Controls.Add(lblForfait);
@@ -115,6 +136,8 @@
         private DataGridView dgvFraisHorsForfait;
         private BindingSource bsFraisForfait;
         private BindingSource bsFraisHorsForfait;
-        private Button button1;
+        private Button btnRetour;
+        private Label lblTotal;
+        private TextBox tbTotal;
     }
 }
