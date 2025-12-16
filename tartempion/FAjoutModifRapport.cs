@@ -125,6 +125,11 @@ namespace tartempion
                     MessageBox.Show("déjà dans médicaments présentés!");
                     return;
                 }
+                if (liste.Count >= 2)
+                {
+                    MessageBox.Show("maximum 2 médicaments présentés!");
+                    return;
+                }
                 liste.Add(medicament);
                 bsMedicamentPresentes.ResetBindings(false);
             }
@@ -155,7 +160,7 @@ namespace tartempion
 
             //demander quantité
             var qteForm = new Form();
-            var num = new NumericUpDown() { Minimum = 1, Maximum = 100, Value = 1, Dock = DockStyle.Top };
+            var num = new NumericUpDown() { Minimum = 1, Maximum = 5, Value = 1, Dock = DockStyle.Top };
             var ok = new Button() { Text = "OK", DialogResult = DialogResult.OK, Dock = DockStyle.Bottom };
             qteForm.Controls.Add(num);
             qteForm.Controls.Add(ok);
@@ -173,6 +178,12 @@ namespace tartempion
             if (liste.Any(o => o.IdMedicament == medicament.IdMedicament))
             {
                 MessageBox.Show("déjà dans échantillons offerts!");
+                return;
+            }
+
+            if (liste.Count >= 3)
+            {
+                MessageBox.Show("maximum 3 échantillons présentés!");
                 return;
             }
 
