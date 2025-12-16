@@ -27,7 +27,7 @@ namespace tartempion
             //cboMedecin
             cboMedecin.ValueMember = "idMedecin";
             cboMedecin.DisplayMember = "nom";
-            bsMedecin.DataSource = MonModelMission2.ListeMedecin();
+            bsMedecin.DataSource = MonModelMission2.ListeMedecinParVisiteur();
             cboMedecin.DataSource = bsMedecin;
 
             //cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;

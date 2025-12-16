@@ -104,6 +104,18 @@ namespace tartempion
             return MonModel.Offrirs.ToList();
         }
 
+        public static List<Medecin> ListeMedecinParVisiteur()
+        {
+            if (UtilisateurConnecte == null)
+                return new List<Medecin>();
+
+            return MonModel.Medecins
+                .Where(m => m.Rapports
+                    .Any(r => r.IdVisiteur == UtilisateurConnecte.IdVisiteur))
+                .OrderBy(m => m.Nom)
+                .ToList();
+        }
+
         public static bool AjoutRapport(string ?motif, string bilan, string dateRapport, string heurePrevue, 
             string heureReelle, int dureeVisite, int idMedecin, List<Medicament> medsPresentes, List<Offrir> echantillons)
         {
