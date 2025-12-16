@@ -49,6 +49,7 @@ namespace tartempion
             dgvMedecin.Columns[6].HeaderText = "N° DEPARTEMENT GSB";
             dgvMedecin.Columns[7].Visible = false;
             dgvMedecin.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            btnModif.Enabled = (dgvRapport.Rows.Count > 0 && bsRapport.Current != null);
         }
 
         private void bsMedecin_CurrentChanged(object sender, EventArgs e)
@@ -73,6 +74,7 @@ namespace tartempion
             //dgvRapport.Columns[7].Visible = false;
             //dgvRapport.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             //dgvRapport.Visible = (bsRapport.Count > 0);
+            btnModif.Enabled = (dgvRapport.Rows.Count > 0 && bsRapport.Current != null);
         }
 
         private void bsRapport_CurrentChanged(object sender, EventArgs e)
@@ -81,6 +83,7 @@ namespace tartempion
             //cboFiltreRapport.DisplayMember = "bilan";
             //cboFiltreRapport.DataSource = MonModelMission2.ListeRapport();
             //cboFiltreRapport.DataSource = bsFiltreRapport;
+            btnModif.Enabled = (dgvRapport.Rows.Count > 0 && bsRapport.Current != null);
         }
 
         private void btnSpecialiteMedecin_Click(object sender, EventArgs e)
