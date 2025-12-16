@@ -43,6 +43,11 @@ namespace tartempion
             return monModel.LigneFraisHorsForfaits.ToList();
         }
 
+        public static List<HistoriqueFrai> listeHistoriqueFrais()
+        {
+            return monModel.HistoriqueFrais.ToList();
+        }
+
         private static string GetMd5Hash(string PasswdSaisi)
         {
             byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(PasswdSaisi);
@@ -70,6 +75,16 @@ namespace tartempion
                 }
             }
             return message;
+        }
+
+        public static double? TrouveMontant(FraisForfait x)
+        {
+            double vretour = 0;
+            vretour = MonModel.HistoriqueFrais.Where(h => h.IdFraisForfait == x.Id && (h.DateFin == null || h.DateFin >= DateOnly.FromDateTime(DateTime.Now)))
+                .OrderByDescending(h => h.DateDebut)
+                .Select(h => h.Montant)
+                .FirstOrDefault();
+            return vretour;
         }
     }
 }

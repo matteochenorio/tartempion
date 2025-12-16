@@ -149,7 +149,6 @@ public partial class TartempionContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("id");
-            entity.Property(e => e.IdHistoriqueFrais).HasColumnName("idHistoriqueFrais");
             entity.Property(e => e.IdTypeFraisForfait).HasColumnName("idTypeFraisForfait");
             entity.Property(e => e.Libelle)
                 .HasMaxLength(50)
@@ -158,11 +157,6 @@ public partial class TartempionContext : DbContext
                 .IsFixedLength()
                 .HasColumnName("libelle");
             entity.Property(e => e.Mensuel).HasColumnName("mensuel");
-
-            entity.HasOne(d => d.IdHistoriqueFraisNavigation).WithMany(p => p.FraisForfaits)
-                .HasForeignKey(d => d.IdHistoriqueFrais)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_FraisForfait_historiqueFrais");
 
             entity.HasOne(d => d.IdTypeFraisForfaitNavigation).WithMany(p => p.FraisForfaits)
                 .HasForeignKey(d => d.IdTypeFraisForfait)
@@ -181,7 +175,17 @@ public partial class TartempionContext : DbContext
                 .HasColumnName("idHistoriqueFrais");
             entity.Property(e => e.DateDebut).HasColumnName("dateDebut");
             entity.Property(e => e.DateFin).HasColumnName("dateFin");
+            entity.Property(e => e.IdFraisForfait)
+                .HasMaxLength(3)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("idFraisForfait");
             entity.Property(e => e.Montant).HasColumnName("montant");
+
+            entity.HasOne(d => d.IdFraisForfaitNavigation).WithMany(p => p.HistoriqueFrais)
+                .HasForeignKey(d => d.IdFraisForfait)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__historiqu__idFra__10566F31");
         });
 
         modelBuilder.Entity<Laboratoire>(entity =>
@@ -421,6 +425,7 @@ public partial class TartempionContext : DbContext
 
             entity.HasOne(d => d.IdMotifNavigation).WithMany(p => p.Rapports)
                 .HasForeignKey(d => d.IdMotif)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("rapport_fk3");
 
             entity.HasOne(d => d.IdVisiteurNavigation).WithMany(p => p.Rapports)

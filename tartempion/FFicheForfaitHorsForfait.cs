@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,7 +46,7 @@ namespace tartempion
             var listeAffichage = lignesForfait.Select(x => // c'est select en sql
             {
                 bool modeMensuel = x.IdFraisForfaitNavigation.Mensuel ?? false;
-                decimal montant = (decimal)x.IdFraisForfaitNavigation.IdHistoriqueFraisNavigation.Montant;
+                decimal montant = (decimal)MonModelMission3.TrouveMontant(x.IdFraisForfaitNavigation);//(decimal)x.IdFraisForfaitNavigation
                 int quantite = x.Quantite ?? 0;
 
                 decimal total = modeMensuel         // le ? remplace le if else dans ce cas la si modeMensuel a true alors total = montant sinon total = quantite x montant

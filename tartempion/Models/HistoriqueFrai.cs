@@ -13,5 +13,7 @@ public partial class HistoriqueFrai
 
     public DateOnly? DateFin { get; set; }
 
-    public virtual ICollection<FraisForfait> FraisForfaits { get; set; } = new List<FraisForfait>();
+    public string IdFraisForfait { get; set; } = null!;
+
+    public virtual FraisForfait IdFraisForfaitNavigation { get; set; } = null!;
 }
