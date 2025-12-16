@@ -174,7 +174,7 @@ namespace tartempion
             catch (Exception ex)
             {
                 vretour = false;
-                Debug.WriteLine(ex.ToString()); // plus complet
+                Debug.WriteLine(ex.ToString()); //plus complet
                 MessageBox.Show(ex.InnerException?.Message ?? ex.Message);
             }
             return vretour;
