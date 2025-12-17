@@ -106,6 +106,7 @@
             btnSuivant.TabIndex = 9;
             btnSuivant.Text = "Suivant";
             btnSuivant.UseVisualStyleBackColor = true;
+            btnSuivant.Click += btnSuivant_Click;
             // 
             // btnAnnuler
             // 

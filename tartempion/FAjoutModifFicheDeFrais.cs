@@ -14,6 +14,7 @@ namespace tartempion
 {
     public partial class FAjoutModifFicheDeFrais : Form
     {
+        int repetition = 0;
         FMenu fMenuMission3 = new FMenu();
         List<(Button supprimer, TextBox ficheFrais, TextBox quantite, TextBox montant, TextBox total)> lignes = new();
         public FAjoutModifFicheDeFrais()
@@ -211,6 +212,20 @@ namespace tartempion
         {
             fMenuMission3.Show();
             this.Close();
+        }
+
+        private void btnSuivant_Click(object sender, EventArgs e)
+        {
+
+            string date = dtpDate.Value.ToString("yyyyMM");
+            if (MonModelMission3.AjoutModif == 1)
+            {
+                MonModelMission3.AjoutFicheDeFrais(date);
+                foreach(var ligne in lignes)
+                {
+                    //MonModelMission3.AjoutLigneFiche(date,,ligne.quantite.Text )
+                }
+            }
         }
     }
 }

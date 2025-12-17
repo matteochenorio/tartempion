@@ -80,6 +80,7 @@ namespace tartempion
 
         private void btnAjouter_Click(object sender, EventArgs e)
         {
+            MonModelMission3.AjoutModif = 1;
             FAjoutModifFicheDeFrais newFAjoutModifFicheDeFrais = new FAjoutModifFicheDeFrais();
             newFAjoutModifFicheDeFrais.Show();
             this.Close();

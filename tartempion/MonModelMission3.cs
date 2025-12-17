@@ -15,11 +15,14 @@ namespace tartempion
         private static Visiteur visiteurConnecte;
         private static bool connexionValide;
         private static Fichefrai ficheFraisChoisi;
+        private static int ajoutModif;
+        private static LigneFraisForfait LigneFraisForfaitChoisi;
 
         public static TartempionContext MonModel { get => monModel; set => monModel = value; }
         public static Visiteur VisiteurConnecte { get => visiteurConnecte; set => visiteurConnecte = value; }
         public static bool ConnexionValide { get => connexionValide; set => connexionValide = value; }
         public static Fichefrai FicheFraisChoisi { get => ficheFraisChoisi; set => ficheFraisChoisi = value; }
+        public static int AjoutModif { get => ajoutModif; set => ajoutModif = value; }
 
         public static void init()
         {
@@ -84,6 +87,45 @@ namespace tartempion
                 .OrderByDescending(h => h.DateDebut)
                 .Select(h => h.Montant)
                 .FirstOrDefault();
+            return vretour;
+        }
+
+        public static bool AjoutFicheDeFrais(string mois)
+        {
+            bool vretour = true;
+            try
+            {
+                ficheFraisChoisi = new Fichefrai();
+                ficheFraisChoisi.IdVisiteur = visiteurConnecte.IdVisiteur;
+                ficheFraisChoisi.Mois = mois;
+                ficheFraisChoisi.IdEtat = "CR";
+                monModel.Fichefrais.Add(ficheFraisChoisi);
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+            }
+            return vretour;
+        }
+
+        public static bool AjoutLigneFiche(string date, string idFraisForfait, int quantite)
+        {
+            bool vretour = true;
+            try
+            {
+                LigneFraisForfaitChoisi = new LigneFraisForfait();
+                LigneFraisForfaitChoisi.IdVisiteur = visiteurConnecte.IdVisiteur;
+                LigneFraisForfaitChoisi.Mois = date;
+                LigneFraisForfaitChoisi.IdFraisForfait = idFraisForfait;
+                LigneFraisForfaitChoisi.Quantite = quantite;
+                monModel.LigneFraisForfaits.Add(LigneFraisForfaitChoisi);
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+            }
             return vretour;
         }
     }
