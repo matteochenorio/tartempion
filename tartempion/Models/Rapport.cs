@@ -27,8 +27,6 @@ public partial class Rapport
 
     public int DureeVisite { get; set; }
 
-    public string IdMedicament { get; set; } = null!;
-
     public virtual Medecin IdMedecinNavigation { get; set; } = null!;
 
     public virtual Motif IdMotifNavigation { get; set; } = null!;

@@ -148,6 +148,18 @@ namespace tartempion
 
         private void btnFiltreRapport_Click(object sender, EventArgs e)
         {
+            System.Type type= bsRapport.Current.GetType();
+            int id = (int)type.GetProperty("IdRapport").GetValue(bsRapport.Current, null);
+
+            MonModelMission2.setLeRapportChoisi(id);
+
+            if(MessageBox.Show("Voulez-vous vraiment supprimer ce rapport ?","Confirmation de suppression",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes)
+            {
+                MonModelMission2.SuppRapport();
+                bsRapport_CurrentChanged(this, null);
+                bsRapport.ResetBindings(false);
+            }
+
             //afficherTousLesRapports = !afficherTousLesRapports;
 
             //if (afficherTousLesRapports)

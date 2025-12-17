@@ -40,9 +40,9 @@
             bsRapport = new BindingSource(components);
             bsFiltreRapport = new BindingSource(components);
             btnSpecialiteMedecin = new Button();
-            btnFiltreRapport = new Button();
             btnAjout = new Button();
             btnModif = new Button();
+            btnDeleteRapport = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvMedecin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvRapport).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsSpecialite).BeginInit();
@@ -123,16 +123,6 @@
             btnSpecialiteMedecin.UseVisualStyleBackColor = true;
             btnSpecialiteMedecin.Click += btnSpecialiteMedecin_Click;
             // 
-            // btnFiltreRapport
-            // 
-            btnFiltreRapport.Location = new Point(617, 5);
-            btnFiltreRapport.Name = "btnFiltreRapport";
-            btnFiltreRapport.Size = new Size(171, 23);
-            btnFiltreRapport.TabIndex = 7;
-            btnFiltreRapport.Text = "Filtrer";
-            btnFiltreRapport.UseVisualStyleBackColor = true;
-            btnFiltreRapport.Click += btnFiltreRapport_Click;
-            // 
             // btnAjout
             // 
             btnAjout.Location = new Point(12, 415);
@@ -153,6 +143,16 @@
             btnModif.UseVisualStyleBackColor = true;
             btnModif.Click += btnModif_Click;
             // 
+            // btnDeleteRapport
+            // 
+            btnDeleteRapport.Location = new Point(617, 5);
+            btnDeleteRapport.Name = "btnDeleteRapport";
+            btnDeleteRapport.Size = new Size(171, 23);
+            btnDeleteRapport.TabIndex = 7;
+            btnDeleteRapport.Text = "Supprimer";
+            btnDeleteRapport.UseVisualStyleBackColor = true;
+            btnDeleteRapport.Click += btnFiltreRapport_Click;
+            // 
             // FVoirRapports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -160,7 +160,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(btnModif);
             Controls.Add(btnAjout);
-            Controls.Add(btnFiltreRapport);
+            Controls.Add(btnDeleteRapport);
             Controls.Add(btnSpecialiteMedecin);
             Controls.Add(cboFiltreRapport);
             Controls.Add(label2);
@@ -194,8 +194,8 @@
         private BindingSource bsRapport;
         private BindingSource bsFiltreRapport;
         private Button btnSpecialiteMedecin;
-        private Button btnFiltreRapport;
         private Button btnAjout;
         private Button btnModif;
+        private Button btnDeleteRapport;
     }
 }

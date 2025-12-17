@@ -11,11 +11,9 @@ public partial class FraisForfait
 
     public bool? Mensuel { get; set; }
 
-    public int IdHistoriqueFrais { get; set; }
-
     public int IdTypeFraisForfait { get; set; }
 
-    public virtual HistoriqueFrai IdHistoriqueFraisNavigation { get; set; } = null!;
+    public virtual ICollection<HistoriqueFrai> HistoriqueFrais { get; set; } = new List<HistoriqueFrai>();
 
     public virtual TypeFraisForfait IdTypeFraisForfaitNavigation { get; set; } = null!;
 

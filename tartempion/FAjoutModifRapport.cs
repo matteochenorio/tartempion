@@ -189,9 +189,9 @@ namespace tartempion
 
             liste.Add(new Offrir
             {
-                IdRapport = MonModelMission2.LeRapportChoisi.IdRapport,
+                //IdRapport = MonModelMission2.LeRapportChoisi.IdRapport,
                 IdMedicament = medicament.IdMedicament,
-                IdMedicamentNavigation = medicament,
+                //IdMedicamentNavigation = medicament,
                 Quantite = (int)num.Value
             });
 
@@ -328,6 +328,8 @@ namespace tartempion
             {
                 string motif = tbMotif.Text;
                 string bilan = tbBilan.Text;
+                int avisMedecin = (int)qteAvis.Value;
+                bool estRemplacant = checkBoxRemplacant.Checked;
                 string dateRapport = tbDateRapport.Text;
                 string heurePrevue = tbHeurePrevue.Text;
                 string heureReelle = tbHeureReelle.Text;
@@ -341,9 +343,15 @@ namespace tartempion
                 int idMedecin = (int)cboMedecin.SelectedValue;
 
                 var medsPresentes = bsMedicamentPresentes.DataSource as List<Medicament> ?? new List<Medicament>();
-                var echantillons = bsEchantillon.DataSource as List<Offrir> ?? new List<Offrir>();
+                //var echantillons = bsEchantillon.DataSource as List<Offrir> ?? new List<Offrir>();
+                var echantillons = bsEchantillon.DataSource as List<Offrir>;
+                if (echantillons == null)
+                {
+                    echantillons = new List<Offrir>();
+                    bsEchantillon.DataSource = echantillons;
+                }
 
-                vretour = MonModelMission2.AjoutRapport(motif, bilan, dateRapport, heurePrevue, heureReelle, dureeVisite, idMedecin, medsPresentes, echantillons);
+                vretour = MonModelMission2.AjoutRapport(motif, bilan, avisMedecin, estRemplacant, dateRapport, heurePrevue, heureReelle, dureeVisite, idMedecin, medsPresentes, echantillons);
 
                 if (vretour)
                 {

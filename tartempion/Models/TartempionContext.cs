@@ -55,7 +55,7 @@ public partial class TartempionContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Data Source=SRV-SGBD\\SQLSERVERGLOBAL;Initial Catalog=tartempion;User ID=tartempion;Password=usersio;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False;");
+        => optionsBuilder.UseSqlServer("Data Source=SRV-SGBD\\SQLSERVERGLOBAL;Initial Catalog=tartempion;User ID=tartempion;Password=usersio;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -149,7 +149,6 @@ public partial class TartempionContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("id");
-            entity.Property(e => e.IdHistoriqueFrais).HasColumnName("idHistoriqueFrais");
             entity.Property(e => e.IdTypeFraisForfait).HasColumnName("idTypeFraisForfait");
             entity.Property(e => e.Libelle)
                 .HasMaxLength(50)
@@ -158,11 +157,6 @@ public partial class TartempionContext : DbContext
                 .IsFixedLength()
                 .HasColumnName("libelle");
             entity.Property(e => e.Mensuel).HasColumnName("mensuel");
-
-            entity.HasOne(d => d.IdHistoriqueFraisNavigation).WithMany(p => p.FraisForfaits)
-                .HasForeignKey(d => d.IdHistoriqueFrais)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_FraisForfait_historiqueFrais");
 
             entity.HasOne(d => d.IdTypeFraisForfaitNavigation).WithMany(p => p.FraisForfaits)
                 .HasForeignKey(d => d.IdTypeFraisForfait)
@@ -181,7 +175,17 @@ public partial class TartempionContext : DbContext
                 .HasColumnName("idHistoriqueFrais");
             entity.Property(e => e.DateDebut).HasColumnName("dateDebut");
             entity.Property(e => e.DateFin).HasColumnName("dateFin");
+            entity.Property(e => e.IdFraisForfait)
+                .HasMaxLength(3)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("idFraisForfait");
             entity.Property(e => e.Montant).HasColumnName("montant");
+
+            entity.HasOne(d => d.IdFraisForfaitNavigation).WithMany(p => p.HistoriqueFrais)
+                .HasForeignKey(d => d.IdFraisForfait)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__historiqu__idFra__10566F31");
         });
 
         modelBuilder.Entity<Laboratoire>(entity =>
@@ -402,11 +406,6 @@ public partial class TartempionContext : DbContext
             entity.Property(e => e.HeurePrevue).HasColumnName("heurePrevue");
             entity.Property(e => e.HeureReelle).HasColumnName("heureReelle");
             entity.Property(e => e.IdMedecin).HasColumnName("idMedecin");
-            entity.Property(e => e.IdMedicament)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasDefaultValue("3MYC7")
-                .HasColumnName("idMedicament");
             entity.Property(e => e.IdMotif).HasColumnName("idMotif");
             entity.Property(e => e.IdVisiteur)
                 .HasMaxLength(3)

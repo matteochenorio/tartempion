@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -32,7 +33,7 @@ namespace tartempion
         public static void init()
         {
             MonModel = new TartempionContext();
-           // Rapport x=MonModel.Rapports.Where(r => r.IdRapport == 1).FirstOrDefault();
+            // Rapport x=MonModel.Rapports.Where(r => r.IdRapport == 1).FirstOrDefault();
         }
 
         public static void ThreadProc()
@@ -51,7 +52,7 @@ namespace tartempion
             }
             return sb.ToString();
         }
-        
+
         public static string validConnexion(string id, string mp)
         {
             ConnexionValide = false;
@@ -116,7 +117,26 @@ namespace tartempion
                 .ToList();
         }
 
-        public static bool AjoutRapport(string ?motif, string bilan, string dateRapport, string heurePrevue, 
+        public static bool SuppRapport()
+        {
+            bool vretour = true;
+            try
+            {
+                monModel.Rapports.Remove(leRapportChoisi);
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+                if (ex.InnerException != null)
+                    msg += " " + ex.InnerException.Message;
+                System.Windows.Forms.MessageBox.Show(msg);
+                vretour = false;
+            }
+            return vretour;
+        }
+
+        public static bool AjoutRapport(string? motif, string bilan, int avisMedecin, bool estRemplacant, string dateRapport, string heurePrevue,
             string heureReelle, int dureeVisite, int idMedecin, List<Medicament> medsPresentes, List<Offrir> echantillons)
         {
             bool vretour = true;
@@ -139,14 +159,26 @@ namespace tartempion
                 leRapportChoisi.IdMotif = motifObj.IdMotif; // Assigner l'ID
 
                 leRapportChoisi.Bilan = bilan;
-                
-                if (DateOnly.TryParse(dateRapport, out var d))
-                    leRapportChoisi.DateRapport = d;
-                else
-                    throw new Exception("Date invalide");
 
-                leRapportChoisi.HeurePrevue = TimeOnly.Parse(heurePrevue); ;
-                leRapportChoisi.HeureReelle = TimeOnly.Parse(heureReelle); ;
+                if (!DateOnly.TryParseExact(
+                    dateRapport,
+                    "dd/MM/yyyy",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out var d))
+                {
+                    throw new Exception("Date invalide");
+                }
+
+                leRapportChoisi.DateRapport = d;
+
+                leRapportChoisi.EstRemplacant = estRemplacant;
+                leRapportChoisi.AvisMedecin = avisMedecin;
+
+                string heureFormatP = string.IsNullOrEmpty(heurePrevue) ? "00:00:00" : heurePrevue;
+                string heureFormatR = string.IsNullOrEmpty(heureReelle) ? "00:00:00" : heureReelle;
+                leRapportChoisi.HeurePrevue = TimeOnly.Parse(heureFormatP); ;
+                leRapportChoisi.HeureReelle = TimeOnly.Parse(heureFormatR); ;
                 leRapportChoisi.DureeVisite = dureeVisite;
                 leRapportChoisi.IdMedecin = idMedecin;
                 leRapportChoisi.IdVisiteur = UtilisateurConnecte.IdVisiteur;
@@ -158,18 +190,39 @@ namespace tartempion
                     leRapportChoisi.IdMedicaments.Add(medTracked);
                 }
 
-                leRapportChoisi.Offrirs = new List<Offrir>();
-                foreach (var o in echantillons)
+                monModel.Rapports.Add(leRapportChoisi);
+                monModel.SaveChanges();  //générer idRapport
+
+                Debug.WriteLine($"Nombre d'entités modifiées : {monModel.SaveChanges()}");
+                Debug.WriteLine($"ID du rapport généré : {leRapportChoisi.IdRapport}");
+
+                foreach (var o in echantillons.ToList())
                 {
-                    leRapportChoisi.Offrirs.Add(new Offrir
+                    var idMed = o.IdMedicament;
+                    var qte = o.Quantite;
+
+                    monModel.Offrirs.Add(new Offrir
                     {
-                        IdMedicament = o.IdMedicament,
-                        Quantite = o.Quantite
+                        IdRapport = leRapportChoisi.IdRapport,
+                        IdMedicament = idMed,
+                        Quantite = qte
                     });
                 }
 
-                monModel.Rapports.Add(leRapportChoisi); 
+
                 monModel.SaveChanges();
+
+                //leRapportChoisi.Offrirs = new List<Offrir>();
+                //foreach (var o in echantillons)
+                //{
+                //    leRapportChoisi.Offrirs.Add(new Offrir
+                //    {
+                //        IdMedicament = o.IdMedicament,
+                //        Quantite = o.Quantite
+                //    });
+                //}
+                //monModel.Rapports.Add(leRapportChoisi); 
+                //monModel.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -180,7 +233,7 @@ namespace tartempion
             return vretour;
         }
 
-        public static bool ModifRapport(string? motif, string bilan, string dateRapport, string heurePrevue, 
+        public static bool ModifRapport(string? motif, string bilan, string dateRapport, string heurePrevue,
             string heureReelle, int dureeVisite, int idMedecin, List<Medicament> medsPresentes, List<Offrir> echantillons)
         {
             try
@@ -213,7 +266,7 @@ namespace tartempion
                 leRapportChoisi.DureeVisite = dureeVisite;
                 leRapportChoisi.IdMedecin = idMedecin;
 
-               leRapportChoisi.IdMedicaments.Clear();
+                leRapportChoisi.IdMedicaments.Clear();
                 foreach (var m in medsPresentes)
                 {
                     var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
