@@ -163,7 +163,7 @@ namespace tartempion
                 {
                     total = montant * quantite;
                 }
-
+                
                 ligneAModifier.total.Text = total.ToString("N2", CultureInfo.CurrentCulture);
 
                 MettreAJourTotalGeneral();
@@ -210,7 +210,6 @@ namespace tartempion
 
         private void btnAnnuler_Click(object sender, EventArgs e)
         {
-            fMenuMission3.Show();
             this.Close();
         }
 
@@ -223,8 +222,36 @@ namespace tartempion
                 MonModelMission3.AjoutFicheDeFrais(date);
                 foreach(var ligne in lignes)
                 {
-                    //MonModelMission3.AjoutLigneFiche(date,,ligne.quantite.Text )
+                    FraisForfait frais = MonModelMission3
+                    .listeFraisForfait()
+                    .FirstOrDefault(f => f.Libelle == ligne.ficheFrais.Text);
+                    int quantite = 0;
+                    if (frais != null)
+                    {
+                        
+
+                        if (ligne.quantite.Visible == false)
+                        {
+                            quantite = 1;
+                        }
+                        else
+                        {
+                            int.TryParse(ligne.quantite.Text, out quantite);
+                        }
+
+                    }
+                    MonModelMission3.AjoutLigneFiche(date, frais.Id, quantite);
                 }
+
+               
+                MessageBox.Show(
+                "La fiche de frais a bien été ajoutée.",
+                "Confirmation",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
+
+                this.Close();
             }
         }
     }
