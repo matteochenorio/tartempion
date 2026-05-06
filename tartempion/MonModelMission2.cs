@@ -124,15 +124,16 @@ namespace tartempion
             bool vretour = true;
             try
             {
+                
                 var rapport = monModel.Rapports
-            .Include(r => r.Presentations)
+         //   .Include(r => r.Presentations)
             .Include(r => r.Offrirs)
             .FirstOrDefault(r => r.IdRapport == leRapportChoisi.IdRapport);
 
                 if (rapport == null)
                     return false;
 
-                monModel.Presentations.RemoveRange(rapport.Presentations);
+             //   monModel.Presentations.RemoveRange(rapport.Presentations);
 
                 monModel.Offrirs.RemoveRange(rapport.Offrirs);
 
@@ -141,6 +142,8 @@ namespace tartempion
             }
             catch (Exception ex)
             {
+                monModel.Dispose();
+                init();
                 string msg = ex.Message;
                 if (ex.InnerException != null)
                     msg += " " + ex.InnerException.Message;
@@ -167,7 +170,7 @@ namespace tartempion
                 {
                     motifObj = new Motif { LibMotif = motif };
                     monModel.Motifs.Add(motifObj);
-                    monModel.SaveChanges();
+                    //monModel.SaveChanges();
                 }
                 leRapportChoisi.IdMotif = motifObj.IdMotif;
 
@@ -204,15 +207,17 @@ namespace tartempion
                 //}
 
                 monModel.Rapports.Add(leRapportChoisi);
-                monModel.SaveChanges();  //générer idRapport
+               // monModel.SaveChanges();  //générer idRapport
 
                 foreach (var m in medsPresentes)
                 {
+                    /*
                     monModel.Presentations.Add(new Presentation
                     {
                         IdRapport = leRapportChoisi.IdRapport,
                         IdMedicament = m.IdMedicament
                     });
+                    */
                 }
 
                 //Debug.WriteLine($"Nombre d'entités modifiées : {monModel.SaveChanges()}");
@@ -249,6 +254,8 @@ namespace tartempion
             catch (Exception ex)
             {
                 vretour = false;
+                monModel.Dispose();
+                init();
                 Debug.WriteLine(ex.ToString());
                 MessageBox.Show(ex.InnerException?.Message ?? ex.Message);
             }
@@ -266,7 +273,7 @@ namespace tartempion
                 {
                     motifObj = new Motif { LibMotif = motif };
                     monModel.Motifs.Add(motifObj);
-                    monModel.SaveChanges();
+                   // monModel.SaveChanges();
                 }
                 leRapportChoisi.IdMotif = motifObj.IdMotif;
 
@@ -296,20 +303,23 @@ namespace tartempion
                 //}
 
                 //supprimer anciennes présentations
+                /*
                 var anciennesPres = monModel.Presentations
                     .Where(p => p.IdRapport == leRapportChoisi.IdRapport)
                     .ToList();
 
                 monModel.Presentations.RemoveRange(anciennesPres);
-
+                */
                 //ajouter nouvelles
                 foreach (var m in medsPresentes)
                 {
+                    /*
                     monModel.Presentations.Add(new Presentation
                     {
                         IdRapport = leRapportChoisi.IdRapport,
                         IdMedicament = m.IdMedicament
                     });
+                    */
                 }
 
                 //supprimer ancien échantillon, ajouter nouveau
@@ -329,16 +339,19 @@ namespace tartempion
                         Quantite = o.Quantite
                     });
                 }
+
                 //entité est déjà trackée
                 monModel.SaveChanges();
-                monModel.Dispose();
-                monModel = new TartempionContext();
+               // monModel.Dispose();
+               // monModel = new TartempionContext();
 
                 return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.InnerException?.Message ?? ex.Message);
+                monModel.Dispose();
+                init();
                 return false;
             }
         }

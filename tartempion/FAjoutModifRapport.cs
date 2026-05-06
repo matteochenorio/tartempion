@@ -57,6 +57,7 @@ namespace tartempion
 
                 //médicaments présentés
                 //bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.IdMedicaments.ToList();
+                /*
                 bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.Presentations
                 .Select(p => p.Medicament)
                 .ToList();
@@ -69,6 +70,7 @@ namespace tartempion
                 }
                 dgvPresentes.Columns[1].Visible = true;
                 dgvPresentes.Columns[1].HeaderCell.Value = "Nom Commercial";
+                */
 
                 //echantillons
                 bsEchantillon.DataSource = MonModelMission2.LeRapportChoisi.Offrirs.ToList();

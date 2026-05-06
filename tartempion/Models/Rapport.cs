@@ -36,5 +36,4 @@ public partial class Rapport
     public virtual ICollection<Offrir> Offrirs { get; set; } = new List<Offrir>();
 
     public virtual ICollection<Medicament> IdMedicaments { get; set; } = new List<Medicament>();
-    public virtual ICollection<Presentation> Presentations { get; set; } = new List<Presentation>();
 }
