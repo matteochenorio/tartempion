@@ -91,7 +91,18 @@ namespace tartempion
             };
             pMontantUnitaire.Controls.Add(tbMontantUnitaire);
             tbMontantUnitaire.KeyPress += new KeyPressEventHandler(bloqueTout);
-            tbMontantUnitaire.Text = ((HistoriqueFrai)bsHistoriqueFrais.Current).Montant.ToString("N2", CultureInfo.CurrentCulture);
+            HistoriqueFrai historique = MonModelMission3
+            .listeHistoriqueFrais()
+            .FirstOrDefault(h => h.IdFraisForfait == fraisSelectionne.Id);
+
+            if (historique != null)
+            {
+                tbMontantUnitaire.Text = historique.Montant.ToString("N2", CultureInfo.CurrentCulture);
+            }
+            else
+            {
+                tbMontantUnitaire.Text = "0,00";
+            }
 
             TextBox tbTotal = new TextBox
             {
@@ -210,6 +221,8 @@ namespace tartempion
 
         private void btnAnnuler_Click(object sender, EventArgs e)
         {
+            FFicheDeFrais newFFicheDeFrais = new FFicheDeFrais();
+            newFFicheDeFrais.Show();
             this.Close();
         }
 
@@ -251,7 +264,10 @@ namespace tartempion
                 MessageBoxIcon.Information
                 );
 
+                FFicheDeFrais newFFicheDeFrais = new FFicheDeFrais();
+                newFFicheDeFrais.Show();
                 this.Close();
+                
             }
         }
     }

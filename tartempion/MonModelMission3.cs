@@ -128,5 +128,43 @@ namespace tartempion
             }
             return vretour;
         }
+
+        public static bool SuppficheFrais()
+        {
+            bool vretour = true;
+            try
+            {
+                // 1. On récupère les lignes liées à cette fiche pour les supprimer d'abord
+                // ficheFraisChoisi contient l'idVisiteur et le mois nécessaires
+
+                var lignesForfait = monModel.LigneFraisForfaits
+                    .Where(l => l.IdVisiteur == ficheFraisChoisi.IdVisiteur && l.Mois == ficheFraisChoisi.Mois);
+
+                var lignesHorsForfait = monModel.LigneFraisHorsForfaits
+                    .Where(l => l.IdVisiteur == ficheFraisChoisi.IdVisiteur && l.Mois == ficheFraisChoisi.Mois);
+
+                // 2. Suppression des dépendances
+                monModel.LigneFraisForfaits.RemoveRange(lignesForfait);
+                monModel.LigneFraisHorsForfaits.RemoveRange(lignesHorsForfait);
+
+                // 3. Suppression de la fiche elle-même
+                monModel.Fichefrais.Remove(ficheFraisChoisi);
+
+                // 4. Validation en base de données
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = ex.InnerException?.InnerException?.Message ?? ex.Message;
+                System.Windows.Forms.MessageBox.Show("Erreur lors de la suppression : " + errorMsg);
+
+                vretour = false;
+                // On réinitialise le contexte en cas d'erreur critique
+                monModel.Dispose();
+                init();
+            }
+
+            return vretour;
+        }
     }
 }

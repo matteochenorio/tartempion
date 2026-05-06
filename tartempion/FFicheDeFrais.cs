@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -85,5 +86,72 @@ namespace tartempion
             newFAjoutModifFicheDeFrais.Show();
             this.Close();
         }
+
+        private void btnSupprimer_Click(object sender, EventArgs e)
+        {
+            // 1. Vérifier si une fiche est bien sélectionnée
+            if (MonModelMission3.FicheFraisChoisi == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une fiche de frais dans la liste avant de supprimer.",
+                                "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Demander confirmation à l'utilisateur
+            DialogResult dr = MessageBox.Show(
+                $"Êtes-vous sûr de vouloir supprimer la fiche de {MonModelMission3.FicheFraisChoisi.Mois} " +
+                $"pour le visiteur {MonModelMission3.FicheFraisChoisi.IdVisiteur} ?\n" +
+                "Toutes les lignes de frais associées seront également supprimées.",
+                "Confirmation de suppression",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (dr == DialogResult.Yes)
+            {
+                // 3. Appel de la méthode de suppression dans le modèle
+                if (MonModelMission3.SuppficheFrais())
+                {
+                    MessageBox.Show("La fiche a été supprimée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // 4. Actualiser l'affichage (ex: recharger la liste dans un DataGridView)
+                    // Imaginons que ton DataGridView s'appelle dgvFiches
+                    // 1. Récupérer l'ID de l'utilisateur connecté
+                    string userId = MonModelMission3.VisiteurConnecte.IdVisiteur.Trim().ToUpper();
+
+                    // 2. Filtrer les fiches de frais (en ignorant la casse)
+                    var toutesLesFiches = MonModelMission3.listeFicheFrais();
+                    var fichesFiltrees = toutesLesFiches
+                        .Where(f => f.IdVisiteur.Trim().ToUpper() == userId)
+                        .ToList();
+
+                    // 3. Mettre à jour le BindingSource et le DataGridView
+                    bsFicheDeFrais.DataSource = fichesFiltrees;
+                    dgvFicheDeFrais.DataSource = bsFicheDeFrais;
+                    dgvFicheDeFrais.Columns[0].Visible = false;
+                    dgvFicheDeFrais.Columns[1].HeaderText = "année et mois";
+                    dgvFicheDeFrais.Columns[2].HeaderText = "nombre de justificatif";
+                    dgvFicheDeFrais.Columns[3].HeaderText = "Montant Valide";
+                    dgvFicheDeFrais.Columns[4].HeaderText = "date de dernière modification";
+                    dgvFicheDeFrais.Columns[5].HeaderText = "Etat";
+                    dgvFicheDeFrais.Columns[6].Visible = false;
+                    dgvFicheDeFrais.Columns[7].Visible = false;
+                    dgvFicheDeFrais.Columns[8].Visible = false;
+                    dgvFicheDeFrais.Columns[9].Visible = false;
+
+
+                    txtMoisActuelle.Text = DateTime.Now.ToString("MMMM");
+                    txtVisiteurConnecte.Text = MonModelMission3.VisiteurConnecte.Nom.Trim() + " " + MonModelMission3.VisiteurConnecte.Prenom.ToString().Trim();
+
+                    // On remet la sélection à null pour éviter de supprimer deux fois la même chose
+                    MonModelMission3.FicheFraisChoisi = null;
+                }
+                else
+                {
+                    // Le message d'erreur détaillé est déjà géré par le MessageBox dans le modèle
+                    MessageBox.Show("La suppression a échoué.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
+

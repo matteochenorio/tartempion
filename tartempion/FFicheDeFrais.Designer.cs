@@ -94,6 +94,7 @@
             btnSupprimer.TabIndex = 3;
             btnSupprimer.Text = "Supprimer";
             btnSupprimer.UseVisualStyleBackColor = true;
+            btnSupprimer.Click += btnSupprimer_Click;
             // 
             // lblVisiteur
             // 
