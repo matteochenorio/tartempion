@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -122,6 +124,18 @@ namespace tartempion
             bool vretour = true;
             try
             {
+                var rapport = monModel.Rapports
+            .Include(r => r.Presentations)
+            .Include(r => r.Offrirs)
+            .FirstOrDefault(r => r.IdRapport == leRapportChoisi.IdRapport);
+
+                if (rapport == null)
+                    return false;
+
+                monModel.Presentations.RemoveRange(rapport.Presentations);
+
+                monModel.Offrirs.RemoveRange(rapport.Offrirs);
+
                 monModel.Rapports.Remove(leRapportChoisi);
                 monModel.SaveChanges();
             }
@@ -148,7 +162,6 @@ namespace tartempion
                 leRapportChoisi = new Rapport();
                 //leRapportChoisi.IdMotifNavigation.LibMotif = motif;
 
-                // Gestion du motif
                 var motifObj = monModel.Motifs.FirstOrDefault(m => m.LibMotif == motif);
                 if (motifObj == null)
                 {
@@ -156,7 +169,7 @@ namespace tartempion
                     monModel.Motifs.Add(motifObj);
                     monModel.SaveChanges();
                 }
-                leRapportChoisi.IdMotif = motifObj.IdMotif; // Assigner l'ID
+                leRapportChoisi.IdMotif = motifObj.IdMotif;
 
                 leRapportChoisi.Bilan = bilan;
 
@@ -183,17 +196,26 @@ namespace tartempion
                 leRapportChoisi.IdMedecin = idMedecin;
                 leRapportChoisi.IdVisiteur = UtilisateurConnecte.IdVisiteur;
 
-                leRapportChoisi.IdMedicaments = new List<Medicament>();
-                foreach (var m in medsPresentes)
-                {
-                    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
-                    leRapportChoisi.IdMedicaments.Add(medTracked);
-                }
+                //leRapportChoisi.IdMedicaments = new List<Medicament>();
+                //foreach (var m in medsPresentes)
+                //{
+                //    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
+                //    leRapportChoisi.IdMedicaments.Add(medTracked);
+                //}
 
                 monModel.Rapports.Add(leRapportChoisi);
                 monModel.SaveChanges();  //générer idRapport
 
-                Debug.WriteLine($"Nombre d'entités modifiées : {monModel.SaveChanges()}");
+                foreach (var m in medsPresentes)
+                {
+                    monModel.Presentations.Add(new Presentation
+                    {
+                        IdRapport = leRapportChoisi.IdRapport,
+                        IdMedicament = m.IdMedicament
+                    });
+                }
+
+                //Debug.WriteLine($"Nombre d'entités modifiées : {monModel.SaveChanges()}");
                 Debug.WriteLine($"ID du rapport généré : {leRapportChoisi.IdRapport}");
 
                 foreach (var o in echantillons.ToList())
@@ -227,7 +249,7 @@ namespace tartempion
             catch (Exception ex)
             {
                 vretour = false;
-                Debug.WriteLine(ex.ToString()); //plus complet
+                Debug.WriteLine(ex.ToString());
                 MessageBox.Show(ex.InnerException?.Message ?? ex.Message);
             }
             return vretour;
@@ -266,15 +288,35 @@ namespace tartempion
                 leRapportChoisi.DureeVisite = dureeVisite;
                 leRapportChoisi.IdMedecin = idMedecin;
 
-                leRapportChoisi.IdMedicaments.Clear();
+                //leRapportChoisi.IdMedicaments.Clear();
+                //foreach (var m in medsPresentes)
+                //{
+                //    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
+                //    leRapportChoisi.IdMedicaments.Add(medTracked);
+                //}
+
+                //supprimer anciennes présentations
+                var anciennesPres = monModel.Presentations
+                    .Where(p => p.IdRapport == leRapportChoisi.IdRapport)
+                    .ToList();
+
+                monModel.Presentations.RemoveRange(anciennesPres);
+
+                //ajouter nouvelles
                 foreach (var m in medsPresentes)
                 {
-                    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
-                    leRapportChoisi.IdMedicaments.Add(medTracked);
+                    monModel.Presentations.Add(new Presentation
+                    {
+                        IdRapport = leRapportChoisi.IdRapport,
+                        IdMedicament = m.IdMedicament
+                    });
                 }
 
                 //supprimer ancien échantillon, ajouter nouveau
-                var anciensEch = leRapportChoisi.Offrirs.ToList();
+                //var anciensEch = leRapportChoisi.Offrirs.ToList();
+                var anciensEch = monModel.Offrirs
+                .Where(o => o.IdRapport == leRapportChoisi.IdRapport)
+                .ToList();
                 foreach (var o in anciensEch)
                     monModel.Offrirs.Remove(o);
 
@@ -289,6 +331,8 @@ namespace tartempion
                 }
                 //entité est déjà trackée
                 monModel.SaveChanges();
+                monModel.Dispose();
+                monModel = new TartempionContext();
 
                 return true;
             }

@@ -56,7 +56,10 @@ namespace tartempion
                 //cboEchantillon.SelectedValue = MonModelMission2.LeRapportChoisi.IdVisiteurNavigation?.Nom.ToString();
 
                 //médicaments présentés
-                bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.IdMedicaments.ToList();
+                //bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.IdMedicaments.ToList();
+                bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.Presentations
+                .Select(p => p.Medicament)
+                .ToList();
                 dgvPresentes.DataSource = bsMedicamentPresentes;
 
                 for (int i = 0; i < dgvPresentes.Columns.Count; i++)

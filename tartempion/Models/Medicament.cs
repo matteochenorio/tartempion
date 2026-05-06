@@ -22,4 +22,5 @@ public partial class Medicament
     public virtual ICollection<Offrir> Offrirs { get; set; } = new List<Offrir>();
 
     public virtual ICollection<Rapport> IdRapports { get; set; } = new List<Rapport>();
+    public virtual ICollection<Presentation> Presentations { get; set; } = new List<Presentation>();
 }

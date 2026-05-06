@@ -52,6 +52,7 @@ public partial class TartempionContext : DbContext
     public virtual DbSet<TypeFraisForfait> TypeFraisForfaits { get; set; }
 
     public virtual DbSet<Visiteur> Visiteurs { get; set; }
+    public virtual DbSet<Presentation> Presentations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -428,28 +429,28 @@ public partial class TartempionContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("rapport_fk1");
 
-            entity.HasMany(d => d.IdMedicaments).WithMany(p => p.IdRapports)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Presentation",
-                    r => r.HasOne<Medicament>().WithMany()
-                        .HasForeignKey("IdMedicament")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__PRESENTAT__idMed__0F624AF8"),
-                    l => l.HasOne<Rapport>().WithMany()
-                        .HasForeignKey("IdRapport")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__PRESENTAT__idRap__0E6E26BF"),
-                    j =>
-                    {
-                        j.HasKey("IdRapport", "IdMedicament").HasName("PK__PRESENTA__8E6CD178FA2E6021");
-                        j.ToTable("PRESENTATION");
-                        j.IndexerProperty<int>("IdRapport").HasColumnName("idRapport");
-                        j.IndexerProperty<string>("IdMedicament")
-                            .HasMaxLength(12)
-                            .IsUnicode(false)
-                            .IsFixedLength()
-                            .HasColumnName("idMedicament");
-                    });
+            //entity.HasMany(d => d.IdMedicaments).WithMany(p => p.IdRapports)
+            //    .UsingEntity<Dictionary<string, object>>(
+            //        "Presentation",
+            //        r => r.HasOne<Medicament>().WithMany()
+            //            .HasForeignKey("IdMedicament")
+            //            .OnDelete(DeleteBehavior.ClientSetNull)
+            //            .HasConstraintName("FK__PRESENTAT__idMed__0F624AF8"),
+            //        l => l.HasOne<Rapport>().WithMany()
+            //            .HasForeignKey("IdRapport")
+            //            .OnDelete(DeleteBehavior.ClientSetNull)
+            //            .HasConstraintName("FK__PRESENTAT__idRap__0E6E26BF"),
+            //        j =>
+            //        {
+            //            j.HasKey("IdRapport", "IdMedicament").HasName("PK__PRESENTA__8E6CD178FA2E6021");
+            //            j.ToTable("PRESENTATION");
+            //            j.IndexerProperty<int>("IdRapport").HasColumnName("idRapport");
+            //            j.IndexerProperty<string>("IdMedicament")
+            //                .HasMaxLength(12)
+            //                .IsUnicode(false)
+            //                .IsFixedLength()
+            //                .HasColumnName("idMedicament");
+            //        });
         });
 
         modelBuilder.Entity<Region>(entity =>
@@ -558,6 +559,39 @@ public partial class TartempionContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("libelle");
+        });
+
+        modelBuilder.Entity<Presentation>(entity =>
+        {
+            // Clé composite
+            entity.HasKey(p => new { p.IdRapport, p.IdMedicament });
+
+            // Nom de la table
+            entity.ToTable("PRESENTATION");
+
+            // Configuration des propriétés et leurs noms de colonnes
+            entity.Property(p => p.IdRapport)
+                .HasColumnName("idRapport");
+
+            entity.Property(p => p.IdMedicament)
+                .HasMaxLength(12)
+                .IsUnicode(false)
+                .IsFixedLength()
+                .HasColumnName("idMedicament");
+
+            // Relations avec Rapport
+            entity.HasOne(p => p.Rapport)
+                .WithMany(r => r.Presentations)
+                .HasForeignKey(p => p.IdRapport)
+                .HasPrincipalKey(r => r.IdRapport)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            // Relations avec Medicament
+            entity.HasOne(p => p.Medicament)
+                .WithMany(m => m.Presentations)
+                .HasForeignKey(p => p.IdMedicament)
+                .HasPrincipalKey(m => m.IdMedicament)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<Visiteur>(entity =>
