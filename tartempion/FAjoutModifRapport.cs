@@ -30,10 +30,11 @@ namespace tartempion
             bsMedecin.DataSource = MonModelMission2.ListeMedecinParVisiteur();
             cboMedecin.DataSource = bsMedecin;
 
-            cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
+            //cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
 
             if (MonModelMission2.ActionRapport == 2)
             {
+                cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
 
                 if (MonModelMission2.LeRapportChoisi.EstRemplacant == true)
                 {
