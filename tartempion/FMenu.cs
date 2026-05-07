@@ -25,7 +25,7 @@ namespace tartempion
 
         private void FMenu_Load(object sender, EventArgs e)
         {
-            pbMenu.Image = Image.FromFile(@"Z:\Romeuf\AP3 GSB 2025\Logo GSB\logo.png");
+            pbMenu.Image = Image.FromFile(@"U:\Romeuf\AP3 GSB 2025\Logo GSB\logo.png");
         }
 
         private void btnDeconnexion_Click(object sender, EventArgs e)

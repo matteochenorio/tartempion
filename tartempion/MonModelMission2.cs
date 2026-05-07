@@ -199,12 +199,12 @@ namespace tartempion
                 leRapportChoisi.IdMedecin = idMedecin;
                 leRapportChoisi.IdVisiteur = UtilisateurConnecte.IdVisiteur;
 
-                //leRapportChoisi.IdMedicaments = new List<Medicament>();
-                //foreach (var m in medsPresentes)
-                //{
-                //    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
-                //    leRapportChoisi.IdMedicaments.Add(medTracked);
-                //}
+                leRapportChoisi.IdMedicaments = new List<Medicament>();
+                foreach (var m in medsPresentes)
+                {
+                    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
+                    leRapportChoisi.IdMedicaments.Add(medTracked);
+                }
 
                 monModel.Rapports.Add(leRapportChoisi);
                // monModel.SaveChanges();  //générer idRapport
@@ -262,7 +262,7 @@ namespace tartempion
             return vretour;
         }
 
-        public static bool ModifRapport(string? motif, string bilan, string dateRapport, string heurePrevue,
+        public static bool ModifRapport(string? motif, string bilan, int avisMedecin, bool estRemplacant, string dateRapport, string heurePrevue,
             string heureReelle, int dureeVisite, int idMedecin, List<Medicament> medsPresentes, List<Offrir> echantillons)
         {
             try
@@ -295,12 +295,15 @@ namespace tartempion
                 leRapportChoisi.DureeVisite = dureeVisite;
                 leRapportChoisi.IdMedecin = idMedecin;
 
-                //leRapportChoisi.IdMedicaments.Clear();
-                //foreach (var m in medsPresentes)
-                //{
-                //    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
-                //    leRapportChoisi.IdMedicaments.Add(medTracked);
-                //}
+                leRapportChoisi.EstRemplacant = estRemplacant;
+                leRapportChoisi.AvisMedecin = avisMedecin;
+
+                leRapportChoisi.IdMedicaments.Clear();
+                foreach (var m in medsPresentes)
+                {
+                    var medTracked = monModel.Medicaments.Find(m.IdMedicament) ?? m;
+                    leRapportChoisi.IdMedicaments.Add(medTracked);
+                }
 
                 //supprimer anciennes présentations
                 /*

@@ -23,7 +23,7 @@ namespace tartempion
 
         private void FConnexion_Load(object sender, EventArgs e)
         {
-            pbConnexion.Image = Image.FromFile(@"Z:\Romeuf\AP3 GSB 2025\Logo GSB\logo.png");
+            pbConnexion.Image = Image.FromFile(@"U:\Romeuf\AP3 GSB 2025\Logo GSB\logo.png");
         }
 
         private void btnOK_Click(object sender, EventArgs e)

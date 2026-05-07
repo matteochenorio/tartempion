@@ -30,7 +30,7 @@ namespace tartempion
             bsMedecin.DataSource = MonModelMission2.ListeMedecinParVisiteur();
             cboMedecin.DataSource = bsMedecin;
 
-            //cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
+            cboMedecin.SelectedValue = MonModelMission2.LeRapportChoisi.IdMedecin;
 
             if (MonModelMission2.ActionRapport == 2)
             {
@@ -45,7 +45,13 @@ namespace tartempion
                 }
 
                 tbMotif.Text = MonModelMission2.LeRapportChoisi.IdMotifNavigation?.LibMotif?.ToString();
-                qteAvis.Value = (MonModelMission2.LeRapportChoisi.AvisMedecin == 1) ? 1 : 5;
+                //qteAvis.Value = (MonModelMission2.LeRapportChoisi.AvisMedecin == 1) ? 1 : 5;
+                //qteAvis.Value = MonModelMission2.LeRapportChoisi.AvisMedecin;
+                qteAvis.Minimum = 1;
+                qteAvis.Maximum = 5;
+
+                var avis = MonModelMission2.LeRapportChoisi.AvisMedecin;
+                qteAvis.Value = Math.Clamp(avis, 1, 5);
                 tbDateRapport.Text = MonModelMission2.LeRapportChoisi.DateRapport?.ToString("dd/MM/yyyy");
                 tbHeurePrevue.Text = MonModelMission2.LeRapportChoisi.HeurePrevue.ToString("HH:mm:ss");
                 tbHeureReelle.Text = MonModelMission2.LeRapportChoisi.HeureReelle.ToString("HH:mm:ss");
@@ -56,11 +62,11 @@ namespace tartempion
                 //cboEchantillon.SelectedValue = MonModelMission2.LeRapportChoisi.IdVisiteurNavigation?.Nom.ToString();
 
                 //médicaments présentés
-                //bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.IdMedicaments.ToList();
-                /*
-                bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.Presentations
-                .Select(p => p.Medicament)
-                .ToList();
+                bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.IdMedicaments.ToList();
+                
+                //bsMedicamentPresentes.DataSource = MonModelMission2.LeRapportChoisi.Presentations
+                //.Select(p => p.Medicament)
+                //.ToList();
                 dgvPresentes.DataSource = bsMedicamentPresentes;
 
                 for (int i = 0; i < dgvPresentes.Columns.Count; i++)
@@ -70,7 +76,7 @@ namespace tartempion
                 }
                 dgvPresentes.Columns[1].Visible = true;
                 dgvPresentes.Columns[1].HeaderCell.Value = "Nom Commercial";
-                */
+                
 
                 //echantillons
                 bsEchantillon.DataSource = MonModelMission2.LeRapportChoisi.Offrirs.ToList();
@@ -140,21 +146,41 @@ namespace tartempion
             }
         }
 
+        //private void btnDeletePresentes_Click(object sender, EventArgs e)
+        //{
+        //    if (dgvPresentes.CurrentRow != null)
+        //    {
+        //        var medicament = dgvPresentes.CurrentRow.DataBoundItem as Medicament;
+        //        var liste = bsMedicamentPresentes.DataSource as List<Medicament>;
+        //        if (liste != null && medicament != null)
+        //        {
+        //            liste.Remove(medicament);
+        //            bsMedicamentPresentes.ResetBindings(false);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("sélectionner médicament!");
+        //    }
+        //}
+
         private void btnDeletePresentes_Click(object sender, EventArgs e)
         {
-            if (dgvPresentes.CurrentRow != null)
-            {
-                var medicament = dgvPresentes.CurrentRow.DataBoundItem as Medicament;
-                var liste = bsMedicamentPresentes.DataSource as List<Medicament>;
-                if (liste != null && medicament != null)
-                {
-                    liste.Remove(medicament);
-                    bsMedicamentPresentes.ResetBindings(false);
-                }
-            }
-            else
+            var liste = bsMedicamentPresentes.DataSource as List<Medicament>;
+            var selected = dgvPresentes.CurrentRow?.DataBoundItem as Medicament;
+
+            if (liste == null || selected == null)
             {
                 MessageBox.Show("sélectionner médicament!");
+                return;
+            }
+
+            var item = liste.FirstOrDefault(m => m.IdMedicament == selected.IdMedicament);
+
+            if (item != null)
+            {
+                liste.Remove(item);
+                bsMedicamentPresentes.ResetBindings(false);
             }
         }
 
@@ -192,29 +218,56 @@ namespace tartempion
                 return;
             }
 
+            //liste.Add(new Offrir
+            //{
+            //    //IdRapport = MonModelMission2.LeRapportChoisi.IdRapport,
+            //    IdMedicament = medicament.IdMedicament,
+            //    //IdMedicamentNavigation = medicament,
+            //    Quantite = (int)num.Value
+            //});
+
             liste.Add(new Offrir
             {
-                //IdRapport = MonModelMission2.LeRapportChoisi.IdRapport,
                 IdMedicament = medicament.IdMedicament,
-                //IdMedicamentNavigation = medicament,
+                IdMedicamentNavigation = medicament,
                 Quantite = (int)num.Value
             });
 
             bsEchantillon.ResetBindings(false);
         }
 
+        //private void btnDeleteEchantillon_Click(object sender, EventArgs e)
+        //{
+        //    if (dgvEchantillon.CurrentRow != null)
+        //    {
+        //        var ech = dgvEchantillon.CurrentRow.DataBoundItem as Offrir;
+        //        var liste = bsEchantillon.DataSource as List<Offrir>;
+        //        liste.Remove(ech);
+        //        bsEchantillon.ResetBindings(false);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("sélectionnez échantillon!");
+        //    }
+        //}
+
         private void btnDeleteEchantillon_Click(object sender, EventArgs e)
         {
-            if (dgvEchantillon.CurrentRow != null)
-            {
-                var ech = dgvEchantillon.CurrentRow.DataBoundItem as Offrir;
-                var liste = bsEchantillon.DataSource as List<Offrir>;
-                liste.Remove(ech);
-                bsEchantillon.ResetBindings(false);
-            }
-            else
+            var liste = bsEchantillon.DataSource as List<Offrir>;
+            var selected = dgvEchantillon.CurrentRow?.DataBoundItem as Offrir;
+
+            if (liste == null || selected == null)
             {
                 MessageBox.Show("sélectionnez échantillon!");
+                return;
+            }
+
+            var item = liste.FirstOrDefault(o => o.IdMedicament == selected.IdMedicament);
+
+            if (item != null)
+            {
+                liste.Remove(item);
+                bsEchantillon.ResetBindings(false);
             }
         }
 
@@ -373,6 +426,8 @@ namespace tartempion
             {
                 string motif = tbMotif.Text;
                 string bilan = tbBilan.Text;
+                int avisMedecin = (int)qteAvis.Value;
+                bool estRemplacant = checkBoxRemplacant.Checked;
                 string dateRapport = tbDateRapport.Text;
                 string heurePrevue = tbHeurePrevue.Text;
                 string heureReelle = tbHeureReelle.Text;
@@ -389,7 +444,7 @@ namespace tartempion
                 var echantillons = bsEchantillon.DataSource as List<Offrir> ?? new List<Offrir>();
 
 
-                vretour = MonModelMission2.ModifRapport(motif, bilan, dateRapport, heurePrevue, heureReelle, dureeVisite, idMedecin, medsPresentes, echantillons);
+                vretour = MonModelMission2.ModifRapport(motif, bilan, avisMedecin, estRemplacant, dateRapport, heurePrevue, heureReelle, dureeVisite, idMedecin, medsPresentes, echantillons);
 
                 if (vretour)
                 {
