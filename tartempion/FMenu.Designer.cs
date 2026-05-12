@@ -30,10 +30,15 @@
         {
             menuStrip1 = new MenuStrip();
             mISSION1ToolStripMenuItem = new ToolStripMenuItem();
+            vISITEURToolStripMenuItem = new ToolStripMenuItem();
+            regionToolStripMenuItem = new ToolStripMenuItem();
+            secteurToolStripMenuItem = new ToolStripMenuItem();
+            quitterToolStripMenuItem = new ToolStripMenuItem();
             mISSION2ToolStripMenuItem = new ToolStripMenuItem();
             mISSION3ToolStripMenuItem = new ToolStripMenuItem();
             pbMenu = new PictureBox();
             label1 = new Label();
+            btnDeconnexion = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbMenu).BeginInit();
             SuspendLayout();
@@ -49,9 +54,38 @@
             // 
             // mISSION1ToolStripMenuItem
             // 
+            mISSION1ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vISITEURToolStripMenuItem, regionToolStripMenuItem, secteurToolStripMenuItem, quitterToolStripMenuItem });
             mISSION1ToolStripMenuItem.Name = "mISSION1ToolStripMenuItem";
             mISSION1ToolStripMenuItem.Size = new Size(75, 20);
             mISSION1ToolStripMenuItem.Text = "MISSION 1";
+            // 
+            // vISITEURToolStripMenuItem
+            // 
+            vISITEURToolStripMenuItem.Name = "vISITEURToolStripMenuItem";
+            vISITEURToolStripMenuItem.Size = new Size(114, 22);
+            vISITEURToolStripMenuItem.Text = "Visiteur";
+            vISITEURToolStripMenuItem.Click += vISITEURToolStripMenuItem_Click;
+            // 
+            // regionToolStripMenuItem
+            // 
+            regionToolStripMenuItem.Name = "regionToolStripMenuItem";
+            regionToolStripMenuItem.Size = new Size(114, 22);
+            regionToolStripMenuItem.Text = "Region ";
+            regionToolStripMenuItem.Click += regionToolStripMenuItem_Click;
+            // 
+            // secteurToolStripMenuItem
+            // 
+            secteurToolStripMenuItem.Name = "secteurToolStripMenuItem";
+            secteurToolStripMenuItem.Size = new Size(114, 22);
+            secteurToolStripMenuItem.Text = "Secteur";
+            secteurToolStripMenuItem.Click += secteurToolStripMenuItem_Click;
+            // 
+            // quitterToolStripMenuItem
+            // 
+            quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
+            quitterToolStripMenuItem.Size = new Size(114, 22);
+            quitterToolStripMenuItem.Text = "Quitter";
+            quitterToolStripMenuItem.Click += quitterToolStripMenuItem_Click;
             // 
             // mISSION2ToolStripMenuItem
             // 
@@ -67,7 +101,7 @@
             // 
             // pbMenu
             // 
-            pbMenu.Location = new Point(423, 89);
+            pbMenu.Location = new Point(423, 98);
             pbMenu.Name = "pbMenu";
             pbMenu.Size = new Size(326, 244);
             pbMenu.TabIndex = 1;
@@ -82,11 +116,22 @@
             label1.TabIndex = 2;
             label1.Text = "BIENVENUR SUR LE TABLEAU DE BORD GSB";
             // 
+            // btnDeconnexion
+            // 
+            btnDeconnexion.Location = new Point(657, 39);
+            btnDeconnexion.Name = "btnDeconnexion";
+            btnDeconnexion.Size = new Size(92, 23);
+            btnDeconnexion.TabIndex = 3;
+            btnDeconnexion.Text = "Deconnexion";
+            btnDeconnexion.UseVisualStyleBackColor = true;
+            btnDeconnexion.Click += btnDeconnexion_Click;
+            // 
             // FMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnDeconnexion);
             Controls.Add(label1);
             Controls.Add(pbMenu);
             Controls.Add(menuStrip1);
@@ -109,5 +154,10 @@
         private ToolStripMenuItem mISSION1ToolStripMenuItem;
         private ToolStripMenuItem mISSION2ToolStripMenuItem;
         private ToolStripMenuItem mISSION3ToolStripMenuItem;
+        private ToolStripMenuItem vISITEURToolStripMenuItem;
+        private ToolStripMenuItem regionToolStripMenuItem;
+        private ToolStripMenuItem secteurToolStripMenuItem;
+        private Button btnDeconnexion;
+        private ToolStripMenuItem quitterToolStripMenuItem;
     }
 }

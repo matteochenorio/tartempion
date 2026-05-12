@@ -28,92 +28,80 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            label2 = new Label();
-            button1 = new Button();
-            button2 = new Button();
+            lblIdentifiant = new Label();
+            txtIdentifiant = new TextBox();
+            lblMotDePasse = new Label();
+            txtMotDePasse = new TextBox();
+            btnConnexion = new Button();
             SuspendLayout();
             // 
-            // label1
+            // lblIdentifiant
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(2, 31);
-            label1.Name = "label1";
-            label1.Size = new Size(67, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Identifiant :";
-            label1.Click += label1_Click;
+            lblIdentifiant.AutoSize = true;
+            lblIdentifiant.Location = new Point(152, 79);
+            lblIdentifiant.Name = "lblIdentifiant";
+            lblIdentifiant.Size = new Size(67, 15);
+            lblIdentifiant.TabIndex = 0;
+            lblIdentifiant.Text = "Identifiant :";
             // 
-            // textBox1
+            // txtIdentifiant
             // 
-            textBox1.Location = new Point(95, 23);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 1;
-            textBox1.Text = "txtIdentifiant";
+            txtIdentifiant.Location = new Point(214, 116);
+            txtIdentifiant.Name = "txtIdentifiant";
+            txtIdentifiant.Size = new Size(100, 23);
+            txtIdentifiant.TabIndex = 1;
             // 
-            // textBox2
+            // lblMotDePasse
             // 
-            textBox2.Location = new Point(95, 93);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 2;
-            textBox2.Text = "txtMotdepasse";
-            textBox2.UseSystemPasswordChar = true;
+            lblMotDePasse.AutoSize = true;
+            lblMotDePasse.Location = new Point(136, 226);
+            lblMotDePasse.Name = "lblMotDePasse";
+            lblMotDePasse.Size = new Size(83, 15);
+            lblMotDePasse.TabIndex = 2;
+            lblMotDePasse.Text = "Mot de passe :";
             // 
-            // label2
+            // txtMotDePasse
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(2, 96);
-            label2.Name = "label2";
-            label2.Size = new Size(77, 15);
-            label2.TabIndex = 3;
-            label2.Text = "Motdepasse :";
+            txtMotDePasse.Location = new Point(214, 265);
+            txtMotDePasse.Name = "txtMotDePasse";
+            txtMotDePasse.ScrollBars = ScrollBars.Both;
+            txtMotDePasse.Size = new Size(100, 23);
+            txtMotDePasse.TabIndex = 3;
+            txtMotDePasse.UseSystemPasswordChar = true;
             // 
-            // button1
+            // btnConnexion
             // 
-            button1.Location = new Point(681, 27);
-            button1.Name = "button1";
-            button1.Size = new Size(93, 23);
-            button1.TabIndex = 4;
-            button1.Text = "Seconnecter";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(12, 415);
-            button2.Name = "button2";
-            button2.Size = new Size(107, 23);
-            button2.TabIndex = 5;
-            button2.Text = "Sedeconnecter";
-            button2.UseVisualStyleBackColor = true;
+            btnConnexion.Location = new Point(385, 373);
+            btnConnexion.Name = "btnConnexion";
+            btnConnexion.Size = new Size(96, 23);
+            btnConnexion.TabIndex = 4;
+            btnConnexion.Text = "Se connecter";
+            btnConnexion.UseVisualStyleBackColor = true;
+            btnConnexion.Click += btnConnexion_Click_1;
             // 
             // FConnexion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(label2);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(label1);
+            ClientSize = new Size(820, 429);
+            Controls.Add(btnConnexion);
+            Controls.Add(txtMotDePasse);
+            Controls.Add(lblMotDePasse);
+            Controls.Add(txtIdentifiant);
+            Controls.Add(lblIdentifiant);
             Name = "FConnexion";
             Text = "FConnexion";
+            Load += FConnexion_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private Label label2;
-        private Button button1;
-        private Button button2;
+        private Label lblIdentifiant;
+        private TextBox txtIdentifiant;
+        private Label lblMotDePasse;
+        private TextBox txtMotDePasse;
+        private Button btnConnexion;
     }
 }

@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using tartempion.Models;
+using Region = tartempion.Models.Region;
 
 namespace tartempion
 {
@@ -18,6 +19,15 @@ namespace tartempion
         public static Visiteur VisiteurConnecte { get => visiteurConnecte; set => visiteurConnecte = value; }
         public static bool ConnexionValide { get => connexionValide; set => connexionValide = value; }
         public static Visiteur UtilisateurConnecte { get => utilisateurConnecte; set => utilisateurConnecte = value; }
+        public static List<Visiteur> LesVisiteurs => MonModel.Visiteurs.ToList();
+        public static List<Secteur> LesSecteurs => MonModel.Secteurs.ToList();
+        public static List<Models.Region> LesRegions => MonModel.Regions.ToList();
+
+        public static int ActionFvisiteur { get => actionFvisiteur; set => actionFvisiteur = value; }
+
+        private static int actionFvisiteur=1; // si 1 visiteur normal affichage de mes collegue
+
+      
 
         public static void init()
         {
@@ -57,10 +67,22 @@ namespace tartempion
             }
             return message;
         }
-
-        public static List<Visiteur> ListeVisiteur()
+        
+        public static List <Visiteur> listVisiteur()
         {
             return MonModel.Visiteurs.ToList();
+        }
+
+
+        public static List<Region> listRegion()
+        {
+            return MonModel.Regions.ToList();
+        }
+
+
+        public static List<Secteur> listSecteur()
+        {
+            return MonModel.Secteurs.ToList();
         }
     }
 }
